@@ -1,7 +1,10 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +12,11 @@ import android.widget.TextView;
 
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.model.Bookmark;
-import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.utils.Utils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class BookmarkAdapter extends RecyclerView.Adapter {
     private List<Bookmark> mBookmarks;
@@ -57,22 +55,28 @@ public class BookmarkAdapter extends RecyclerView.Adapter {
 
     public class BookmarkHolder extends RecyclerView.ViewHolder {
         private BookMarksListener mListener;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.tv_text) TextView tvText;
-        @BindView(R.id.v_separator_top) View vSeparatorTop;
-        @BindView(R.id.v_separator_bottom) View vSeparatorBottom;
+        TextView tvTitle;
+        TextView tvText;
+        View vSeparatorTop;
+        View vSeparatorBottom;
 
-        public BookmarkHolder(View itemView, BookMarksListener listener) {
+        public BookmarkHolder(@NonNull View itemView, BookMarksListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mListener = listener;
-        }
 
-        @OnClick(R.id.rl_main)
-        void onClick() {
-            if (mListener != null) {
-                mListener.bookmarkSelected(getLayoutPosition() - 1);
-            }
+            // Initialize views using findViewById
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvText = itemView.findViewById(R.id.tv_text);
+            vSeparatorTop = itemView.findViewById(R.id.v_separator_top);
+            vSeparatorBottom = itemView.findViewById(R.id.v_separator_bottom);
+
+            // Set up click listener manually
+            View rlMain = itemView.findViewById(R.id.rl_main);
+            rlMain.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.bookmarkSelected(getLayoutPosition() - 1);
+                }
+            });
         }
     }
 

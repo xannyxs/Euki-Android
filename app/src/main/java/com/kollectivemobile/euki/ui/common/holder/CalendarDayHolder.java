@@ -6,8 +6,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kollectivemobile.euki.App;
@@ -18,30 +16,53 @@ import com.kollectivemobile.euki.ui.common.listeners.CalendarDayListener;
 import com.kollectivemobile.euki.utils.DateUtils;
 import com.kollectivemobile.euki.utils.strings.StringUtils;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class CalendarDayHolder extends RecyclerView.ViewHolder {
     private CalendarDayListener mListener;
     private Date mDate;
-    public @BindView(R.id.v_clickable) View vClickable;
-    public @BindView(R.id.iv_blur) ImageView ivBlur;
-    public @BindView(R.id.tv_title) TextView tvTitle;
-    public @BindView(R.id.tv_day) TextView tvDay;
-    public @BindView(R.id.iv_bleeding_size) ImageView ivBleedingSize;
-    public @BindViews({R.id.v_circle_1, R.id.v_circle_2, R.id.v_circle_3, R.id.v_circle_4,
-            R.id.v_circle_5, R.id.v_circle_6, R.id.v_circle_7, R.id.v_circle_8}) List<View> mCircleViews;
+    public View vClickable;
+    public ImageView ivBlur;
+    public TextView tvTitle;
+    public TextView tvDay;
+    public ImageView ivBleedingSize;
+    public List<View> mCircleViews;
 
     public CalendarDayHolder(View itemView, CalendarDayListener listener) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
         mListener = listener;
+
+        // Manual view binding
+        vClickable = itemView.findViewById(R.id.v_clickable);
+        ivBlur = itemView.findViewById(R.id.iv_blur);
+        tvTitle = itemView.findViewById(R.id.tv_title);
+        tvDay = itemView.findViewById(R.id.tv_day);
+        ivBleedingSize = itemView.findViewById(R.id.iv_bleeding_size);
+
+        // Bind circle views
+        mCircleViews = Arrays.asList(
+                itemView.findViewById(R.id.v_circle_1),
+                itemView.findViewById(R.id.v_circle_2),
+                itemView.findViewById(R.id.v_circle_3),
+                itemView.findViewById(R.id.v_circle_4),
+                itemView.findViewById(R.id.v_circle_5),
+                itemView.findViewById(R.id.v_circle_6),
+                itemView.findViewById(R.id.v_circle_7),
+                itemView.findViewById(R.id.v_circle_8)
+        );
+
+        // Set click listener manually
+        vClickable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.daySelected(mDate);
+                }
+            }
+        });
     }
 
     public void setup(Date date, Boolean showDayName, CalendarItem calendarItem, CalendarFilter calendarFilter, Boolean isSelectedDate, Boolean isToday, Boolean isPrediction) {
@@ -151,12 +172,4 @@ public class CalendarDayHolder extends RecyclerView.ViewHolder {
             }
         }
     }
-
-    @OnClick(R.id.v_clickable)
-    public void onCLick() {
-        if (mListener != null) {
-            mListener.daySelected(mDate);
-        }
-    }
 }
-

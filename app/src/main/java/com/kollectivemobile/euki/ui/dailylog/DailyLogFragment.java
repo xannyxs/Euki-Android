@@ -8,19 +8,22 @@ import android.graphics.Canvas;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentDailyLogBinding;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.model.Appointment;
@@ -41,21 +44,19 @@ import com.kollectivemobile.euki.ui.common.adapter.DailyLogFooterAdapter;
 import com.kollectivemobile.euki.ui.common.listeners.FilterItemListener;
 import com.kollectivemobile.euki.utils.DateUtils;
 import com.kollectivemobile.euki.utils.advrecyclerview.animator.DraggableItemAnimator;
-import com.kollectivemobile.euki.utils.advrecyclerview.animator.GeneralItemAnimator;
 import com.kollectivemobile.euki.utils.advrecyclerview.draggable.RecyclerViewDragDropManager;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.DailyLogListener, FilterItemListener, View.OnClickListener, MaterialTapTargetPrompt.PromptStateChangeListener {
-    @Inject AppSettingsManager mAppSettingsManager;
-    @Inject CalendarManager mCalendarManager;
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-    @BindView(R.id.tv_done) TextView tvDone;
+    @Inject
+    AppSettingsManager mAppSettingsManager;
+    @Inject
+    CalendarManager mCalendarManager;
 
     private DailyLogListener mListener;
     private DailyLogAdapter mAdapter;
@@ -73,6 +74,7 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
 
     private SwipeController swipeController = null;
     private Integer mTutorialIndex = 0;
+    private FragmentDailyLogBinding binding;
 
     public static DailyLogFragment newInstance(CalendarItem calendarItem, DailyLogListener listener) {
         Bundle args = new Bundle();
@@ -86,11 +88,17 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App)getActivity().getApplication()).getAppComponent().inject(this);
+        ((App) getActivity().getApplication()).getAppComponent().inject(this);
         mFilterItems = mAppSettingsManager.filterItems();
         shouldShowBleedingAlert = mCalendarManager.shouldShowIncludeCycleAlert(mCalendarItem.getDate());
         setUIElements();
         showCounter();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentDailyLogBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -115,8 +123,8 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
         mAdapter = new DailyLogAdapter(getActivity(), getContext(), this, mAppSettingsManager.trackPeriodEnabled());
         mFooterAdapter = new DailyLogFooterAdapter(mAdapter, this);
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
-        rvMain.setLayoutManager(mLinearLayoutManager);
-        rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
+        binding.rvMain.setLayoutManager(mLinearLayoutManager);
+        binding.rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
 
         mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();
         mRecyclerViewDragDropManager.setDraggingItemShadowDrawable(
@@ -125,10 +133,10 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
         mFilterAdapter = new DailyLogFilterAdapter(getContext(), this);
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(mFilterAdapter);
         mFilterFooterAdapter = new DailyLogFilterFooterAdapter(mWrappedAdapter, this);
-        mRecyclerViewDragDropManager.attachRecyclerView(rvMain);
+        mRecyclerViewDragDropManager.attachRecyclerView(binding.rvMain);
 
         final RecyclerView.ItemAnimator animator = new DraggableItemAnimator();
-        rvMain.setItemAnimator(animator);
+        binding.rvMain.setItemAnimator(animator);
 
         updateAdapter();
 
@@ -156,16 +164,16 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
         });
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(rvMain);
+        itemTouchhelper.attachToRecyclerView(binding.rvMain);
 
-        rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
+        binding.rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
                 swipeController.onDraw(c);
             }
         });
 
-        tvDone.setOnClickListener(view -> save(new EukiCallback<Boolean>() {
+        binding.tvDone.setOnClickListener(view -> save(new EukiCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean aBoolean) {
                 getActivity().finish();
@@ -180,10 +188,10 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
 
     private void updateAdapter() {
         if (mIsEditing) {
-            rvMain.setAdapter(mFilterFooterAdapter);
+            binding.rvMain.setAdapter(mFilterFooterAdapter);
             mFilterAdapter.update(mFilterItems);
         } else {
-            rvMain.setAdapter(mFooterAdapter);
+            binding.rvMain.setAdapter(mFooterAdapter);
             mAdapter.update(mCalendarItem, mFilterItems);
         }
     }
@@ -192,7 +200,7 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
         CalendarItem item = mCalendarItem.copy();
         item.setAppointments(mAdapter.getAppointments());
         String text = String.format(getString(R.string.done_tracking), item.dataCount());
-        tvDone.setText(text);
+        binding.tvDone.setText(text);
     }
 
     public void save(EukiCallback<Boolean> callback) {
@@ -204,7 +212,7 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
     @Override
     public void filterChanged(int position) {
         int lastOnIndex = 0;
-        for (int i=0; i<mFilterItems.size(); i++) {
+        for (int i = 0; i < mFilterItems.size(); i++) {
             FilterItem filterItem = mFilterItems.get(i);
             if (!filterItem.getOn()) {
                 lastOnIndex = i;
@@ -300,15 +308,15 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
 
     private void showBleedingAlert() {
         new AlertDialog.Builder(getActivity())
-            .setMessage(getString(R.string.bleeding_tracking_alert_message))
-            .setPositiveButton(getString(R.string.bleeding_tracking_alert_confirm), new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    mCalendarItem.setIncludeCycleSummary(true);
-                    mAdapter.notifyDataSetChanged();
-                }
-            })
-            .setNegativeButton(getString(R.string.bleeding_tracking_alert_cancel), null).show();
+                .setMessage(getString(R.string.bleeding_tracking_alert_message))
+                .setPositiveButton(getString(R.string.bleeding_tracking_alert_confirm), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mCalendarItem.setIncludeCycleSummary(true);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                })
+                .setNegativeButton(getString(R.string.bleeding_tracking_alert_cancel), null).show();
     }
 
     @Override
@@ -321,7 +329,7 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
                 mTutorialIndex = 1;
 
                 tutorialView.setVisibility(View.VISIBLE);
-                params.width = (int)getResources().getDimension(R.dimen.dimen_x13_5);
+                params.width = (int) getResources().getDimension(R.dimen.dimen_x13_5);
 
                 mInteractionListener.showTutorial(getString(R.string.track_bleeding_tutorial_title),
                         getString(R.string.track_bleeding_tutorial_content), R.id.ll_include_cycle, this);

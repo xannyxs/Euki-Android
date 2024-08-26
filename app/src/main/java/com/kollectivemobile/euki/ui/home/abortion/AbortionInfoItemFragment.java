@@ -1,6 +1,10 @@
 package com.kollectivemobile.euki.ui.home.abortion;
 
 import android.os.Bundle;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kollectivemobile.euki.R;
@@ -9,10 +13,9 @@ import com.kollectivemobile.euki.ui.common.adapter.AbortionHeaderFooterAdapter;
 import com.kollectivemobile.euki.ui.home.content.ContentItemFragment;
 import com.kollectivemobile.euki.utils.advrecyclerview.headerfooter.AbstractHeaderFooterWrapperAdapter;
 
-import butterknife.BindView;
 
 public class AbortionInfoItemFragment extends ContentItemFragment {
-    @BindView(R.id.rv_main) RecyclerView rvMain;
+    private RecyclerView rvMain;
 
     public static AbortionInfoItemFragment newInstance(ContentItem contentItem) {
         return newInstance(contentItem, null);
@@ -25,6 +28,13 @@ public class AbortionInfoItemFragment extends ContentItemFragment {
         fragment.mExpandContentItem = expandContentItem;
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Manual view binding
+        rvMain = view.findViewById(R.id.rv_main);
     }
 
     @Override

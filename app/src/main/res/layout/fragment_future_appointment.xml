@@ -28,6 +28,7 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/ll_af"
         layout="@layout/layout_appointments_fields"/>
 
 </LinearLayout>

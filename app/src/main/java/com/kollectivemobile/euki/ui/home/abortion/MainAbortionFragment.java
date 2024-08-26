@@ -1,15 +1,19 @@
 package com.kollectivemobile.euki.ui.home.abortion;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentAbortionBinding;
 import com.kollectivemobile.euki.manager.ContentManager;
 import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.networking.EukiCallback;
@@ -22,13 +26,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 
 public class MainAbortionFragment extends BaseFragment implements AbortionAdapter.AbortionListener {
     @Inject ContentManager mContentManager;
 
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-
+    private FragmentAbortionBinding binding;
     private AbortionAdapter mAbortionAdapter;
     private List<ContentItem> mContentItems;
 
@@ -48,6 +50,12 @@ public class MainAbortionFragment extends BaseFragment implements AbortionAdapte
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentAbortionBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     protected View onCreateViewCalled(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_abortion, container, false);
     }
@@ -60,8 +68,8 @@ public class MainAbortionFragment extends BaseFragment implements AbortionAdapte
     private void setUIElements() {
         mContentItems = new ArrayList<>();
         mAbortionAdapter = new AbortionAdapter(getActivity(), this);
-        rvMain.setAdapter(mAbortionAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvMain.setAdapter(mAbortionAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     private void requestItems() {

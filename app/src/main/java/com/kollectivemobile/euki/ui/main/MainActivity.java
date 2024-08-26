@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.EmptyFragment;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.ActivityMainBinding;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.model.database.entity.CalendarItem;
@@ -33,32 +34,33 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class MainActivity extends BaseActivity {
     @Inject CalendarManager mCalendarManager;
     @Inject AppSettingsManager mAppSettingsManager;
 
-    @BindView(R.id.bottom_nav_bar) NavBar nbMain;
-
-    private Unbinder mUnbinder;
+    private ActivityMainBinding binding;
 
     private Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mUnbinder = ButterKnife.bind(this);
+
+        // Inflate the layout using View Binding
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         mShowEukiLogo = true;
         ((App)getApplication()).getAppComponent().inject(this);
+
         setUIElements();
     }
 
-    void setUIElements(){
+    void setUIElements() {
+        NavBar nbMain = binding.bottomNavBar;
+
         nbMain.setListener(new NavBarListener() {
             @Override
             public Boolean onTabSelected(int position) {
@@ -79,6 +81,12 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         validateOverlays();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 
     void validateOverlays() {
@@ -119,7 +127,7 @@ public class MainActivity extends BaseActivity {
     void showTabBarTutorial(final Integer index) {
         String title = Utils.getLocalized("tabbar_tutorial_title_" + index);
         String text = Utils.getLocalized("tabbar_tutorial_content_" + index);
-        showTutorial(title, text, nbMain.getViewAtPosition(index), new MaterialTapTargetPrompt.PromptStateChangeListener() {
+        showTutorial(title, text, binding.bottomNavBar.getViewAtPosition(index), new MaterialTapTargetPrompt.PromptStateChangeListener() {
             @Override
             public void onPromptStateChanged(@NonNull MaterialTapTargetPrompt prompt, int state) {
                 if (state == MaterialTapTargetPrompt.STATE_FINISHED || state == MaterialTapTargetPrompt.STATE_DISMISSED) {
@@ -179,7 +187,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void changeTabbarSelected(int index) {
-        nbMain.setCurrentItem(index);
+        binding.bottomNavBar.setCurrentItem(index);
     }
 
     static public Intent makeIntent(Context context) {

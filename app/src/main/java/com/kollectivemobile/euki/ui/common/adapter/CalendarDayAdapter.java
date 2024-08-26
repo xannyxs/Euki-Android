@@ -3,6 +3,7 @@ package com.kollectivemobile.euki.ui.common.adapter;
 import android.content.Context;
 import android.content.res.ColorStateList;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,9 +25,6 @@ import java.util.List;
 
 import com.kollectivemobile.euki.utils.Constants.*;
 import com.kollectivemobile.euki.utils.Utils;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CalendarDayAdapter extends RecyclerView.Adapter {
     private final Integer VIEW_TYPE_HEADER = 0;
@@ -235,33 +233,37 @@ public class CalendarDayAdapter extends RecyclerView.Adapter {
     }
 
     public class CalendarHeaderHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.v_circle)
         View vCircle;
-        @BindView(R.id.tv_title)
         TextView tvTitle;
 
-        public CalendarHeaderHolder(View itemView) {
+        public CalendarHeaderHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+
+            // Initialize views using findViewById
+            vCircle = itemView.findViewById(R.id.v_circle);
+            tvTitle = itemView.findViewById(R.id.tv_title);
         }
     }
 
     public class CalendarValueHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.sb_value)
         SelectableButton sbValue;
 
-        public CalendarValueHolder(View itemView) {
+        public CalendarValueHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+
+            // Initialize views using findViewById
+            sbValue = itemView.findViewById(R.id.sb_value);
         }
     }
 
     public class CalendarTextHolder extends RecyclerView.ViewHolder {
-        public @BindView(R.id.tv_text) TextView tvText;
+        TextView tvText;
 
-        public CalendarTextHolder(View itemView) {
+        public CalendarTextHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+
+            // Initialize views using findViewById
+            tvText = itemView.findViewById(R.id.tv_text);
         }
     }
 }

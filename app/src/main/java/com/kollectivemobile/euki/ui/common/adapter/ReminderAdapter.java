@@ -24,10 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import static com.kollectivemobile.euki.App.getContext;
 
 public class ReminderAdapter extends RecyclerView.Adapter implements RemindersListener {
@@ -221,18 +217,22 @@ public class ReminderAdapter extends RecyclerView.Adapter implements RemindersLi
 
     public class NewHolder extends RecyclerView.ViewHolder {
         private RemindersListener mListener;
+        public View llMain;
 
         public NewHolder(@NonNull View itemView, RemindersListener listener) {
             super(itemView);
             mListener = listener;
-            ButterKnife.bind(this, itemView);
-        }
+            llMain = itemView.findViewById(R.id.ll_main);
 
-        @OnClick(R.id.ll_main)
-        void onClick() {
-            if (mListener != null) {
-                mListener.newSelected();
-            }
+            // Set click listener manually
+            llMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.newSelected();
+                    }
+                }
+            });
         }
     }
 
@@ -243,74 +243,95 @@ public class ReminderAdapter extends RecyclerView.Adapter implements RemindersLi
     }
 
     public class ScheduledHolder extends RecyclerView.ViewHolder {
-        public @BindView(R.id.tv_title) TextView tvTitle;
-
+        public TextView tvTitle;
         private RemindersListener mListener;
+        public View llMain;
 
         public ScheduledHolder(@NonNull View itemView, RemindersListener listener) {
             super(itemView);
             mListener = listener;
-            ButterKnife.bind(this, itemView);
-        }
+            llMain = itemView.findViewById(R.id.ll_main);
+            tvTitle = itemView.findViewById(R.id.tv_title);
 
-        @OnClick(R.id.ll_main)
-        void onClick() {
-            if (mListener != null) {
-                mListener.reminderSelected(getLayoutPosition() - 2);
-            }
+            // Set click listener manually
+            llMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.reminderSelected(getLayoutPosition() - 2);
+                    }
+                }
+            });
         }
     }
 
     public class ExistentHolder extends RecyclerView.ViewHolder {
-        public @BindView(R.id.ll_new) LinearLayout llNew;
-        public @BindView(R.id.et_title) EditText etTitle;
-        public @BindView(R.id.et_text) EditText etText;
-        public @BindView(R.id.tv_day_time) TextView tvDayTime;
-        public @BindView(R.id.tv_repeat) TextView tvRepeat;
-        public @BindView(R.id.btn_add) Button btnAdd;
+        public LinearLayout llNew;
+        public EditText etTitle;
+        public EditText etText;
+        public TextView tvDayTime;
+        public TextView tvRepeat;
+        public Button btnAdd;
         private RemindersListener mListener;
 
         public ExistentHolder(@NonNull View itemView, RemindersListener listener) {
             super(itemView);
             mListener = listener;
-            ButterKnife.bind(this, itemView);
-        }
+            llNew = itemView.findViewById(R.id.ll_new);
+            etTitle = itemView.findViewById(R.id.et_title);
+            etText = itemView.findViewById(R.id.et_text);
+            tvDayTime = itemView.findViewById(R.id.tv_day_time);
+            tvRepeat = itemView.findViewById(R.id.tv_repeat);
+            btnAdd = itemView.findViewById(R.id.btn_add);
 
-        @OnClick(R.id.ll_new)
-        void newPressed() {
-            if (mListener != null) {
-                mListener.newSelected();
-            }
-        }
+            // Set click listeners manually
+            llNew.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.newSelected();
+                    }
+                }
+            });
 
-        @OnClick(R.id.tv_day_time)
-        void dayTimePressed() {
-            if (mListener != null) {
-                mListener.dayTimeSelected();
-            }
-        }
+            tvDayTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.dayTimeSelected();
+                    }
+                }
+            });
 
-        @OnClick(R.id.tv_repeat)
-        void repeatPressed() {
-            if (mListener != null) {
-                mListener.repeatSelected();
-            }
-        }
+            tvRepeat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.repeatSelected();
+                    }
+                }
+            });
 
-        @OnClick(R.id.btn_cancel)
-        void cancelPressed() {
-            if (mListener != null) {
-                mListener.cancelSelected();
-            }
-        }
+            itemView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.cancelSelected();
+                    }
+                }
+            });
 
-        @OnClick(R.id.btn_add)
-        void addPressed() {
-            if (mListener != null) {
-                mListener.saveSelected(etTitle.getText().toString(), etText.getText().toString());
-            }
+            btnAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.saveSelected(etTitle.getText().toString(), etText.getText().toString());
+                    }
+                }
+            });
         }
     }
+
 
     public void update(List<ReminderItem> reminderItems) {
         if (reminderItems != null) {

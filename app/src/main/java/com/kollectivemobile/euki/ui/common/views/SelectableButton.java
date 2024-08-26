@@ -15,10 +15,6 @@ import android.widget.TextView;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.utils.Utils;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnLongClick;
-
 public class SelectableButton extends LinearLayout {
     private View mView;
     private View mBorderView;
@@ -61,12 +57,11 @@ public class SelectableButton extends LinearLayout {
         ivIcon.setImageResource(imageResId);
 
         updateUIElements();
-    }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        ButterKnife.bind(this);
+        // Set click listeners manually
+        mBorderView.setOnClickListener(v -> handleClick());
+
+        mBorderView.setOnLongClickListener(v -> handleLongClick());
     }
 
     public SelectableButton(Context context) {
@@ -129,12 +124,12 @@ public class SelectableButton extends LinearLayout {
             return;
         }
 
-        ViewGroup parentView = (ViewGroup)getParent();
-        for (int i=0; i<parentView.getChildCount(); i++) {
+        ViewGroup parentView = (ViewGroup) getParent();
+        for (int i = 0; i < parentView.getChildCount(); i++) {
             View view = parentView.getChildAt(i);
 
             if (view instanceof SelectableButton) {
-                SelectableButton selectableButton = (SelectableButton)view;
+                SelectableButton selectableButton = (SelectableButton) view;
                 if (selectableButton != this && selectableButton.mIsRadio) {
                     selectableButton.changeSelected(false);
                 }
@@ -151,8 +146,7 @@ public class SelectableButton extends LinearLayout {
         mOnClickListener = onClickListener;
     }
 
-    @OnClick(R.id.v_border)
-    void onClick() {
+    private void handleClick() {
         if (!mIsEnabled) {
             return;
         }
@@ -173,8 +167,7 @@ public class SelectableButton extends LinearLayout {
         }
     }
 
-    @OnLongClick(R.id.v_border)
-    boolean onLongClick() {
+    private boolean handleLongClick() {
         if (!mIsEnabled) {
             return false;
         }

@@ -1,8 +1,10 @@
 package com.kollectivemobile.euki.ui.cycle;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,30 +12,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.viewbinding.ViewBinding;
 import androidx.viewpager.widget.ViewPager;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCycleBinding;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.adapter.CycleFragmentAdapter;
-import com.kollectivemobile.euki.ui.common.views.NoSwipeViewPager;
-import com.kollectivemobile.euki.ui.common.views.SegmentedButton;
 import com.kollectivemobile.euki.ui.common.views.SegmentedButtonListener;
 import com.kollectivemobile.euki.ui.cycle.settings.SettingsActivity;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class CycleFragment extends BaseFragment {
-    @Inject AppSettingsManager mAppSettingsManager;
+    @Inject
+    AppSettingsManager mAppSettingsManager;
 
-    @BindView(R.id.vp_main) NoSwipeViewPager vpMain;
-    @BindView(R.id.sb_sections) SegmentedButton sbSections;
-    @BindView(R.id.v_tutorial) View vTutorial;
-
+    private FragmentCycleBinding binding;
     private Boolean isShowingTutorial = false;
 
     public static CycleFragment newInstance() {
@@ -44,11 +43,19 @@ public class CycleFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCycleBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -57,21 +64,19 @@ public class CycleFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_cycle, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (isShowingTutorial) {
             return super.onOptionsItemSelected(item);
         }
 
-        switch (item.getItemId()) {
-            case R.id.item_settings:
-                startActivity(SettingsActivity.makeIntent(getActivity()));
-                break;
+        if (item.getItemId() == R.id.item_settings) {
+            startActivity(SettingsActivity.makeIntent(getActivity()));
         }
 
         return super.onOptionsItemSelected(item);
@@ -91,25 +96,25 @@ public class CycleFragment extends BaseFragment {
 
     private void verifyCycleSummaryTutorial() {
         if (mAppSettingsManager.shouldShowCycleSummaryTutorial()) {
-            vTutorial.setVisibility(View.VISIBLE);
-            vTutorial.setOnClickListener(new View.OnClickListener() {
+            binding.vTutorial.setVisibility(View.VISIBLE);
+            binding.vTutorial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    vTutorial.setVisibility(View.GONE);
+                    binding.vTutorial.setVisibility(View.GONE);
                 }
             });
         } else {
-            vTutorial.setVisibility(View.GONE);
+            binding.vTutorial.setVisibility(View.GONE);
         }
     }
 
     private void setUIElements() {
-        vTutorial.setVisibility(View.GONE);
+        binding.vTutorial.setVisibility(View.GONE);
 
         CycleFragmentAdapter adapter = new CycleFragmentAdapter(getActivity(), getChildFragmentManager());
-        vpMain.setAdapter(adapter);
-        vpMain.setPagingEnabled(false);
-        vpMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        binding.vpMain.setAdapter(adapter);
+        binding.vpMain.setPagingEnabled(false);
+        binding.vpMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
             }
@@ -126,10 +131,10 @@ public class CycleFragment extends BaseFragment {
             }
         });
 
-        sbSections.setListener(new SegmentedButtonListener() {
+        binding.sbSections.setListener(new SegmentedButtonListener() {
             @Override
             public void onSegmentedChanged(Integer index) {
-                vpMain.setCurrentItem(index);
+                binding.vpMain.setCurrentItem(index);
             }
         });
     }

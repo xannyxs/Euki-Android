@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.listeners.LinkListener;
@@ -34,8 +36,6 @@ import com.kollectivemobile.euki.utils.Utils;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 /**
@@ -48,15 +48,15 @@ public abstract class BaseFragment extends Fragment implements LinkListener {
     ContentManager mContentManager;
 
     protected InteractionListener mInteractionListener;
-    private Unbinder mUnbinder;
+    private ViewBinding mBinding;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof InteractionListener) {
             mInteractionListener = (InteractionListener) context;
         } else {
-            throw new RuntimeException("Context should implements InteractionListener");
+            throw new RuntimeException("Context should implement InteractionListener");
         }
     }
 
@@ -67,27 +67,28 @@ public abstract class BaseFragment extends Fragment implements LinkListener {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = onCreateViewCalled(inflater, container, savedInstanceState);
-        mUnbinder = ButterKnife.bind(this, rootView);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mBinding = getViewBinding(inflater, container);
+        View rootView = mBinding.getRoot();
         mInteractionListener.updateTitle(getTitle().toUpperCase(), showBack());
         return rootView;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mUnbinder != null) {
-            mUnbinder.unbind();
-        }
+        mBinding = null;
     }
+
+    protected abstract ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container);
 
     @Override
     public void onDetach() {
@@ -131,24 +132,28 @@ public abstract class BaseFragment extends Fragment implements LinkListener {
 
     @Override
     public void linkClicked(String link) {
-        if (link.equals("abortion")) {
-            HomeFragment.ShouldShowAbortion = true;
-            getActivity().finish();
-            return;
-        }
-        if (link.equals("reminders")) {
-            getActivity().startActivity(RemindersActivity.makeIntent(getActivity()));
-            return;
-        }
-        if (link.equals("resources") || link.equals("sexuality_resources") || link.equals("method_information")
-                || link.equals("symptom_management") || link.equals("menstrual_cycle_101") || link.equals("contraception") ||
-                link.equals("menstruation_faqs")
-        ) {
-            ContentItem contentItem = mContentManager.getContentItem(link);
-            if (contentItem != null) {
-                Intent intent = ContentItemActivity.makeIntent(getActivity(), contentItem);
-                startActivity(intent);
+        switch (link) {
+            case "abortion" -> {
+                HomeFragment.ShouldShowAbortion = true;
+                if (getActivity() != null) {
+                    getActivity().finish();
+                }
                 return;
+            }
+            case "reminders" -> {
+                if (getActivity() != null) {
+                    getActivity().startActivity(RemindersActivity.makeIntent(getActivity()));
+                }
+                return;
+            }
+            case "resources", "sexuality_resources", "method_information", "symptom_management",
+                 "menstrual_cycle_101", "contraception", "menstruation_faqs" -> {
+                ContentItem contentItem = mContentManager.getContentItem(link);
+                if (contentItem != null) {
+                    Intent intent = ContentItemActivity.makeIntent(getActivity(), contentItem);
+                    startActivity(intent);
+                    return;
+                }
             }
         }
 

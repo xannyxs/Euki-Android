@@ -12,19 +12,27 @@ import com.kollectivemobile.euki.ui.common.listeners.DailyLogViewListener;
 import com.kollectivemobile.euki.ui.common.views.SelectableButton;
 import com.kollectivemobile.euki.utils.Constants;
 
+import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-
 public class DailyLogTestHolder extends BaseDailyLogHolder implements View.OnClickListener {
-    public @BindViews({R.id.sb_test_sti_1, R.id.sb_test_sti_2}) List<SelectableButton> sbTestSTI;
-    public @BindViews({R.id.sb_test_pregnancy_1, R.id.sb_test_pregnancy_2}) List<SelectableButton> sbTestPregnancy;
+    private List<SelectableButton> sbTestSTI;
+    private List<SelectableButton> sbTestPregnancy;
 
     public DailyLogTestHolder(@NonNull View itemView, DailyLogViewListener listener) {
         super(itemView, listener);
-        ButterKnife.bind(this, itemView);
 
+        // Manual view binding
+        sbTestSTI = Arrays.asList(
+                itemView.findViewById(R.id.sb_test_sti_1),
+                itemView.findViewById(R.id.sb_test_sti_2)
+        );
+        sbTestPregnancy = Arrays.asList(
+                itemView.findViewById(R.id.sb_test_pregnancy_1),
+                itemView.findViewById(R.id.sb_test_pregnancy_2)
+        );
+
+        // Set OnClickListeners
         for (SelectableButton selectableButton : sbTestSTI) {
             selectableButton.setOnClickListener(this);
         }
@@ -33,7 +41,7 @@ public class DailyLogTestHolder extends BaseDailyLogHolder implements View.OnCli
         }
     }
 
-    static public DailyLogTestHolder create(ViewGroup parent, DailyLogViewListener listener) {
+    public static DailyLogTestHolder create(ViewGroup parent, DailyLogViewListener listener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_daily_log_test, parent, false);
         return new DailyLogTestHolder(view, listener);
@@ -53,24 +61,24 @@ public class DailyLogTestHolder extends BaseDailyLogHolder implements View.OnCli
     public void bind(CalendarItem calendarItem, Boolean selected, DailyLogAdapter.ViewType selectedType) {
         super.bind(calendarItem, selected, selectedType);
 
-        if (mCalendarItem.getTestSTI() != null) {
-            sbTestSTI.get(mCalendarItem.getTestSTI().ordinal()).changeSelected(true);
+        if (calendarItem.getTestSTI() != null) {
+            sbTestSTI.get(calendarItem.getTestSTI().ordinal()).changeSelected(true);
         }
-        if (mCalendarItem.getTestPregnancy() != null) {
-            sbTestPregnancy.get(mCalendarItem.getTestPregnancy().ordinal()).changeSelected(true);
+        if (calendarItem.getTestPregnancy() != null) {
+            sbTestPregnancy.get(calendarItem.getTestPregnancy().ordinal()).changeSelected(true);
         }
     }
 
     @Override
     public void onClick(View view) {
         if (view instanceof SelectableButton && view.getTag() instanceof String) {
-            SelectableButton selectableButton = (SelectableButton)view;
-            Integer index = Integer.parseInt((String)view.getTag());
+            SelectableButton selectableButton = (SelectableButton) view;
+            Integer index = Integer.parseInt((String) view.getTag());
 
             if (sbTestSTI.contains(selectableButton)) {
-                mCalendarItem.setTestSTI(selectableButton.getSelected() ? Constants.TestSTI.values()[index-1] : null);
+                mCalendarItem.setTestSTI(selectableButton.getSelected() ? Constants.TestSTI.values()[index - 1] : null);
             } else if (sbTestPregnancy.contains(selectableButton)) {
-                mCalendarItem.setTestPregnancy(selectableButton.getSelected() ? Constants.TestPregnancy.values()[index-1] : null);
+                mCalendarItem.setTestPregnancy(selectableButton.getSelected() ? Constants.TestPregnancy.values()[index - 1] : null);
             }
 
             updateTitle();
@@ -78,3 +86,4 @@ public class DailyLogTestHolder extends BaseDailyLogHolder implements View.OnCli
         }
     }
 }
+

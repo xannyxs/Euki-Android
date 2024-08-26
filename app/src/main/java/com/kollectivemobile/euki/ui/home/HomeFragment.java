@@ -11,13 +11,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentMainBinding;
 import com.kollectivemobile.euki.manager.ContentManager;
 import com.kollectivemobile.euki.manager.HomeManager;
 import com.kollectivemobile.euki.manager.ReminderManager;
@@ -45,8 +48,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class HomeFragment extends BaseFragment implements TileHolder.TileListener, TilesHeaderFooterAdapter.HeaderListener, TilesHeaderFooterAdapter.FooterListener {
     public static Boolean ShouldShowAbortion = false;
 
@@ -57,9 +58,7 @@ public class HomeFragment extends BaseFragment implements TileHolder.TileListene
     @Inject
     ReminderManager mReminderManager;
 
-    @BindView(R.id.rv_main)
-    RecyclerView rvMain;
-
+    private FragmentMainBinding binding;
     private GridLayoutManager mLayoutManager;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
     private TilesAdapter mTilesAdapter;
@@ -89,6 +88,12 @@ public class HomeFragment extends BaseFragment implements TileHolder.TileListene
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentMainBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     protected View onCreateViewCalled(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
@@ -101,11 +106,9 @@ public class HomeFragment extends BaseFragment implements TileHolder.TileListene
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_search:
-            case R.id.item_search_text:
-                startActivity(SearchActivity.makeIntent(getActivity()));
-                break;
+        int itemId = item.getItemId();
+        if (itemId == R.id.item_search || itemId == R.id.item_search_text) {
+            startActivity(SearchActivity.makeIntent(getActivity()));
         }
 
         return super.onOptionsItemSelected(item);
@@ -145,10 +148,10 @@ public class HomeFragment extends BaseFragment implements TileHolder.TileListene
         GeneralItemAnimator animator = new DraggableItemAnimator();
 
         mHeaderFooterAdapter = new TilesHeaderFooterAdapter(mWrappedAdapter, this, this);
-        rvMain.setAdapter(mHeaderFooterAdapter);
-        rvMain.setItemAnimator(animator);
+        binding.rvMain.setAdapter(mHeaderFooterAdapter);
+        binding.rvMain.setItemAnimator(animator);
 
-        mRecyclerViewDragDropManager.attachRecyclerView(rvMain);
+        mRecyclerViewDragDropManager.attachRecyclerView(binding.rvMain);
         mTilesAdapter.update(mUsedItems, mIsEditing);
         updateLayout();
     }
@@ -336,12 +339,12 @@ public class HomeFragment extends BaseFragment implements TileHolder.TileListene
         if (mLayoutManager == null || mLayoutManager.getSpanCount() != spanCount) {
             mLayoutManager = new GridLayoutManager(requireContext(), spanCount, RecyclerView.VERTICAL, false);
             mLayoutManager.setSpanCount(spanCount);
-            rvMain.setLayoutManager(mLayoutManager);
+            binding.rvMain.setLayoutManager(mLayoutManager);
             mHeaderFooterAdapter.update(mIsEditing);
-            mHeaderFooterAdapter.setupFullSpanForGridLayoutManager(rvMain);
+            mHeaderFooterAdapter.setupFullSpanForGridLayoutManager(binding.rvMain);
 
             int margin = spanCount == 1 ? 0 : Utils.dpFromInt(6);
-            rvMain.setPadding(margin, margin, margin, margin);
+            binding.rvMain.setPadding(margin, margin, margin, margin);
         }
     }
 

@@ -26,7 +26,6 @@ import com.kollectivemobile.euki.utils.Utils;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 /**

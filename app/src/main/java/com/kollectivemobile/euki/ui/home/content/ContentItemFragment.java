@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentContentItemBinding;
 import com.kollectivemobile.euki.listeners.HeightListener;
 import com.kollectivemobile.euki.manager.BookmarkManager;
 import com.kollectivemobile.euki.model.ContentItem;
@@ -37,8 +40,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class ContentItemFragment extends BaseFragment implements ContentGridSelectableAdapter.ContentGridSelectableListener,
                                                                  ContentRowSelectableAdapter.ContentRowSelectableListener,
                                                                  ContentRowExpandableAdapter.ContentRowExpandableListener,
@@ -48,8 +49,8 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
     private static final String SAVED_STATE_EXPANDABLE_ITEM_MANAGER = "RecyclerViewExpandableItemManager";
 
     @Inject BookmarkManager mBookmarkManager;
-    @BindView(R.id.rv_main) RecyclerView rvMain;
 
+    private FragmentContentItemBinding binding;
     private RecyclerViewExpandableItemManager mRecyclerViewExpandableItemManager;
     private AbstractHeaderFooterWrapperAdapter mHeaderFooterAdapter;
 
@@ -80,6 +81,12 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentContentItemBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         int resId = mBookmarkManager.isBookmark(mContentItem.getId()) ? R.menu.menu_favorite_on : R.menu.menu_favorite_off;
         inflater.inflate(resId, menu);
@@ -88,15 +95,13 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_bookmark:
-                if (mBookmarkManager.isBookmark(mContentItem.getId())) {
-                    mBookmarkManager.removeBookmark(mContentItem.getId());
-                } else {
-                    mBookmarkManager.addBookmark(mContentItem.getId());
-                }
-                getActivity().invalidateOptionsMenu();
-                break;
+        if (item.getItemId() == R.id.item_bookmark) {
+            if (mBookmarkManager.isBookmark(mContentItem.getId())) {
+                mBookmarkManager.removeBookmark(mContentItem.getId());
+            } else {
+                mBookmarkManager.addBookmark(mContentItem.getId());
+            }
+            getActivity().invalidateOptionsMenu();
         }
 
         return super.onOptionsItemSelected(item);
@@ -141,9 +146,9 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
             adapter = mRecyclerViewExpandableItemManager.createWrappedAdapter(rowAdapter);
             GeneralItemAnimator animator = new RefactoredDefaultItemAnimator();
             animator.setSupportsChangeAnimations(false);
-            rvMain.setItemAnimator(animator);
-            rvMain.setHasFixedSize(false);
-            mRecyclerViewExpandableItemManager.attachRecyclerView(rvMain);
+            binding.rvMain.setItemAnimator(animator);
+            binding.rvMain.setHasFixedSize(false);
+            mRecyclerViewExpandableItemManager.attachRecyclerView(binding.rvMain);
 
             layoutManager = new LinearLayoutManager(getContext());
         } else {
@@ -152,8 +157,8 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
         }
 
         mHeaderFooterAdapter = getHeaderFooterAdapter(adapter);
-        rvMain.setLayoutManager(layoutManager);
-        rvMain.setAdapter(mHeaderFooterAdapter);
+        binding.rvMain.setLayoutManager(layoutManager);
+        binding.rvMain.setAdapter(mHeaderFooterAdapter);
 
         if (mExpandContentItem != null) {
             Integer index = -1;
@@ -170,8 +175,8 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
                 final int indexFinal = index;
                 final Handler handler = new Handler();
-                handler.postDelayed(() -> rvMain.smoothScrollToPosition(indexFinal + 1), 250);
-                rvMain.scrollToPosition(mContentItem.getExpandableItems().size() - 1);
+                handler.postDelayed(() -> binding.rvMain.smoothScrollToPosition(indexFinal + 1), 250);
+                binding.rvMain.scrollToPosition(mContentItem.getExpandableItems().size() - 1);
             }
         }
     }
@@ -221,7 +226,7 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
         AdapterPath path = new AdapterPath();
 
-        path.append(new AdapterPathSegment(rvMain.getAdapter(), null));
+        path.append(new AdapterPathSegment(binding.rvMain.getAdapter(), null));
         path.append(mHeaderFooterAdapter.getWrappedAdapterSegment());
 
         mRecyclerViewExpandableItemManager.scrollToGroup(groupPosition, childItemHeight, topMargin, bottomMargin, path);

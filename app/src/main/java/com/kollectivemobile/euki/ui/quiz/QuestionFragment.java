@@ -1,26 +1,27 @@
 package com.kollectivemobile.euki.ui.quiz;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentQuizOptionBinding;
 import com.kollectivemobile.euki.model.Quiz;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.adapter.QuizOptionAdapter;
 import com.kollectivemobile.euki.utils.Utils;
 
-import butterknife.BindView;
 
 public class QuestionFragment extends BaseFragment implements QuizOptionAdapter.QuizOptionListener {
-    @BindView(R.id.tv_title) TextView tvTitle;
-    @BindView(R.id.rv_main) RecyclerView rvMain;
 
+    private FragmentQuizOptionBinding binding;
     private QuizOptionAdapter mAdapter;
     private Quiz mQuiz;
     private int mPosition;
@@ -41,6 +42,12 @@ public class QuestionFragment extends BaseFragment implements QuizOptionAdapter.
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentQuizOptionBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     protected View onCreateViewCalled(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_quiz_option, container, false);
     }
@@ -51,10 +58,10 @@ public class QuestionFragment extends BaseFragment implements QuizOptionAdapter.
     }
 
     private void setUIElements() {
-        tvTitle.setText(Utils.getLocalized(mQuiz.getQuestions().get(mPosition).getTitle()));
+        binding.tvTitle.setText(Utils.getLocalized(mQuiz.getQuestions().get(mPosition).getTitle()));
         mAdapter = new QuizOptionAdapter(getActivity(), mQuiz, mPosition, this);
-        rvMain.setAdapter(mAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvMain.setAdapter(mAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override

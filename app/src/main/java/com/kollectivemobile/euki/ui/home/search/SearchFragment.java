@@ -1,9 +1,12 @@
 package com.kollectivemobile.euki.ui.home.search;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,10 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.EditText;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentSearchBinding;
 import com.kollectivemobile.euki.manager.ContentManager;
 import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
@@ -28,14 +31,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 
 public class SearchFragment extends BaseFragment implements SearchAdapter.SearchListener {
     @Inject ContentManager mContentManager;
 
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-    @BindView(R.id.et_search) EditText etSearch;
-
+    private FragmentSearchBinding binding;
     private List<ContentItem> mItems;
     private SearchAdapter mSearchAdapter;
 
@@ -55,6 +55,12 @@ public class SearchFragment extends BaseFragment implements SearchAdapter.Search
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentSearchBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     protected View onCreateViewCalled(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
@@ -67,10 +73,8 @@ public class SearchFragment extends BaseFragment implements SearchAdapter.Search
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_done:
-                getActivity().finish();
-                break;
+        if (item.getItemId() == R.id.item_done) {
+            getActivity().finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -79,10 +83,10 @@ public class SearchFragment extends BaseFragment implements SearchAdapter.Search
     private void setUIElements() {
         mItems = new ArrayList<>();
         mSearchAdapter = new SearchAdapter(getActivity(), this);
-        rvMain.setAdapter(mSearchAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvMain.setAdapter(mSearchAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        etSearch.addTextChangedListener(new TextWatcher() {
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -93,10 +97,10 @@ public class SearchFragment extends BaseFragment implements SearchAdapter.Search
 
             @Override
             public void afterTextChanged(Editable editable) {
-                processSearch(etSearch.getText().toString());
+                processSearch(binding.etSearch.getText().toString());
             }
         });
-        etSearch.requestFocus();
+        binding.etSearch.requestFocus();
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 

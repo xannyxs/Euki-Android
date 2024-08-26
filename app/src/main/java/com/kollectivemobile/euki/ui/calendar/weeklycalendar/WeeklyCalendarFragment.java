@@ -1,6 +1,8 @@
 package com.kollectivemobile.euki.ui.calendar.weeklycalendar;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -8,10 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentWeeklyCalendarBinding;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.model.CalendarFilter;
@@ -32,14 +35,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class WeeklyCalendarFragment extends BaseFragment implements CalendarDayListener {
     @Inject CalendarManager mCalendarManager;
     @Inject AppSettingsManager mAppSettingsManager;;
 
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-
+    private FragmentWeeklyCalendarBinding binding;
     private WeeklyCalendarListener listener;
     private Map<String, CalendarItem> mCalendarItems;
     private List<DayItem> todayItems;
@@ -61,9 +61,17 @@ public class WeeklyCalendarFragment extends BaseFragment implements CalendarDayL
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
         showDateItem();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentWeeklyCalendarBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -86,12 +94,12 @@ public class WeeklyCalendarFragment extends BaseFragment implements CalendarDayL
         startItem = pair.second.second;
 
         mAdapter = new CalendarWeekAdapter(getActivity(), selectedDate, this);
-        rvMain.setAdapter(mAdapter);
+        binding.rvMain.setAdapter(mAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
-        rvMain.setLayoutManager(layoutManager);
+        binding.rvMain.setLayoutManager(layoutManager);
 
         SnapToBlock snapToBlock = new SnapToBlock(7);
-        snapToBlock.attachToRecyclerView(rvMain);
+        snapToBlock.attachToRecyclerView(binding.rvMain);
     }
 
     private void showDateItem() {
@@ -103,10 +111,12 @@ public class WeeklyCalendarFragment extends BaseFragment implements CalendarDayL
             item = todayItem;
         }
 
-        if (item != null) {
-            Integer weekDay = DateUtils.getDayOfWeek(item.getDate());
-            rvMain.getLayoutManager().scrollToPosition(item.getIndex() - (weekDay - 1));
-            daySelected(item.getDate());
+        if (item != null ){
+            if(binding.rvMain.getLayoutManager() != null){
+                Integer weekDay = DateUtils.getDayOfWeek(item.getDate());
+                binding.rvMain.getLayoutManager().scrollToPosition(item.getIndex() - (weekDay - 1));
+                daySelected(item.getDate());
+            }
         }
     }
 

@@ -12,26 +12,35 @@ import com.kollectivemobile.euki.ui.common.listeners.DailyLogViewListener;
 import com.kollectivemobile.euki.ui.common.views.SelectableButton;
 import com.kollectivemobile.euki.utils.Constants;
 
+import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-
 public class DailyLogEmotionsHolder extends BaseDailyLogHolder implements View.OnClickListener {
-    public @BindViews({R.id.sb_emotions_1, R.id.sb_emotions_2, R.id.sb_emotions_3,
-                       R.id.sb_emotions_4, R.id.sb_emotions_5, R.id.sb_emotions_6,
-                       R.id.sb_emotions_7, R.id.sb_emotions_8, R.id.sb_emotions_9}) List<SelectableButton> sbEmotions;
+    private List<SelectableButton> sbEmotions;
 
     public DailyLogEmotionsHolder(@NonNull View itemView, DailyLogViewListener listener) {
         super(itemView, listener);
-        ButterKnife.bind(this, itemView);
 
+        // Bind views manually
+        sbEmotions = Arrays.asList(
+                itemView.findViewById(R.id.sb_emotions_1),
+                itemView.findViewById(R.id.sb_emotions_2),
+                itemView.findViewById(R.id.sb_emotions_3),
+                itemView.findViewById(R.id.sb_emotions_4),
+                itemView.findViewById(R.id.sb_emotions_5),
+                itemView.findViewById(R.id.sb_emotions_6),
+                itemView.findViewById(R.id.sb_emotions_7),
+                itemView.findViewById(R.id.sb_emotions_8),
+                itemView.findViewById(R.id.sb_emotions_9)
+        );
+
+        // Set click listeners
         for (SelectableButton selectableButton : sbEmotions) {
             selectableButton.setOnClickListener(this);
         }
     }
 
-    static public DailyLogEmotionsHolder create(ViewGroup parent, DailyLogViewListener listener) {
+    public static DailyLogEmotionsHolder create(ViewGroup parent, DailyLogViewListener listener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_daily_log_emotions, parent, false);
         return new DailyLogEmotionsHolder(view, listener);
@@ -59,7 +68,8 @@ public class DailyLogEmotionsHolder extends BaseDailyLogHolder implements View.O
     @Override
     public void onClick(View view) {
         if (view instanceof SelectableButton && view.getTag() instanceof String) {
-            Integer index = Integer.parseInt((String)view.getTag());
+            SelectableButton selectableButton = (SelectableButton) view;
+            Integer index = Integer.parseInt((String) view.getTag());
             Constants.Emotions emotion = Constants.Emotions.values()[index - 1];
 
             if (mCalendarItem.getEmotions().contains(emotion)) {
@@ -73,3 +83,4 @@ public class DailyLogEmotionsHolder extends BaseDailyLogHolder implements View.O
         }
     }
 }
+

@@ -12,27 +12,39 @@ import com.kollectivemobile.euki.ui.common.listeners.DailyLogViewListener;
 import com.kollectivemobile.euki.ui.common.views.SelectableButton;
 import com.kollectivemobile.euki.utils.Constants;
 
+import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-
 public class DailyLogBodyHolder extends BaseDailyLogHolder implements View.OnClickListener {
-    public @BindViews({R.id.sb_body1, R.id.sb_body2, R.id.sb_body3, R.id.sb_body4,
-                       R.id.sb_body5, R.id.sb_body6, R.id.sb_body7, R.id.sb_body8,
-                       R.id.sb_body9, R.id.sb_body10, R.id.sb_body11, R.id.sb_body12,
-                       R.id.sb_body13, R.id.sb_body14}) List<SelectableButton> sbBody;
+    public List<SelectableButton> sbBody;
 
     public DailyLogBodyHolder(@NonNull View itemView, DailyLogViewListener listener) {
         super(itemView, listener);
-        ButterKnife.bind(this, itemView);
+
+        // Manual view binding
+        sbBody = Arrays.asList(
+                itemView.findViewById(R.id.sb_body1),
+                itemView.findViewById(R.id.sb_body2),
+                itemView.findViewById(R.id.sb_body3),
+                itemView.findViewById(R.id.sb_body4),
+                itemView.findViewById(R.id.sb_body5),
+                itemView.findViewById(R.id.sb_body6),
+                itemView.findViewById(R.id.sb_body7),
+                itemView.findViewById(R.id.sb_body8),
+                itemView.findViewById(R.id.sb_body9),
+                itemView.findViewById(R.id.sb_body10),
+                itemView.findViewById(R.id.sb_body11),
+                itemView.findViewById(R.id.sb_body12),
+                itemView.findViewById(R.id.sb_body13),
+                itemView.findViewById(R.id.sb_body14)
+        );
 
         for (SelectableButton selectableButton : sbBody) {
             selectableButton.setOnClickListener(this);
         }
     }
 
-    static public DailyLogBodyHolder create(ViewGroup parent, DailyLogViewListener listener) {
+    public static DailyLogBodyHolder create(ViewGroup parent, DailyLogViewListener listener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_daily_log_body, parent, false);
         return new DailyLogBodyHolder(view, listener);
@@ -60,7 +72,7 @@ public class DailyLogBodyHolder extends BaseDailyLogHolder implements View.OnCli
     @Override
     public void onClick(View view) {
         if (view instanceof SelectableButton && view.getTag() instanceof String) {
-            Integer index = Integer.parseInt((String)view.getTag());
+            Integer index = Integer.parseInt((String) view.getTag());
             Constants.Body body = Constants.Body.values()[index - 1];
 
             if (mCalendarItem.getBody().contains(body)) {
@@ -74,3 +86,4 @@ public class DailyLogBodyHolder extends BaseDailyLogHolder implements View.OnCli
         }
     }
 }
+

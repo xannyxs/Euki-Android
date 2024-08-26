@@ -1,6 +1,8 @@
 package com.kollectivemobile.euki.ui.privacy;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import android.view.Gravity;
@@ -12,13 +14,12 @@ import android.widget.Toast;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentPrivacyPinCodeBinding;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.ui.onboarding.PinSetupFragment;
 import com.kollectivemobile.euki.utils.Utils;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
 
 public class PrivacyPinSetupFragment extends PinSetupFragment {
     enum PinCodeType {
@@ -27,9 +28,7 @@ public class PrivacyPinSetupFragment extends PinSetupFragment {
 
     @Inject AppSettingsManager mAppSettingsManager;
 
-    @BindView(R.id.tv_title) TextView tvTitle;
-    @BindView(R.id.tv_error) TextView tvError;
-
+    private FragmentPrivacyPinCodeBinding binding;
     private PinCodeType mPinCodeType = PinCodeType.CREATE;
 
     public static PrivacyPinSetupFragment newInstance() {
@@ -37,6 +36,13 @@ public class PrivacyPinSetupFragment extends PinSetupFragment {
         PrivacyPinSetupFragment fragment = new PrivacyPinSetupFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentPrivacyPinCodeBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -47,7 +53,7 @@ public class PrivacyPinSetupFragment extends PinSetupFragment {
     @Override
     public void onResume() {
         super.onResume();
-        tvError.setVisibility(View.GONE);
+        binding.tvError.setVisibility(View.GONE);
     }
 
     @Override
@@ -73,8 +79,8 @@ public class PrivacyPinSetupFragment extends PinSetupFragment {
                 titleResId = R.string.confirm_existing_pin;
                 break;
         }
-        tvTitle.setText(getString(titleResId));
-        tvTitle.setGravity(titleResId == R.string.onboarding_set_pin_title ? Gravity.LEFT : Gravity.CENTER_HORIZONTAL);
+        binding.tvTitle.setText(getString(titleResId));
+        binding.tvTitle.setGravity(titleResId == R.string.onboarding_set_pin_title ? Gravity.LEFT : Gravity.CENTER_HORIZONTAL);
     }
 
     @Override
@@ -83,15 +89,15 @@ public class PrivacyPinSetupFragment extends PinSetupFragment {
         Boolean isCompleted = code.length() == 4;
 
         if (mPinCodeType == PinCodeType.CREATE && mAppSettingsManager.getPinCode() != null) {
-            btnSetPin.setAlpha(isCompleted ? 1.0F : 0.5F);
-            btnSetPin.setEnabled(isCompleted);
-            btnSetPin.setText(getString(R.string.set_new_pin_button).toUpperCase());
+            binding.btnSetPin.setAlpha(isCompleted ? 1.0F : 0.5F);
+            binding.btnSetPin.setEnabled(isCompleted);
+            binding.btnSetPin.setText(getString(R.string.set_new_pin_button).toUpperCase());
         }
 
         if (mPinCodeType == PinCodeType.CONFIRM) {
-            btnSetPin.setAlpha(isCompleted ? 1.0F : 0.5F);
-            btnSetPin.setEnabled(isCompleted);
-            btnSetPin.setText(getString(R.string.next).toUpperCase());
+            binding.btnSetPin.setAlpha(isCompleted ? 1.0F : 0.5F);
+            binding.btnSetPin.setEnabled(isCompleted);
+            binding.btnSetPin.setText(getString(R.string.next).toUpperCase());
 
             int codeLenght = code.length();
 
@@ -113,12 +119,12 @@ public class PrivacyPinSetupFragment extends PinSetupFragment {
         if (mPinCodeType == PinCodeType.CONFIRM) {
             String currentPin = mAppSettingsManager.getPinCode();
             if (currentPin != null && currentPin.equals(code)) {
-                tvError.setVisibility(View.GONE);
+                binding.tvError.setVisibility(View.GONE);
                 code = "";
                 mPinCodeType = PinCodeType.CREATE;
                 updateCodeType();
             } else {
-                tvError.setVisibility(View.VISIBLE);
+                binding.tvError.setVisibility(View.VISIBLE);
                 code = "";
             }
             showDots();

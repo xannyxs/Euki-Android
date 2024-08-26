@@ -2,49 +2,38 @@ package com.kollectivemobile.euki.ui.privacy;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Switch;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentPrivacyBinding;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.manager.PrivacyContentManager;
 import com.kollectivemobile.euki.manager.PrivacyManager;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.Dialogs;
-import com.kollectivemobile.euki.ui.home.search.SearchActivity;
-import com.kollectivemobile.euki.ui.main.MainActivity;
 import com.kollectivemobile.euki.utils.Constants;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 public class PrivacyFragment extends BaseFragment {
-    @Inject PrivacyContentManager mPrivacyContentManager;
-    @Inject PrivacyManager mPrivacyManager;
-    @Inject AppSettingsManager mAppSettingsManager;
+    @Inject
+    PrivacyContentManager mPrivacyContentManager;
+    @Inject
+    PrivacyManager mPrivacyManager;
+    @Inject
+    AppSettingsManager mAppSettingsManager;
 
-    @BindView(R.id.swch_recurring) Switch swchRecurring;
-    @BindView(R.id.tv_recurring) TextView tvRecurring;
-    @BindView(R.id.ll__recurring_container) LinearLayout llRecurring;
-    @BindView(R.id.db_recurring) SeekBar sbRecurring;
-    @BindView(R.id.b_set_pin) Button bSetPin;
-    @BindView(R.id.ll_remove_pin) LinearLayout llRemovePin;
-    @BindView(R.id.v_remove_pin) View vRemovePin;
-
+    private FragmentPrivacyBinding binding;
     private Integer mRecurringCounter = 4;
     private Boolean isFirstTime = true;
 
@@ -58,8 +47,16 @@ public class PrivacyFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App)getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentPrivacyBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -79,20 +76,58 @@ public class PrivacyFragment extends BaseFragment {
     }
 
     private void setUIElements() {
-        sbRecurring.setMax(mRecurringCounter);
-        sbRecurring.incrementProgressBy(1);
-        sbRecurring.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
-        swchRecurring.setOnCheckedChangeListener(mOnCheckedChangeListener);
+        binding.dbRecurring.setMax(mRecurringCounter);
+        binding.dbRecurring.incrementProgressBy(1);
+        binding.dbRecurring.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
+        binding.swchRecurring.setOnCheckedChangeListener(mOnCheckedChangeListener);
         isFirstTime = mPrivacyManager.getRecurringType() != null;
+
+        binding.bDeletteAllData.setOnClickListener(v -> deleteAllData());
+        binding.bSetPin.setOnClickListener(v -> setPin());
+        binding.bRemovePin.setOnClickListener(v -> removePin());
+        binding.bPricavyFaqs.setOnClickListener(v -> showPrivacyFaqs());
+        binding.bPrivacyStatement.setOnClickListener(v -> showPrivacyStatement());
+
         updateUIElements();
+    }
+
+    private void deleteAllData() {
+        Dialogs.createSimpleDialog(getActivity(), null, getString(R.string.confirm_delete_all_now), getString(R.string.ok), true, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mPrivacyManager.removeAllData();
+            }
+        }).show();
+    }
+
+    private void setPin() {
+        startActivity(PrivacyPinSetupActivity.makeIntent(getActivity()));
+    }
+
+    private void removePin() {
+        Dialogs.createSimpleDialog(getActivity(), null, getString(R.string.confirm_remove_pin), getString(R.string.ok), true, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mAppSettingsManager.savePinCode(null);
+                updatePinOptions();
+            }
+        }).show();
+    }
+
+    private void showPrivacyFaqs() {
+        showContentItem(mPrivacyContentManager.getPrivacyFAQs());
+    }
+
+    private void showPrivacyStatement() {
+        showContentItem(mPrivacyContentManager.getPrivacyStatement());
     }
 
     private void updateUIElements() {
         Constants.DeleteRecurringType recurringType = mPrivacyManager.getRecurringType();
-        tvRecurring.setText(getTitle(recurringType));
-        swchRecurring.setChecked(recurringType != null);
-        sbRecurring.setProgress(recurringType == null ? 0 : recurringType.ordinal());
-        llRecurring.setVisibility(swchRecurring.isChecked() ? View.VISIBLE : View.GONE);
+        binding.tvRecurring.setText(getTitle(recurringType));
+        binding.swchRecurring.setChecked(recurringType != null);
+        binding.dbRecurring.setProgress(recurringType == null ? 0 : recurringType.ordinal());
+        binding.llRecurringContainer.setVisibility(binding.swchRecurring.isChecked() ? View.VISIBLE : View.GONE);
     }
 
     private String getTitle(Integer index) {
@@ -109,52 +144,16 @@ public class PrivacyFragment extends BaseFragment {
 
     private void updatePinOptions() {
         Boolean hasPinCode = mAppSettingsManager.getPinCode() != null;
-        bSetPin.setText(hasPinCode ? getString(R.string.reset_pin) : getString(R.string.set_pin));
-        llRemovePin.setVisibility(hasPinCode ? View.VISIBLE : View.GONE);
-        vRemovePin.setVisibility(hasPinCode ? View.VISIBLE : View.GONE);
-    }
-
-    @OnClick(R.id.b_delette_all_data)
-    void deleteAllData() {
-        Dialogs.createSimpleDialog(getActivity(), null, getString(R.string.confirm_delete_all_now), getString(R.string.ok), true, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mPrivacyManager.removeAllData();
-            }
-        }).show();
-    }
-
-    @OnClick(R.id.b_set_pin)
-    void setPin() {
-        startActivity(PrivacyPinSetupActivity.makeIntent(getActivity()));
-    }
-
-    @OnClick(R.id.b_remove_pin)
-    void removePin() {
-        Dialogs.createSimpleDialog(getActivity(), null, getString(R.string.confirm_remove_pin), getString(R.string.ok), true, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mAppSettingsManager.savePinCode(null);
-                updatePinOptions();
-            }
-        }).show();
-    }
-
-    @OnClick(R.id.b_pricavy_faqs)
-    void showPrivacyFaqs() {
-        showContentItem(mPrivacyContentManager.getPrivacyFAQs());
-    }
-
-    @OnClick(R.id.b_privacy_statement)
-    void showPrivacyStatement() {
-        showContentItem(mPrivacyContentManager.getPrivacyStatement());
+        binding.bSetPin.setText(hasPinCode ? getString(R.string.reset_pin) : getString(R.string.set_pin));
+        binding.llRemovePin.setVisibility(hasPinCode ? View.VISIBLE : View.GONE);
+        binding.vRemovePin.setVisibility(hasPinCode ? View.VISIBLE : View.GONE);
     }
 
     private SeekBar.OnSeekBarChangeListener mOnSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             if (fromUser) {
-                tvRecurring.setText(getTitle(progress));
+                binding.tvRecurring.setText(getTitle(progress));
 
                 Constants.DeleteRecurringType recurringType = Constants.DeleteRecurringType.values[progress];
                 if (recurringType != mPrivacyManager.getRecurringType()) {

@@ -3,17 +3,19 @@ package com.kollectivemobile.euki.ui.cycle.days;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.Nullable;
 
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCycleDaysBinding;
 import com.kollectivemobile.euki.manager.CycleManager;
 import com.kollectivemobile.euki.model.CycleDayItem;
 import com.kollectivemobile.euki.networking.EukiCallback;
@@ -25,18 +27,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 
 public class DaysFragment extends BaseFragment implements DaysFragmentListener {
-    @Inject CycleManager mCycleManager;
+    @Inject
+    CycleManager mCycleManager;
 
-    @BindView(R.id.rv_main) HorizontalCarouselRecyclerView rvMain;
-    @BindView(R.id.iv_left) ImageView ivLeft;
-    @BindView(R.id.iv_right) ImageView ivRight;
-    @BindView(R.id.tv_info) TextView tvInfo;
-
+    private FragmentCycleDaysBinding binding;
     private List<CycleDayItem> mItems = new ArrayList<>();
-
     private DaysFragmentListener mListener;
     private Boolean mIsFirstTime = true;
 
@@ -48,12 +45,22 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
         return fragment;
     }
 
+
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
+
         setUIElements();
         requestData();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCycleDaysBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -74,20 +81,17 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
     }
 
     private void requestData() {
-        mCycleManager.requestCycleItems(new EukiCallback<List<CycleDayItem>>() {
+        mCycleManager.requestCycleItems(new EukiCallback<>() {
             @Override
             public void onSuccess(final List<CycleDayItem> cycleDayItems) {
                 mItems = cycleDayItems;
-                rvMain.updateData(cycleDayItems);
+                binding.rvMain.updateData(cycleDayItems);
 
                 final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(rvMain != null && cycleDayItems != null) {
-                            rvMain.scrollToPosition(cycleDayItems.size());
-                            rvMain.smoothScrollToPosition(cycleDayItems.size() + 1);
-                        }
+                handler.postDelayed(() -> {
+                    if (cycleDayItems != null) {
+                        binding.rvMain.scrollToPosition(cycleDayItems.size());
+                        binding.rvMain.smoothScrollToPosition(cycleDayItems.size() + 1);
                     }
                 }, 100);
             }
@@ -99,13 +103,13 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
     }
 
     private void refreshData() {
-        mCycleManager.requestCycleItems(new EukiCallback<List<CycleDayItem>>() {
+        mCycleManager.requestCycleItems(new EukiCallback<>() {
             @Override
             public void onSuccess(final List<CycleDayItem> cycleDayItems) {
                 mItems = cycleDayItems;
-                rvMain.updateData(cycleDayItems);
-                mListener.itemChanged(mItems.get(rvMain.getCurrentIndex()));
-                rvMain.smoothScrollToPosition(rvMain.getCurrentIndex() + 1);
+                binding.rvMain.updateData(cycleDayItems);
+                mListener.itemChanged(mItems.get(binding.rvMain.getCurrentIndex()));
+                binding.rvMain.smoothScrollToPosition(binding.rvMain.getCurrentIndex() + 1);
             }
 
             @Override
@@ -115,21 +119,25 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
     }
 
     private void setUIElements() {
+
+        HorizontalCarouselRecyclerView rvMain = binding.rvMain;
+        ImageView ivLeft = binding.ivLeft;
+        ImageView ivRight = binding.ivRight;
+
         rvMain.setListener(this);
         ivRight.setVisibility(View.GONE);
 
         ivLeft.setOnClickListener(view -> rvMain.smoothScrollToPosition(rvMain.getCurrentIndex() - 1));
-
         ivRight.setOnClickListener(view -> rvMain.smoothScrollToPosition(rvMain.getCurrentIndex() + 3));
     }
 
     @Override
     public void itemChanged(CycleDayItem item) {
-        ivLeft.setVisibility(item == mItems.get(0) ? View.GONE : View.VISIBLE);
-        ivRight.setVisibility(item == mItems.get(mItems.size() - 1) ? View.GONE : View.VISIBLE);
+        binding.ivLeft.setVisibility(item == mItems.get(0) ? View.GONE : View.VISIBLE);
+        binding.ivRight.setVisibility(item == mItems.get(mItems.size() - 1) ? View.GONE : View.VISIBLE);
 
-        Integer resId = (item.getCalendarItem() != null && item.getCalendarItem().hasData()) ? R.string.day_summary_data_title : item.isToday() ? R.string.day_summary_empty_today_title : R.string.day_summary_empty_past_title;
-        tvInfo.setText(getString(resId));
+        int resId = (item.getCalendarItem() != null && item.getCalendarItem().hasData()) ? R.string.day_summary_data_title : item.isToday() ? R.string.day_summary_empty_today_title : R.string.day_summary_empty_past_title;
+        binding.tvInfo.setText(getString(resId));
 
         mListener.itemChanged(item);
     }

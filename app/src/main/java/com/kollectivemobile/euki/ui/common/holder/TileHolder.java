@@ -14,36 +14,34 @@ import com.kollectivemobile.euki.utils.advrecyclerview.utils.AbstractDraggableIt
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class TileHolder extends AbstractDraggableItemViewHolder {
-    public @BindView(R.id.cv_main) CardView cvMain;
-    public @BindView(R.id.ib_action) ImageButton ibAction;
-    public @BindView(R.id.iv_icon) ImageView ivIcon;
-    public @BindView(R.id.tv_title) TextView tvTitle;
+    public CardView cvMain;
+    public ImageButton ibAction;
+    public ImageView ivIcon;
+    public TextView tvTitle;
 
     private TileListener mTileListener;
 
     public TileHolder(@NonNull View itemView, TileListener tileListener) {
         super(itemView);
         mTileListener = tileListener;
-        ButterKnife.bind(this, itemView);
-    }
 
-    @OnClick(R.id.cv_main)
-    void mainClicked() {
-        if (mTileListener != null) {
-            mTileListener.tileSelected(getLayoutPosition());
-        }
-    }
+        cvMain = itemView.findViewById(R.id.cv_main);
+        ibAction = itemView.findViewById(R.id.ib_action);
+        ivIcon = itemView.findViewById(R.id.iv_icon);
+        tvTitle = itemView.findViewById(R.id.tv_title);
 
-    @OnClick(R.id.ib_action)
-    void actionClicked() {
-        if (mTileListener != null) {
-            mTileListener.actionSelected(getLayoutPosition());
-        }
+        cvMain.setOnClickListener(v -> {
+            if (mTileListener != null) {
+                mTileListener.tileSelected(getLayoutPosition());
+            }
+        });
+
+        ibAction.setOnClickListener(v -> {
+            if (mTileListener != null) {
+                mTileListener.actionSelected(getLayoutPosition());
+            }
+        });
     }
 
     public interface TileListener {

@@ -2,19 +2,18 @@ package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.LayoutDailyLogItemBinding;
 import com.kollectivemobile.euki.model.FilterItem;
 import com.kollectivemobile.euki.ui.common.listeners.FilterItemListener;
 import com.kollectivemobile.euki.utils.Utils;
@@ -26,10 +25,6 @@ import com.kollectivemobile.euki.utils.advrecyclerview.utils.AbstractDraggableIt
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class DailyLogFilterAdapter extends RecyclerView.Adapter<DailyLogFilterAdapter.FilterHolder> implements DraggableItemAdapter<DailyLogFilterAdapter.FilterHolder> {
     private List<FilterItem> mFilterItems;
@@ -45,19 +40,18 @@ public class DailyLogFilterAdapter extends RecyclerView.Adapter<DailyLogFilterAd
 
     @NonNull
     @Override
-    public FilterHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.layout_daily_log_item, parent, false);
-        return new FilterHolder(view, mListener);
+    public FilterHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutDailyLogItemBinding binding = LayoutDailyLogItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new FilterHolder(binding, mListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FilterHolder filterHolder, int position) {
+    public void onBindViewHolder(@NonNull FilterHolder holder, int position) {
         FilterItem filterItem = mFilterItems.get(position);
-        filterHolder.vCircle.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext.get(), filterItem.getColor())));
-        filterHolder.tvTitle.setText(Utils.getLocalized(filterItem.getTitle()));
-        filterHolder.ibChange.setImageResource(filterItem.getOn() ? R.drawable.ic_tile_remove : R.drawable.ic_tile_add);
-        filterHolder.ivMove.setVisibility(filterItem.getOn() ? View.VISIBLE : View.GONE);
+        holder.binding.vCircle.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext.get(), filterItem.getColor())));
+        holder.binding.tvTitle.setText(Utils.getLocalized(filterItem.getTitle()));
+        holder.binding.ibChange.setImageResource(filterItem.getOn() ? R.drawable.ic_tile_remove : R.drawable.ic_tile_add);
+        holder.binding.ivMove.setVisibility(filterItem.getOn() ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -72,8 +66,8 @@ public class DailyLogFilterAdapter extends RecyclerView.Adapter<DailyLogFilterAd
 
     @Override
     public boolean onCheckCanStartDrag(@NonNull FilterHolder holder, int position, int x, int y) {
-        final View containerView = holder.rlMain;
-        final View dragHandleView = holder.ivMove;
+        final View containerView = holder.binding.rlMain;
+        final View dragHandleView = holder.binding.ivMove;
 
         final int offsetX = containerView.getLeft() + (int) (containerView.getTranslationX() + 0.5f);
         final int offsetY = containerView.getTop() + (int) (containerView.getTranslationY() + 0.5f);
@@ -111,23 +105,18 @@ public class DailyLogFilterAdapter extends RecyclerView.Adapter<DailyLogFilterAd
 
     static class FilterHolder extends AbstractDraggableItemViewHolder {
         private FilterItemListener mListener;
-        @BindView(R.id.rl_main) View rlMain;
-        @BindView(R.id.v_circle) View vCircle;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.ib_change) ImageButton ibChange;
-        @BindView(R.id.iv_move) ImageView ivMove;
+        final LayoutDailyLogItemBinding binding;
 
-        public FilterHolder(View itemView, FilterItemListener listener) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        public FilterHolder(LayoutDailyLogItemBinding binding, FilterItemListener listener) {
+            super(binding.getRoot());
+            this.binding = binding;
             mListener = listener;
-        }
 
-        @OnClick(R.id.ib_change)
-        void onClick() {
-            if (mListener != null) {
-                mListener.filterChanged(getLayoutPosition());
-            }
+            this.binding.ibChange.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.filterChanged(getLayoutPosition());
+                }
+            });
         }
     }
 

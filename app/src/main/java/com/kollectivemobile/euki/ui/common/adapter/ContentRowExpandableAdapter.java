@@ -26,10 +26,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<ContentRowExpandableAdapter.TitleHolder, ContentRowExpandableAdapter.TextHolder> {
     private List<ContentItem> mContentItems;
 
@@ -151,19 +147,23 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
 
     static class TitleHolder extends AbstractExpandableItemViewHolder {
         private ContentRowExpandableListener mListener;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.iv_arrow) ImageView ivArrow;
-        @BindView(R.id.v_separator_top) View vSeparatorTop;
-        @BindView(R.id.v_separator_bottom) View vSeparatorBottom;
+        private TextView tvTitle;
+        private ImageView ivArrow;
+        private View vSeparatorTop;
+        private View vSeparatorBottom;
 
         public TitleHolder(View itemView, ContentRowExpandableListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            ivArrow = itemView.findViewById(R.id.iv_arrow);
+            vSeparatorTop = itemView.findViewById(R.id.v_separator_top);
+            vSeparatorBottom = itemView.findViewById(R.id.v_separator_bottom);
             mListener = listener;
+
+            itemView.findViewById(R.id.rl_main).setOnClickListener(v -> onClick());
         }
 
-        @OnClick(R.id.rl_main)
-        void onClick() {
+        private void onClick() {
             if (mListener != null) {
                 mListener.rowExpandableSelected(getLayoutPosition() - 1);
             }
@@ -171,16 +171,17 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
     }
 
     static class TextHolder extends AbstractExpandableItemViewHolder {
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.v_separator_bottom) View vSeparatorBottom;
-        @BindView(R.id.iv_bookmark) ImageView ivBookmark;
-
-        @BindView(R.id.swiper_view)
-        CustomContainerView swiperView;
+        private TextView tvTitle;
+        private View vSeparatorBottom;
+        private ImageView ivBookmark;
+        private CustomContainerView swiperView;
 
         public TextHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            vSeparatorBottom = itemView.findViewById(R.id.v_separator_bottom);
+            ivBookmark = itemView.findViewById(R.id.iv_bookmark);
+            swiperView = itemView.findViewById(R.id.swiper_view);
         }
     }
 

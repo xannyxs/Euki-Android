@@ -1,7 +1,9 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ContentRowSelectableAdapter extends RecyclerView.Adapter {
     private List<ContentItem> mContentItems;
@@ -54,20 +53,29 @@ public class ContentRowSelectableAdapter extends RecyclerView.Adapter {
 
     static class RowHolder extends RecyclerView.ViewHolder {
         private ContentRowSelectableListener mListener;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.v_separator_top) View vSeparatorTop;
-        @BindView(R.id.v_separator_bottom) View vSeparatorBottom;
+        public TextView tvTitle;
+        public View vSeparatorTop;
+        public View vSeparatorBottom;
 
         public RowHolder(View itemView, ContentRowSelectableListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mListener = listener;
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            vSeparatorTop = itemView.findViewById(R.id.v_separator_top);
+            vSeparatorBottom = itemView.findViewById(R.id.v_separator_bottom);
+
+            // Set click listener manually
+            itemView.findViewById(R.id.rl_main).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    RowHolder.this.onClick();
+                }
+            });
         }
 
-        @OnClick(R.id.rl_main)
-        void onClick() {
+        private void onClick() {
             if (mListener != null) {
-                mListener.rowSelected(getLayoutPosition() - 1);
+                mListener.rowSelected(getBindingAdapterPosition() - 1);
             }
         }
     }

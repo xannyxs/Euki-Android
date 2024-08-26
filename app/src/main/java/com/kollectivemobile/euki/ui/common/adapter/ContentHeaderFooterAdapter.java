@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +19,6 @@ import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.utils.TextUtils;
 import com.kollectivemobile.euki.utils.Utils;
 import com.kollectivemobile.euki.utils.advrecyclerview.headerfooter.AbstractHeaderFooterWrapperAdapter;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ContentHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapter<ContentHeaderFooterAdapter.HeaderViewHolder, ContentHeaderFooterAdapter.FooterViewHolder> {
     private final ContentItem mContentItem;
@@ -129,16 +125,15 @@ public class ContentHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapt
     }
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.iv_icon)
-        ImageView ivIcon;
-        @BindView(R.id.tv_content)
-        TextView tvContent;
+        public TextView tvTitle;
+        public ImageView ivIcon;
+        public TextView tvContent;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            ivIcon = itemView.findViewById(R.id.iv_icon);
+            tvContent = itemView.findViewById(R.id.tv_content);
         }
     }
 

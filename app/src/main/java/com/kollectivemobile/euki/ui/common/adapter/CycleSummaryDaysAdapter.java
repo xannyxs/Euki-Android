@@ -1,7 +1,7 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
-import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +18,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
 
@@ -112,18 +109,24 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
     }
 
     public class CycleSummaryDaysHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.ll_container) View llContainer;
-        @BindView(R.id.ll_content) View llContent;
-        @BindView(R.id.tv_date) TextView tvDate;
-        @BindView(R.id.tv_cycle_day) TextView tvCycleDay;
-        @BindView(R.id.ll_next_cycle) View llNextCycle;
-        @BindView(R.id.tv_next_cycle_day) TextView tvNextCycleDay;
+        public View llContainer;
+        public View llContent;
+        public TextView tvDate;
+        public TextView tvCycleDay;
+        public View llNextCycle;
+        public TextView tvNextCycleDay;
 
         public CycleSummaryDaysHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            llContainer = itemView.findViewById(R.id.ll_container);
+            llContent = itemView.findViewById(R.id.ll_content);
+            tvDate = itemView.findViewById(R.id.tv_date);
+            tvCycleDay = itemView.findViewById(R.id.tv_cycle_day);
+            llNextCycle = itemView.findViewById(R.id.ll_next_cycle);
+            tvNextCycleDay = itemView.findViewById(R.id.tv_next_cycle_day);
         }
     }
+
 
     public void update(List<CycleDayItem> items) {
         if (items != null) {

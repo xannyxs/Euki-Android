@@ -1,27 +1,27 @@
 package com.kollectivemobile.euki.ui.cycle.settings;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCycleSettingsBinding;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnCheckedChanged;
-
 public class SettingsFragment extends BaseFragment {
     @Inject AppSettingsManager mAppSettingsManager;
 
-    @BindView(R.id.stch_track_period) Switch stchTrackPeriod;
-    @BindView(R.id.stch_period_prediction) Switch stchPeriodPrediction;
+    private FragmentCycleSettingsBinding binding;
 
     public static SettingsFragment newInstance() {
         Bundle args = new Bundle();
@@ -33,8 +33,16 @@ public class SettingsFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCycleSettingsBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -49,12 +57,14 @@ public class SettingsFragment extends BaseFragment {
 
     private void setUIElements() {
         Boolean trackPeriodEnabled = mAppSettingsManager.trackPeriodEnabled();
-        stchTrackPeriod.setChecked(trackPeriodEnabled);
-        stchPeriodPrediction.setChecked(mAppSettingsManager.periodPredictionEnabled());
-        stchPeriodPrediction.setEnabled(trackPeriodEnabled);
+        binding.stchTrackPeriod.setChecked(trackPeriodEnabled);
+        binding.stchPeriodPrediction.setChecked(mAppSettingsManager.periodPredictionEnabled());
+        binding.stchPeriodPrediction.setEnabled(trackPeriodEnabled);
+
+        binding.stchTrackPeriod.setOnCheckedChangeListener((buttonView, isChecked) -> trackPeriod(isChecked));
+        binding.stchPeriodPrediction.setOnCheckedChangeListener((buttonView, isChecked) -> periodPrediction(isChecked));
     }
 
-    @OnCheckedChanged(R.id.stch_track_period)
     void trackPeriod(boolean checked) {
         mAppSettingsManager.saveTrackPeriodEnabled(checked);
         if (!checked) {
@@ -63,7 +73,6 @@ public class SettingsFragment extends BaseFragment {
         setUIElements();
     }
 
-    @OnCheckedChanged(R.id.stch_period_prediction)
     void periodPrediction(boolean checked) {
         mAppSettingsManager.savePeriodPredictionEnabled(checked);
     }

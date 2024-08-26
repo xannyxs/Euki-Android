@@ -335,7 +335,7 @@ Si decides que ya no quieres un PIN, puedes cambiar tus ajustes de privacidad m�
   <string name="calendar">Calendario</string>
   <string name="bookmarks">Favoritos</string>
   <string name="privacy">Privacidad</string>
-  <string name="source_format">Fuente: %@</string>
+  <string name="source_format">Fuente: %s</string>
   <string name="knowledge_base">Información</string>
   <string name="walk_me_through_the_process">Guía paso a paso</string>
   <string name="knowledge_base_title">Información sobre el aborto</string>
@@ -2029,7 +2029,7 @@ Si tienes cualquier pregunta, comentario, petición o preocupación relacionada 
   <string name="bookmarks_empty_title">Los marcadores aparecen aquí</string>
   <string name="bookmarks_empty_content">Puede marcar la información desde la pestaña Inicio para acceder fácilmente.</string>
   <string name="pin_code_update_alert_title">Actualización de PIN falso</string>
-  <string name="pin_code_update_alert_message">Si alguien te pide que abras Euki y no quieres que vea tus datos, introduce el PIN %@ cuando abras la aplicación y mostraremos una pantalla falsa.</string>
+  <string name="pin_code_update_alert_message">Si alguien te pide que abras Euki y no quieres que vea tus datos, introduce el PIN %s cuando abras la aplicación y mostraremos una pantalla falsa.</string>
   <string name="nav_cycle">Ciclo</string>
   <string name="nav_calendar">Calendario</string>
   <string name="nav_track">Seguimiento</string>
@@ -2044,12 +2044,12 @@ Si tienes cualquier pregunta, comentario, petición o preocupación relacionada 
   <string name="day_summary_data_title">Hiciste seguimiento a:</string>
   <string name="day_summary_empty_past_title">¿Necesitas retroceder?</string>
   <string name="day_summary_empty_today_title">¿Qué hay de nuevo en tu cuerpo?</string>
-  <string name="cycle_summary_days_format">%@
+  <string name="cycle_summary_days_format">%s %s
 día</string>
   <string name="avg_cycle_length">Duración promedio del ciclo</string>
   <string name="cycle_variation">Variación de ciclo</string>
   <string name="avg_period_length">Longitud promedio del ciclo</string>
-  <string name="your_current_cycle_day">Tu ciclo actual: día %@</string>
+  <string name="your_current_cycle_day">Tu ciclo actual: día %s</string>
   <string name="date_starting_period">Día de inicio del ciclo</string>
   <string name="period">Ciclo</string>
   <string name="cycle_today">hoy</string>

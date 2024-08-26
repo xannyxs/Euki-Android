@@ -5,10 +5,14 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,15 +20,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentAppointmentsBinding;
 import com.kollectivemobile.euki.manager.CalendarManager;
-import com.kollectivemobile.euki.manager.ReminderManager;
 import com.kollectivemobile.euki.model.Appointment;
 import com.kollectivemobile.euki.model.database.entity.CalendarItem;
-import com.kollectivemobile.euki.model.database.entity.ReminderItem;
 import com.kollectivemobile.euki.networking.EukiCallback;
 import com.kollectivemobile.euki.networking.ServerError;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
@@ -33,24 +35,19 @@ import com.kollectivemobile.euki.ui.common.InsetDecoration;
 import com.kollectivemobile.euki.ui.common.SwipeController;
 import com.kollectivemobile.euki.ui.common.SwipeControllerActions;
 import com.kollectivemobile.euki.ui.common.adapter.AppointmentAdapter;
-import com.kollectivemobile.euki.ui.common.adapter.ReminderAdapter;
 import com.kollectivemobile.euki.utils.Constants;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class AppointmentsFragment extends BaseFragment implements AppointmentAdapter.AppointmentsDataListener {
     @Inject CalendarManager mCalendarManager;
 
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-
+    private FragmentAppointmentsBinding binding;
     private Date mDate;
     private CalendarItem mCalendarItem;
     private AppointmentAdapter mAdapter;
@@ -67,10 +64,18 @@ public class AppointmentsFragment extends BaseFragment implements AppointmentAda
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App)getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App)getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setHasOptionsMenu(true);
         setUIElements();
         requestCalendarItem();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentAppointmentsBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -86,10 +91,8 @@ public class AppointmentsFragment extends BaseFragment implements AppointmentAda
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_done:
-                getActivity().finish();
-                break;
+        if (item.getItemId() == R.id.item_done) {
+            getActivity().finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -97,9 +100,9 @@ public class AppointmentsFragment extends BaseFragment implements AppointmentAda
 
     private void setUIElements() {
         mAdapter = new AppointmentAdapter(getContext(), this, mDate);
-        rvMain.setAdapter(mAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
+        binding.rvMain.setAdapter(mAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
 
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
@@ -132,9 +135,9 @@ public class AppointmentsFragment extends BaseFragment implements AppointmentAda
         });
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(rvMain);
+        itemTouchhelper.attachToRecyclerView(binding.rvMain);
 
-        rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
+        binding.rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
                 swipeController.onDraw(c);
@@ -219,14 +222,11 @@ public class AppointmentsFragment extends BaseFragment implements AppointmentAda
         cal.setTime(date);
 
         TimePickerDialog dpd = new TimePickerDialog(getContext(),
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hours, int mins) {
-                        cal.set(Calendar.HOUR_OF_DAY, hours);
-                        cal.set(Calendar.MINUTE, mins);
-                        cal.set(Calendar.SECOND, 0);
-                        mAdapter.selectDate(cal.getTime());
-                    }
+                (timePicker, hours, mins) -> {
+                    cal.set(Calendar.HOUR_OF_DAY, hours);
+                    cal.set(Calendar.MINUTE, mins);
+                    cal.set(Calendar.SECOND, 0);
+                    mAdapter.selectDate(cal.getTime());
                 }, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), false);
         dpd.show();
     }
@@ -238,11 +238,6 @@ public class AppointmentsFragment extends BaseFragment implements AppointmentAda
             objects.add(App.getContext().getString(alertRes));
         }
 
-        Dialogs.createListDialog(getActivity(), objects, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mAdapter.selectAlert(i);
-            }
-        }).show();
+        Dialogs.createListDialog(getActivity(), objects, (dialogInterface, i) -> mAdapter.selectAlert(i)).show();
     }
 }

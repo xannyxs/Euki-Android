@@ -15,11 +15,7 @@ import com.kollectivemobile.euki.utils.Utils;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
-public class CalendarFilterAdapter extends RecyclerView.Adapter {
+public class CalendarFilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     static final Integer VIEW_TYPE_ITEM = 0;
     static final Integer VIEW_TYPE_FOOTER = 1;
 
@@ -48,7 +44,7 @@ public class CalendarFilterAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof CalendarItemHolder) {
-            CalendarItemHolder itemHolder = (CalendarItemHolder)holder;
+            CalendarItemHolder itemHolder = (CalendarItemHolder) holder;
             FilterItem filterItem = mFilterItems.get(position);
             itemHolder.vCircle.setBackgroundResource(filterItem.getOn() ? R.drawable.ic_calendar_filter_on : R.drawable.ic_calendar_filter_off);
             itemHolder.vCircle.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, filterItem.getColor())));
@@ -72,20 +68,23 @@ public class CalendarFilterAdapter extends RecyclerView.Adapter {
 
     static class CalendarItemHolder extends RecyclerView.ViewHolder {
         private CalendarFilterListener mListener;
-        @BindView(R.id.v_circle) View vCircle;
-        @BindView(R.id.tv_title) TextView tvTitle;
+        private View vCircle;
+        private TextView tvTitle;
 
         public CalendarItemHolder(View itemView, CalendarFilterListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mListener = listener;
-        }
+            vCircle = itemView.findViewById(R.id.v_circle);
+            tvTitle = itemView.findViewById(R.id.tv_title);
 
-        @OnClick(R.id.ll_main)
-        void onClick() {
-            if (mListener != null) {
-                mListener.filterSelected(getLayoutPosition());
-            }
+            itemView.findViewById(R.id.ll_main).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.filterSelected(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 
@@ -94,22 +93,25 @@ public class CalendarFilterAdapter extends RecyclerView.Adapter {
 
         public CalendarFooterHolder(View itemView, CalendarFilterListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mListener = listener;
-        }
 
-        @OnClick(R.id.btn_clear)
-        void onClickClear() {
-            if (mListener != null) {
-                mListener.clear();
-            }
-        }
+            itemView.findViewById(R.id.btn_clear).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.clear();
+                    }
+                }
+            });
 
-        @OnClick(R.id.btn_show_results)
-        void onClickShowResults() {
-            if (mListener != null) {
-                mListener.showResults();
-            }
+            itemView.findViewById(R.id.btn_show_results).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.showResults();
+                    }
+                }
+            });
         }
     }
 

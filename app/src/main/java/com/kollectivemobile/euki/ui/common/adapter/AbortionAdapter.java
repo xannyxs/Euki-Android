@@ -21,9 +21,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AbortionAdapter extends RecyclerView.Adapter {
     private WeakReference<Context> mContext;
@@ -64,22 +61,26 @@ public class AbortionAdapter extends RecyclerView.Adapter {
     }
 
     public class AbortionHolder extends RecyclerView.ViewHolder {
-        public @BindView(R.id.cv_main) CardView cvMain;
-        public @BindView(R.id.iv_icon) ImageView ivIcon;
-        public @BindView(R.id.tv_title) TextView tvTitle;
+        public CardView cvMain;
+        public ImageView ivIcon;
+        public TextView tvTitle;
         private AbortionListener mListener;
 
         public AbortionHolder(@NonNull View itemView, AbortionListener listener) {
             super(itemView);
             mListener = listener;
-            ButterKnife.bind(this, itemView);
-        }
 
-        @OnClick(R.id.cv_main)
-        void mainClicked() {
-            if (mListener != null) {
-                mListener.abortionClicked(getLayoutPosition());
-            }
+            // Replace Butter Knife binding with findViewById
+            cvMain = itemView.findViewById(R.id.cv_main);
+            ivIcon = itemView.findViewById(R.id.iv_icon);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+
+            // Set up click listener manually
+            cvMain.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.abortionClicked(getLayoutPosition());
+                }
+            });
         }
     }
 

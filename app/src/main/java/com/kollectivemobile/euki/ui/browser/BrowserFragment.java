@@ -1,6 +1,5 @@
 package com.kollectivemobile.euki.ui.browser;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +9,18 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentBrowserBinding;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 
-import butterknife.BindView;
-
 public class BrowserFragment extends BaseFragment {
-    @BindView(R.id.wv_main)
-    WebView wvMain;
 
+    private FragmentBrowserBinding binding;
     private String url;
 
     public static BrowserFragment newInstance(String url) {
@@ -33,8 +32,16 @@ public class BrowserFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentBrowserBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -48,10 +55,10 @@ public class BrowserFragment extends BaseFragment {
     }
 
     private void setUIElements() {
-        wvMain.requestFocus();
-        wvMain.clearCache(true);
-        wvMain.getSettings().setLightTouchEnabled(true);
-        WebSettings webSettings = wvMain.getSettings();
+        binding.wvMain.requestFocus();
+        binding.wvMain.clearCache(true);
+        binding.wvMain.getSettings().setLightTouchEnabled(true);
+        WebSettings webSettings = binding.wvMain.getSettings();
         webSettings.setUserAgentString("android-leavesCZY");
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);
@@ -60,11 +67,11 @@ public class BrowserFragment extends BaseFragment {
         webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        wvMain.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        binding.wvMain.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 
 
         // Check the API level before setting WebViewClient
-        wvMain.setWebViewClient(new WebViewClient() {
+        binding.wvMain.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(request.getUrl().toString());
@@ -72,7 +79,7 @@ public class BrowserFragment extends BaseFragment {
             }
         });
 
-        wvMain.loadUrl(url);
+        binding.wvMain.loadUrl(url);
     }
 }
 
