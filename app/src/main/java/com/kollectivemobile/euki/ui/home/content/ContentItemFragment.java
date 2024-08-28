@@ -3,6 +3,7 @@ package com.kollectivemobile.euki.ui.home.content;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -41,14 +42,15 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 public class ContentItemFragment extends BaseFragment implements ContentGridSelectableAdapter.ContentGridSelectableListener,
-                                                                 ContentRowSelectableAdapter.ContentRowSelectableListener,
-                                                                 ContentRowExpandableAdapter.ContentRowExpandableListener,
-                                                                 RecyclerViewExpandableItemManager.OnGroupCollapseListener,
-                                                                 RecyclerViewExpandableItemManager.OnGroupExpandListener,
-                                                                 HeightListener {
+        ContentRowSelectableAdapter.ContentRowSelectableListener,
+        ContentRowExpandableAdapter.ContentRowExpandableListener,
+        RecyclerViewExpandableItemManager.OnGroupCollapseListener,
+        RecyclerViewExpandableItemManager.OnGroupExpandListener,
+        HeightListener {
     private static final String SAVED_STATE_EXPANDABLE_ITEM_MANAGER = "RecyclerViewExpandableItemManager";
 
-    @Inject BookmarkManager mBookmarkManager;
+    @Inject
+    BookmarkManager mBookmarkManager;
 
     private FragmentContentItemBinding binding;
     private RecyclerViewExpandableItemManager mRecyclerViewExpandableItemManager;
@@ -75,7 +77,7 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App)getActivity().getApplication()).getAppComponent().inject(this);
+        ((App) getActivity().getApplication()).getAppComponent().inject(this);
         setUIElements(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -162,7 +164,7 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
         if (mExpandContentItem != null) {
             Integer index = -1;
-            for (int i=0; i<mContentItem.getExpandableItems().size(); i++) {
+            for (int i = 0; i < mContentItem.getExpandableItems().size(); i++) {
                 ContentItem contentItem = mContentItem.getExpandableItems().get(i);
                 if (contentItem.getId().equals(mExpandContentItem.getId())) {
                     index = i;

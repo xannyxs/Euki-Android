@@ -70,7 +70,6 @@ public class AbortionAdapter extends RecyclerView.Adapter {
             super(itemView);
             mListener = listener;
 
-            // Replace Butter Knife binding with findViewById
             cvMain = itemView.findViewById(R.id.cv_main);
             ivIcon = itemView.findViewById(R.id.iv_icon);
             tvTitle = itemView.findViewById(R.id.tv_title);

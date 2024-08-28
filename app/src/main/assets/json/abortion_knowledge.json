@@ -331,6 +331,42 @@
       "icon": "IconAbortion",
       "title": "abortion_laws_title",
       "content": "abortion_laws_content",
+      "expandable_items": [
+        {
+          "id": "counseling_requirements_dropdown",
+          "content": "counseling_requirements_copy",
+          "links": {}
+        },
+        {
+          "id": "judicial_bypass_dropdown",
+          "content": "judicial_bypass_copy",
+          "links": {
+            "Repro Legal Helpline": "https://www.reprolegalhelpline.org/contact-the-helpline/"
+          }
+        },
+        {
+          "id": "legal_risk_dropdown",
+          "content": "Legal_risk_copy",
+          "links": {}
+        },
+        {
+          "id": "Parental_involvement_laws_dropdown",
+          "content": "Parental_involvement_laws_copy",
+          "links": {
+            "parental involvement laws": "https://www.reprolegalhelpline.org/abortion-laws-by-state/"
+          }
+        },
+        {
+          "id": "waiting_periods_dropdown",
+          "content": "waiting_periods_copy",
+          "links": {}
+        },
+        {
+          "id": "shield_laws_dropdown",
+          "content": "shield_laws_copy",
+          "links": {}
+        }
+      ],
       "links": {
         "Center for Reproductive Rights": "https://reproductiverights.org/maps/abortion-laws-by-state/",
         "Repro Legal Hotline": "https://www.reprolegalhelpline.org/",
