@@ -889,6 +889,7 @@ Clinics typically provide surgical abortions between 5 weeks to 24 weeks of preg
 
 There are always risks with any medical procedure. Consult a medical provider with any concerns or questions.</string>
   <string name="suction_or_vacuum">Procedural or vacuum aspiration</string>
+  <string name="suction_or_vacuum_no_expandable">Procedural or vacuum aspiration</string>
   <string name="suction_or_vacuum_text_1">Before the abortion, clinic staff might suggest a pregnancy test, complete an ultrasound, and do routine blood work.</string>
   <string name="suction_or_vacuum_text_2">Once in the exam room, a health care provider may insert a speculum into the vagina and inject a numbing medication into the cervix. This could feel like a sharp pinch.</string>
   <string name="suction_or_vacuum_text_3">A health care provider will then insert a thin tube into the vagina and through the cervix. Using a small suction device, the health care provider will remove the pregnancy from the uterus. This should only take a few minutes.</string>
@@ -922,6 +923,7 @@ The All-Options Talkline is a free phone hotline that provides support to people
 
 Source: All-Options</string>
   <string name="dilation_evacuation">Dilation and Evacuation (D&amp;E)</string>
+  <string name="dilation_evacuation_no_expandable">Dilation and Evacuation (D&amp;E)</string>
   <string name="dilation_evacuation_text_1">Before the abortion, clinic staff might suggest a pregnancy test, complete an ultrasound, and do routine blood work.</string>
   <string name="dilation_evacuation_text_2">A health care provider may use rods called dilators or pills (misoprostol) to help soften your cervix. They may do this a few hours before or a day before the abortion, and some cramping afterwards is common. Ask a health care provider about what medications can be used to help with pain or discomfort.</string>
   <string name="dilation_evacuation_text_3">Anesthesia or sedation, which a health care provider will use before the abortion starts, can help to manage pain. During the abortion, a health care provider will use medical tools and a suction device to remove the pregnancy from your uterus. This should take 10 to 30 minutes.</string>

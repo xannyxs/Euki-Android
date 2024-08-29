@@ -886,6 +886,7 @@ Las clínicas normalmente proporcionan abortos procesales entre la semana 5 y 24
 
 Todo procedimiento médico siempre conlleva riesgos. En caso de duda o si tienes alguna pregunta consulta con un proveedor de atención médica.</string>
   <string name="suction_or_vacuum">Procesal o aspiración por vacío</string>
+  <string name="suction_or_vacuum_no_expandable">Procesal o aspiración por vacío</string>
   <string name="suction_or_vacuum_text_1">Antes del aborto, el personal de la clínica puede sugerir hacer una prueba de embarazo, una ecografía, y realizar un examen de sangre rutinario.</string>
   <string name="suction_or_vacuum_text_2">Una vez de la sala de examen, un/a proveedor/a de atención médica puede insertar un espéculo en la vagina e inyectar un medicamento anestésico en el cuello del útero. Esto puede sentirse como un pinchazo agudo.</string>
   <string name="suction_or_vacuum_text_3">Un/a proveedor/a de atención médica insertará entonces un tubo fino en la vagina y a través del cuello del útero. Utilizando un dispositivo succionador, el/la proveedor/a de atención médica retirará el embarazo del útero. Esto debería durar sólo unos pocos minutos.</string>
@@ -919,6 +920,7 @@ All-Options Talkline es una línea de asistencia telefónica que proporciona apo
 
 Fuente: All-Options</string>
   <string name="dilation_evacuation">Dilatación y evacuación (DyE)</string>
+  <string name="dilation_evacuation_no_expandable">Dilatación y evacuación (DyE)</string>
   <string name="dilation_evacuation_text_1">Antes del aborto, el personal de la clínica puede sugerir una prueba de embarazo, hacer una ecografía y realizar un examen de sangre rutinario.</string>
   <string name="dilation_evacuation_text_2">Un/a proveedor/a de atención médica puede que utilice unas varillas llamadas dilatadores o pastillas (misoprostol) para ayudar a que el cuello de tu útero se ablande. Puede que hagan esto unas pocas horas antes o el día anterior al aborto, y es común experimentar algo de cólico después. Pregunta a tu médico qué medicamentos pueden usarse para ayudar con dolores o molestias.</string>
   <string name="dilation_evacuation_text_3">La anestesia o la sedación, que quizás un/a proveedor/a de atención médica utilice antes de comenzar el aborto, puede ayudar a manejar el dolor. Durante el aborto, un/a médico usará herramientas médicas y un dispositivo succionador para retirar el embarazo de tu útero. Esto debería durar entre 10 y 30 minutos.</string>

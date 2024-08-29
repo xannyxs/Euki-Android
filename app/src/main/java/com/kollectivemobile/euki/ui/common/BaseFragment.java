@@ -243,6 +243,18 @@ public abstract class BaseFragment extends Fragment implements LinkListener {
             case "concerned_pregnancy":
                 mContentManager.getPregnancyOptions(callback);
                 break;
+            case "mife_miso":
+                fragment = AbortionInfoItemFragment.newInstance(mAbortionContentManager.getAbortionMifeMiso12NoExpandables());
+                break;
+            case "miso":
+                fragment = AbortionInfoItemFragment.newInstance(mAbortionContentManager.getAbortionMiso12NoExpandables());
+                break;
+            case "suction_or_vacuum_no_expandable":
+                fragment = AbortionInfoItemFragment.newInstance(mAbortionContentManager.getAbortionSuctionVacuumNoExpandables());
+                break;
+            case "dilation_evacuation_no_expandable":
+                fragment = AbortionInfoItemFragment.newInstance(mAbortionContentManager.getAbortionDilationEvacuationNoExpandables());
+                break;
             default:
                 fragment = ContentItemFragment.newInstance(contentItem);
                 break;

@@ -42,4 +42,58 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
         item.setContent("privacy_statement_content");
         return item;
     }
+
+    @Override
+    public ContentItem getPrivacyBestPractices() {
+        ContentItem item = new ContentItem("Privacy_best_practices_header");
+        item.setImageIcon("icon_privacy_best_practices");
+        item.setContent("Privacy_best_practices_copy");
+
+        List<ContentItem> childItems = new ArrayList<>();
+
+        String textMessages = "Protect_your_private_messages_dropdown";
+        String contentMessages = "Protect_your_private_messages_copy";
+
+        String textHistory = "Protect_your_internet_search_history_dropdown";
+        String contentHistory = "Protect_your_internet_search_history_copy";
+
+        String textPaymentHistory = "Protect_your_payment_history_dropdown";
+        String contentPaymentHistory = "Protect_your_payment_history_copy";
+
+        String textLocation = "Protect_your_location_data_and_ad_tracking_dropdown";
+        String contentLocation = "Protect_your_location_data_and_ad_tracking_copy";
+
+        String textResources = "Resources_dropdown";
+        String contentResources = "Resources_copy";
+
+        ContentItem childItemMessages = new ContentItem(textMessages);
+        childItemMessages.setContent(contentMessages);
+        childItemMessages.setItemId(0);
+        childItems.add(childItemMessages);
+
+        ContentItem childItemHistory = new ContentItem(textHistory);
+        childItemHistory.setContent(contentHistory);
+        childItemHistory.setItemId(1);
+        childItems.add(childItemHistory);
+
+        ContentItem childItemPaymentHistory = new ContentItem(textPaymentHistory);
+        childItemPaymentHistory.setContent(contentPaymentHistory);
+        childItemPaymentHistory.setItemId(2);
+        childItems.add(childItemPaymentHistory);
+
+        ContentItem childItemLocation = new ContentItem(textLocation);
+        childItemLocation.setContent(contentLocation);
+        childItemLocation.setItemId(3);
+        childItems.add(childItemLocation);
+
+        ContentItem childItemResources = new ContentItem(textResources);
+        childItemResources.setContent(contentResources);
+        childItemResources.setItemId(4);
+        childItems.add(childItemResources);
+
+        item.setExpandableItems(childItems);
+
+        return item;
+    }
+
 }

@@ -81,6 +81,12 @@ public class ContentItemActivity extends BaseActivity {
             case "dilation_evacuation":
                 fragment = AbortionInfoItemFragment.newInstance(mAbortionContentManager.getAbortionDilationEvacuation(), expandedItem);
                 break;
+            case "mife_miso":
+                fragment = AbortionInfoItemFragment.newInstance(mAbortionContentManager.getAbortionMifeMiso12());
+                break;
+            case "miso":
+                fragment = AbortionInfoItemFragment.newInstance(mAbortionContentManager.getAbortionMiso12());
+                break;
             case "concerned_sti_hiv":
                 mContentManager.getSTIs(callback);
                 break;

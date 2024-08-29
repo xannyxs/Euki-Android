@@ -87,6 +87,7 @@ public class PrivacyFragment extends BaseFragment {
         binding.bRemovePin.setOnClickListener(v -> removePin());
         binding.bPricavyFaqs.setOnClickListener(v -> showPrivacyFaqs());
         binding.bPrivacyStatement.setOnClickListener(v -> showPrivacyStatement());
+        binding.bPrivacyBestPractices.setOnClickListener(v -> showPrivacyBestPractices());
 
         updateUIElements();
     }
@@ -120,6 +121,10 @@ public class PrivacyFragment extends BaseFragment {
 
     private void showPrivacyStatement() {
         showContentItem(mPrivacyContentManager.getPrivacyStatement());
+    }
+
+    private void showPrivacyBestPractices() {
+        showContentItem(mPrivacyContentManager.getPrivacyBestPractices());
     }
 
     private void updateUIElements() {

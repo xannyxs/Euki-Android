@@ -159,6 +159,11 @@ public class ContentManagerImpl implements ContentManager {
             return foundContentItem;
         }
 
+        foundContentItem = getContentItem(id, mPrivacyContentManager.getPrivacyBestPractices());
+        if (foundContentItem != null) {
+            return foundContentItem;
+        }
+
         return null;
     }
 

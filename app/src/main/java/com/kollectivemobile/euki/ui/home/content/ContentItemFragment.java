@@ -27,6 +27,7 @@ import com.kollectivemobile.euki.manager.BookmarkManager;
 import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.adapter.ContentGridSelectableAdapter;
+import com.kollectivemobile.euki.ui.common.adapter.ContentGridSelectableAdapter.ContentGridSelectableListener;
 import com.kollectivemobile.euki.ui.common.adapter.ContentHeaderFooterAdapter;
 import com.kollectivemobile.euki.ui.common.adapter.ContentRowExpandableAdapter;
 import com.kollectivemobile.euki.ui.common.adapter.ContentRowSelectableAdapter;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-public class ContentItemFragment extends BaseFragment implements ContentGridSelectableAdapter.ContentGridSelectableListener,
+public class ContentItemFragment extends BaseFragment implements ContentGridSelectableListener,
         ContentRowSelectableAdapter.ContentRowSelectableListener,
         ContentRowExpandableAdapter.ContentRowExpandableListener,
         RecyclerViewExpandableItemManager.OnGroupCollapseListener,
@@ -128,39 +129,54 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
     }
 
     private void setUIElements(Bundle savedInstanceState) {
-        RecyclerView.Adapter adapter;
-        RecyclerView.LayoutManager layoutManager;
+        RecyclerView.Adapter mainAdapter;
+        RecyclerView.LayoutManager mainLayoutManager;
+        RecyclerView.Adapter secondaryAdapter = null;
+        RecyclerView.LayoutManager secondaryLayoutManager = null;
 
-        if (mContentItem.getSelectableRowItems() != null && mContentItem.getSelectableItems().size() > 0) {
-            adapter = new ContentGridSelectableAdapter(getContext(), mContentItem.getSelectableItems(), this);
-            layoutManager = new GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false);
+        if (mContentItem.getSelectableItems() != null && mContentItem.getSelectableItems().size() > 0) {
+            mainAdapter = new ContentGridSelectableAdapter(getContext(), mContentItem.getSelectableItems(), this);
+            mainLayoutManager = new GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false);
         } else if (mContentItem.getSelectableRowItems() != null && mContentItem.getSelectableRowItems().size() > 0) {
-            adapter = new ContentRowSelectableAdapter(getContext(), mContentItem.getSelectableRowItems(), this);
-            layoutManager = new LinearLayoutManager(getContext());
-        } else if (mContentItem.getExpandableItems() != null && mContentItem.getExpandableItems().size() > 0) {
-            RecyclerView.Adapter rowAdapter = new ContentRowExpandableAdapter(getContext(), mContentItem.getExpandableItems(), this, this, mBookmarkManager);
+            mainAdapter = new ContentRowSelectableAdapter(getContext(), mContentItem.getSelectableRowItems(), this);
+            mainLayoutManager = new LinearLayoutManager(getContext());
+        } else {
+            mainAdapter = new ContentRowSelectableAdapter(getContext(), new ArrayList<>(), this);
+            mainLayoutManager = new LinearLayoutManager(getContext());
+        }
+
+        if (mContentItem.getExpandableItems() != null && mContentItem.getExpandableItems().size() > 0) {
+            RecyclerView.Adapter expandableAdapter = new ContentRowExpandableAdapter(getContext(), mContentItem.getExpandableItems(), this, this, mBookmarkManager);
 
             final Parcelable eimSavedState = (savedInstanceState != null) ? savedInstanceState.getParcelable(SAVED_STATE_EXPANDABLE_ITEM_MANAGER) : null;
             mRecyclerViewExpandableItemManager = new RecyclerViewExpandableItemManager(eimSavedState);
             mRecyclerViewExpandableItemManager.setOnGroupExpandListener(this);
             mRecyclerViewExpandableItemManager.setOnGroupCollapseListener(this);
 
-            adapter = mRecyclerViewExpandableItemManager.createWrappedAdapter(rowAdapter);
+            secondaryAdapter = mRecyclerViewExpandableItemManager.createWrappedAdapter(expandableAdapter);
             GeneralItemAnimator animator = new RefactoredDefaultItemAnimator();
             animator.setSupportsChangeAnimations(false);
-            binding.rvMain.setItemAnimator(animator);
-            binding.rvMain.setHasFixedSize(false);
-            mRecyclerViewExpandableItemManager.attachRecyclerView(binding.rvMain);
+            binding.rvSecondary.setItemAnimator(animator);
+            binding.rvSecondary.setHasFixedSize(false);
+            mRecyclerViewExpandableItemManager.attachRecyclerView(binding.rvSecondary);
 
-            layoutManager = new LinearLayoutManager(getContext());
-        } else {
-            adapter = new ContentRowSelectableAdapter(getContext(), new ArrayList<ContentItem>(), this);
-            layoutManager = new LinearLayoutManager(getContext());
+            secondaryLayoutManager = new LinearLayoutManager(getContext());
         }
 
-        mHeaderFooterAdapter = getHeaderFooterAdapter(adapter);
-        binding.rvMain.setLayoutManager(layoutManager);
+        // Set up the main RecyclerView
+        mHeaderFooterAdapter = getHeaderFooterAdapter(mainAdapter);
+        binding.rvMain.setLayoutManager(mainLayoutManager);
         binding.rvMain.setAdapter(mHeaderFooterAdapter);
+        binding.rvMain.setNestedScrollingEnabled(false);
+
+        // Set up the secondary RecyclerView, if applicable
+        if (secondaryAdapter != null) {
+            binding.rvSecondary.setLayoutManager(secondaryLayoutManager);
+            binding.rvSecondary.setAdapter(secondaryAdapter);
+            binding.rvSecondary.setNestedScrollingEnabled(false);
+        } else {
+            binding.rvSecondary.setVisibility(View.GONE);
+        }
 
         if (mExpandContentItem != null) {
             Integer index = -1;
@@ -177,8 +193,8 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
                 final int indexFinal = index;
                 final Handler handler = new Handler();
-                handler.postDelayed(() -> binding.rvMain.smoothScrollToPosition(indexFinal + 1), 250);
-                binding.rvMain.scrollToPosition(mContentItem.getExpandableItems().size() - 1);
+                handler.postDelayed(() -> binding.rvSecondary.smoothScrollToPosition(indexFinal + 1), 250);
+                binding.rvSecondary.scrollToPosition(mContentItem.getExpandableItems().size() - 1);
             }
         }
     }
