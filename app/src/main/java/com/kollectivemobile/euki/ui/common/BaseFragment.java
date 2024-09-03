@@ -208,7 +208,7 @@ public abstract class BaseFragment extends Fragment implements LinkListener {
     }
 
     protected void showContentItem(ContentItem contentItem) {
-        EukiCallback<ContentItem> callback = new EukiCallback<ContentItem>() {
+        EukiCallback<ContentItem> callback = new EukiCallback<>() {
             @Override
             public void onSuccess(ContentItem contentItem) {
                 mInteractionListener.replaceFragment(ContentItemFragment.newInstance(contentItem), true);

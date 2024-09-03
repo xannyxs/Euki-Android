@@ -1,7 +1,9 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,8 +116,27 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
     public void onBindChildViewHolder(@NonNull final TextHolder holder, int groupPosition, int childPosition, int viewType) {
         final ContentItem contentItem = mContentItems.get(groupPosition);
 
-        Spannable spannable = TextUtils.getSpannable(contentItem.getLocalizedContent(), contentItem.getLinks(), mLinkListener, contentItem.getBoldStrings());
-        holder.tvTitle.setText(spannable);
+        String originalText = contentItem.getLocalizedContent();
+
+        CharSequence formattedText = Html.fromHtml(originalText, Html.FROM_HTML_MODE_LEGACY);
+        Spannable spannableFormattedText = new SpannableString(formattedText);
+        Spannable linkSpannable = TextUtils.getSpannable(originalText, contentItem.getLinks(), mLinkListener, contentItem.getBoldStrings());
+
+        for (Object span : linkSpannable.getSpans(0, linkSpannable.length(), Object.class)) {
+            int start = linkSpannable.getSpanStart(span);
+            int end = linkSpannable.getSpanEnd(span);
+
+            String spanText = originalText.substring(start, end);
+            int newStart = formattedText.toString().indexOf(spanText);
+            int newEnd = newStart + spanText.length();
+
+
+            if (newStart != -1) {
+                spannableFormattedText.setSpan(span, newStart, newEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
+        holder.tvTitle.setText(spannableFormattedText);
         holder.tvTitle.setMovementMethod(LinkMovementMethod.getInstance());
         holder.vSeparatorBottom.setVisibility(groupPosition == mContentItems.size() - 1 ? View.VISIBLE : View.GONE);
 
@@ -139,6 +160,7 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
             holder.swiperView.setVisibility(View.GONE);
         }
     }
+
 
     @Override
     public boolean onCheckCanExpandOrCollapseGroup(@NonNull TitleHolder holder, int groupPosition, int x, int y, boolean expand) {

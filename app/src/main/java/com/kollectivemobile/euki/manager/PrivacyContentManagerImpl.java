@@ -4,7 +4,9 @@ import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PrivacyContentManagerImpl implements PrivacyContentManager {
     private AppSettingsManager mAppSettingsManager;
@@ -54,40 +56,54 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
         String textMessages = "Protect_your_private_messages_dropdown";
         String contentMessages = "Protect_your_private_messages_copy";
 
-        String textHistory = "Protect_your_internet_search_history_dropdown";
-        String contentHistory = "Protect_your_internet_search_history_copy";
-
-        String textPaymentHistory = "Protect_your_payment_history_dropdown";
-        String contentPaymentHistory = "Protect_your_payment_history_copy";
-
-        String textLocation = "Protect_your_location_data_and_ad_tracking_dropdown";
-        String contentLocation = "Protect_your_location_data_and_ad_tracking_copy";
-
-        String textResources = "Resources_dropdown";
-        String contentResources = "Resources_copy";
+        Map<String, String> linksMessages = new HashMap<>();
+        linksMessages.put("Signal", "https://signal.org/download/");
 
         ContentItem childItemMessages = new ContentItem(textMessages);
         childItemMessages.setContent(contentMessages);
+        childItemMessages.setLinks(linksMessages);
         childItemMessages.setItemId(0);
         childItems.add(childItemMessages);
+
+        String textHistory = "Protect_your_internet_search_history_dropdown";
+        String contentHistory = "Protect_your_internet_search_history_copy";
 
         ContentItem childItemHistory = new ContentItem(textHistory);
         childItemHistory.setContent(contentHistory);
         childItemHistory.setItemId(1);
         childItems.add(childItemHistory);
 
+        String textPaymentHistory = "Protect_your_payment_history_dropdown";
+        String contentPaymentHistory = "Protect_your_payment_history_copy";
+
         ContentItem childItemPaymentHistory = new ContentItem(textPaymentHistory);
         childItemPaymentHistory.setContent(contentPaymentHistory);
         childItemPaymentHistory.setItemId(2);
         childItems.add(childItemPaymentHistory);
 
+        String textLocation = "Protect_your_location_data_and_ad_tracking_dropdown";
+        String contentLocation = "Protect_your_location_data_and_ad_tracking_copy";
+
+        Map<String, String> linksLocation = new HashMap<>();
+        linksLocation.put("DuckDuckGo", "https://duckduckgo.com/");
+        linksLocation.put("Firefox Focus", "https://play.google.com/store/apps/details?id=org.mozilla.focus&hl=en_US&gl=US");
+
         ContentItem childItemLocation = new ContentItem(textLocation);
         childItemLocation.setContent(contentLocation);
+        childItemLocation.setLinks(linksLocation);
         childItemLocation.setItemId(3);
         childItems.add(childItemLocation);
 
+        String textResources = "Resources_dropdown";
+        String contentResources = "Resources_copy";
+
+        Map<String, String> linksResources = new HashMap<>();
+        linksResources.put("Digital Defense Fund", "https://digitaldefensefund.org/ddf-guides/abortion-privacy");
+        linksResources.put("Electronic Frontier Foundation privacy guidance", "https://www.eff.org/issues/privacy");
+
         ContentItem childItemResources = new ContentItem(textResources);
         childItemResources.setContent(contentResources);
+        childItemResources.setLinks(linksResources);
         childItemResources.setItemId(4);
         childItems.add(childItemResources);
 

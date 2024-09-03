@@ -64,7 +64,6 @@ public class ContentRowSelectableAdapter extends RecyclerView.Adapter {
             vSeparatorTop = itemView.findViewById(R.id.v_separator_top);
             vSeparatorBottom = itemView.findViewById(R.id.v_separator_bottom);
 
-            // Set click listener manually
             itemView.findViewById(R.id.rl_main).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

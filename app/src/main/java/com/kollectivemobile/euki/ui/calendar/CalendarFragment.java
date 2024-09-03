@@ -36,6 +36,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class CalendarFragment extends BaseFragment {
+
     @Inject CalendarManager mCalendarManager;
     @Inject ReminderManager mReminderManager;
 
@@ -51,11 +52,13 @@ public class CalendarFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         if (getActivity() != null) {
             ((App) getActivity().getApplication()).getAppComponent().inject(this);
         }
+
         setUIElements();
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true); // Ensure this fragment participates in the options menu
         EventBus.getDefault().register(this);
     }
 
@@ -75,7 +78,7 @@ public class CalendarFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         if (getActivity() != null) {
-            getActivity().invalidateOptionsMenu();
+            getActivity().invalidateOptionsMenu();  // This will trigger onCreateOptionsMenu
         }
     }
 
@@ -89,42 +92,35 @@ public class CalendarFragment extends BaseFragment {
         inflater.inflate(R.menu.menu_calendar, menu);
 
         final com.kollectivemobile.euki.ui.common.views.MenuItem filterItem =
-                (com.kollectivemobile.euki.ui.common.views.MenuItem)menu.getItem(1).getActionView();
+                (com.kollectivemobile.euki.ui.common.views.MenuItem) menu.findItem(R.id.item_filter).getActionView();
         if (filterItem != null) {
             filterItem.setTitle(getString(R.string.filter));
-        }
-        if (filterItem != null) {
             filterItem.updateCount(mCalendarManager.getCalendarFilter().getFiltersCount());
-        }
-        if (filterItem != null) {
             filterItem.setOnClickListener(view -> startActivity(FilterActivity.makeIntent(getActivity(), mCalendarManager.getCalendarFilter())));
         }
 
         final com.kollectivemobile.euki.ui.common.views.MenuItem reminderItem =
-                (com.kollectivemobile.euki.ui.common.views.MenuItem)menu.getItem(0).getActionView();
+                (com.kollectivemobile.euki.ui.common.views.MenuItem) menu.findItem(R.id.item_reminders).getActionView();
         if (reminderItem != null) {
             reminderItem.setTitle(getString(R.string.reminders));
-        }
-        if (reminderItem != null) {
             reminderItem.setOnClickListener(view -> startActivity(RemindersActivity.makeIntent(getActivity())));
+
+            mReminderManager.getReminders(new EukiCallback<>() {
+                @Override
+                public void onSuccess(List<ReminderItem> reminderItems) {
+                    if (reminderItem != null) {
+                        reminderItem.updateCount(reminderItems.size());
+                    }
+                }
+
+                @Override
+                public void onError(ServerError serverError) {
+                    if (reminderItem != null) {
+                        reminderItem.updateCount(0);
+                    }
+                }
+            });
         }
-        mReminderManager.getReminders(new EukiCallback<>() {
-            @Override
-            public void onSuccess(List<ReminderItem> reminderItems) {
-                if (reminderItem != null) {
-                    reminderItem.updateCount(reminderItems.size());
-                }
-            }
-
-            @Override
-            public void onError(ServerError serverError) {
-                if (reminderItem != null) {
-                    reminderItem.updateCount(0);
-                }
-            }
-        });
-
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -132,8 +128,10 @@ public class CalendarFragment extends BaseFragment {
         int itemId = item.getItemId();
         if (itemId == R.id.item_reminders) {
             startActivity(RemindersActivity.makeIntent(getActivity()));
+            return true;
         } else if (itemId == R.id.item_filter) {
             startActivity(FilterActivity.makeIntent(getActivity(), mCalendarManager.getCalendarFilter()));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -157,3 +155,4 @@ public class CalendarFragment extends BaseFragment {
         mCalendarManager.updateCalendarFilter(calendarFilter);
     }
 }
+
