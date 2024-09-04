@@ -310,7 +310,6 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
 
     Cramping can also vary greatly from person to person. For many people, the cramping can be painful, though it tends to subside after passing the pregnancy. Over-the-counter pain medication, a heating pad, rest, and a massage may help. It is also normal to experience nausea, vomiting, diarrhea, and weakness. If these symptoms last for more than 24 hours after taking misoprostol, it is recommended to call a health care provider.<br/><br/>
 
-    Source: National Abortion Federation
     ]]>
 </string>
     <string name="when_seek_care_title">When to seek medical help?</string>
@@ -325,15 +324,31 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     - Flu-like symptoms more than 24 hours after taking misoprostol<br/><br/>
     For any concerns about side effects, it\'s recommended to call a trusted clinic or seek medical care. The Miscarriage and Abortion hotline (1-833-246-2632), is also available by phone or text 8am-11pm anywhere in the US. If it is a medical emergency, call 9-1-1.<br/>
     No matter how or where an abortion happened, everyone always has the right to share or not to share any information with a health care provider—including information about whether they have had an abortion. Some people might feel more comfortable saying that they had a miscarriage. You can contact the Repro Legal Hotline (844-868-2812) for any legal questions about abortion. <br/><br/>
-    Source: Women on Web
      ]]>
     </string>
     <string name="suction_abortion_title">Procedural abortion</string>
-    <string name="suction_abortion_content">Procedural abortion, sometimes called suction or aspiration abortion, is often done in a medical office or clinic by a health care provider who uses instruments to remove a pregnancy from the uterus. It is generally a very safe procedure, has a high success rate (about 99%), and takes about 5-15 minutes to complete. In a clinic, local anesthesia or sedation can be used for pain management. Clinics typically provide surgical abortions between 5 weeks to 24 weeks of pregnancy. Some clinics may not be able to provide abortions past a certain number of weeks based on laws in their state. There are always risks with any medical procedure. Consult a qualified health care provider with any concerns or questions.</string>
+    <string name="suction_abortion_content">
+    <![CDATA[
+    Procedural abortion, sometimes called suction or aspiration abortion, is often done in a medical office or clinic by a health care provider who uses instruments to remove a pregnancy from the uterus. It is generally a very safe procedure, has a high success rate (about 99%), and takes about 5-15 minutes to complete. In a clinic, local anesthesia or sedation can be used for pain management.<br/><br/>
+    Clinics typically provide surgical abortions between 5 weeks to 24 weeks of pregnancy. Some clinics may not be able to provide abortions past a certain number of weeks based on laws in their state.<br/><br/>
+    There are always risks with any medical procedure. Consult a qualified health care provider with any concerns or questions.<br/>
+    ]]>
+</string>
+
     <string name="suction_abortion_subheading_1">Suction or vacuum aspiration</string>
     <string name="suction_abortion_subheading_2">Dilation and evacuation (D&amp;E)</string>
     <string name="suction_abortion_subheading_3">Abortion after 12 weeks</string>
-    <string name="suction_abortion_content_3">There are many reasons people seek abortions at this point in pregnancy, including delays getting care, changing their mind, changing life circumstances, and finding out about a fetal anomaly. There is no wrong reason for needing an abortion, no matter at what point anyone is in pregnancy. Abortions after 12 weeks are generally very safe and effective. In the second trimester of pregnancy or later, people who are considering an abortion can visit the National Abortion Federation to find a provider. This organization—as well as abortion funds—can connect people with resources to help cover the cost of the abortion, including travel costs. Abortions after 12 weeks may be a one, two, or three day outpatient procedure. The abortion itself may take between 10 to 30 minutes in one day, but it may take a few days to prepare the cervix for the procedure. A health care provider will often use medication or insert dilator sticks in the cervix to help it gently expand. It may take one or two days for the cervix to dilate. Providers may be able to provide pain medication to help with any discomfort. For the actual abortion, the provider may often offer general anesthesia, and then use instruments to safely remove a pregnancy from the uterus. For more information on the science and safety of abortion after 12 weeks, check out the Later Abortion Initiative. Sources: Ibis Reproductive Health, Advancing New Standards in Reproductive Health</string>
+    <string name="suction_abortion_content_3">
+    <![CDATA[
+    There are many reasons people seek abortions at this point in pregnancy, including delays getting care, changing their mind, changing life circumstances, and finding out about a fetal anomaly. There is no wrong reason for needing an abortion, no matter at what point anyone is in pregnancy.<br/><br/>
+    Abortions after 12 weeks are generally very safe and effective. In the second trimester of pregnancy or later, people who are considering an abortion can visit the National Abortion Federation to find a provider. This organization—as well as abortion funds—can connect people with resources to help cover the cost of the abortion, including travel costs.<br/><br/>
+    Abortions after 12 weeks may be a one, two, or three day outpatient procedure. The abortion itself may take between 10 to 30 minutes in one day, but it may take a few days to prepare the cervix for the procedure. A health care provider will often use medication or insert dilator sticks in the cervix to help it gently expand. It may take one or two days for the cervix to dilate. Providers may be able to provide pain medication to help with any discomfort.<br/><br/>
+    For the actual abortion, the provider may often offer general anesthesia, and then use instruments to safely remove a pregnancy from the uterus.<br/><br/>
+    For more information on the science and safety of abortion after 12 weeks, check out the Later Abortion Initiative.<br/><br/>
+    Sources: Ibis Reproductive Health, Advancing New Standards in Reproductive Health
+    ]]>
+</string>
+
     <string name="abortion_faqs_title">Abortion FAQs</string>
     <string name="abortion_faqs_content">It\'s okay to need an abortion. Sometimes people have concerns about abortion because they do not know much about it. Below are common questions and answers about abortion. If you have more questions, check out the resources section.</string>
     <string name="abortion_faqs_subheading_1">How safe is abortion?</string>

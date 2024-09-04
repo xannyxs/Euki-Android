@@ -146,13 +146,17 @@
   <string name="suction_abortion_what_to_expect_content">
     <![CDATA[
     <b>Aspiración por succión o aspiración por vacío</b><br/>
-    El aborto aspirado manual es uno de los tipos de aborto procesal más comunes, y se usa normalmente hasta la semana 14-16 de embarazo. A menudo se utilizan analgésicos antes del aborto para ayudar con los cólicos, y un/a proveedor/a de atención médica puede utilizar medicamentos para ayudar a dilatar el cuello del útero. También se puede usar anestesia local o general para ayudar a controlar el dolor. Durante un aborto aspirado manual, un/a proveedor/a de atención médica usará un dispositivo o máquina succionadora para retirar el embarazo del útero. Estas prácticas abortivas son generalmente seguras y efectivas, y tan sólo se demoran unos minutos. Si tienes alguna duda acerca del procedimiento abortivo, no tengas reparos en preguntar al proveedor/a de atención médica. Están ahí para responder a cualquier pregunta que tengas.<br/><br/>
+    El aborto aspirado manual es uno de los tipos de aborto procesal más comunes, y se usa normalmente hasta la semana 14-16 de embarazo.<br/><br/>
+    A menudo se utilizan analgésicos antes del aborto para ayudar con los cólicos, y un/a proveedor/a de atención médica puede utilizar medicamentos para ayudar a dilatar el cuello del útero. También se puede usar anestesia local o general para ayudar a controlar el dolor.<br/><br/>
+    Durante un aborto aspirado manual, un/a proveedor/a de atención médica usará un dispositivo o máquina succionadora para retirar el embarazo del útero. Estas prácticas abortivas son generalmente seguras y efectivas, y tan sólo se demoran unos minutos. Si tienes alguna duda acerca del procedimiento abortivo, no tengas reparos en preguntar al proveedor/a de atención médica. Están ahí para responder a cualquier pregunta que tengas.<br/><br/>
     <b>Dilatación y evacuación (DyE)</b><br/>
-    La dilatación y evacuación (DyE) es otro tipo de aborto procesal que normalmente se efectúa después de la semana 14 de embarazo. Este procedimiento puede requerir más de una visita a la clínica, y es en general una práctica abortiva muy segura y efectiva que se practica en todo el mundo. Dependiendo del número de semanas de embarazo, el/la proveedor/a de atención médica puede introducir dilatadores osmóticos (palillos dilatadores) uno o dos días antes de comenzar el procedimiento, para ayudar a que el cuello del útero se abra. Puede que recibas también medicamentos o anestesia para ayudarte a aliviar el dolor.<br/><br/>
+    La dilatación y evacuación (DyE) es otro tipo de aborto procesal que normalmente se efectúa después de la semana 14 de embarazo. Este procedimiento puede requerir más de una visita a la clínica, y es en general una práctica abortiva muy segura y efectiva que se practica en todo el mundo.<br/><br/>
+    Dependiendo del número de semanas de embarazo, el/la proveedor/a de atención médica puede introducir dilatadores osmóticos (palillos dilatadores) uno o dos días antes de comenzar el procedimiento, para ayudar a que el cuello del útero se abra. Puede que recibas también medicamentos o anestesia para ayudarte a aliviar el dolor.<br/><br/>
     Si recibes anestesia general, el/la proveedor/a de atención médica puede pedirte que no comas nada antes del procedimiento. Si tienes dudas acerca de esto, pregúntales cómo puedes prepararte.<br/><br/>
     Durante un aborto aspirado manual, un/a proveedor/a de atención médica usará un dispositivo o máquina succionadora para retirar el embarazo del útero. Estas son prácticas abortivas generalmente seguras y efectivas, y normalmente se demoran entre 20 y 30 minutos. Si tienes alguna duda acerca del procedimiento abortivo, no tengas reparos en preguntar al proveedor de atención médica. Están ahí para responder a cualquier pregunta que tengas.
     ]]>
-  </string>
+</string>
+
   <string name="suction_abortion_what_to_expect_source">Planned Parenthood Federation of America y Federación Nacional del Aborto</string>
   <string name="mife_miso">Mifepristona y misoprostol</string>
   <string name="miso">Misoprostol solo</string>
