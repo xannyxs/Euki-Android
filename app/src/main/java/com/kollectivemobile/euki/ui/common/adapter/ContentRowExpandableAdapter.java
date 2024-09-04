@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,21 +118,20 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
         final ContentItem contentItem = mContentItems.get(groupPosition);
 
         String originalText = contentItem.getLocalizedContent();
-
-        CharSequence formattedText = Html.fromHtml(originalText, Html.FROM_HTML_MODE_LEGACY);
-        Spannable spannableFormattedText = new SpannableString(formattedText);
+        Spanned spannedFormattedText = Html.fromHtml(originalText, Html.FROM_HTML_MODE_LEGACY);
+        Spannable spannableFormattedText = new SpannableString(spannedFormattedText);
         Spannable linkSpannable = TextUtils.getSpannable(originalText, contentItem.getLinks(), mLinkListener, contentItem.getBoldStrings());
 
         for (Object span : linkSpannable.getSpans(0, linkSpannable.length(), Object.class)) {
             int start = linkSpannable.getSpanStart(span);
             int end = linkSpannable.getSpanEnd(span);
 
-            String spanText = originalText.substring(start, end);
-            int newStart = formattedText.toString().indexOf(spanText);
+            String spanText = linkSpannable.subSequence(start, end).toString();
+
+            int newStart = spannedFormattedText.toString().indexOf(spanText);
             int newEnd = newStart + spanText.length();
 
-
-            if (newStart != -1) {
+            if (newStart >= 0 && newEnd <= spannedFormattedText.length()) {
                 spannableFormattedText.setSpan(span, newStart, newEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }

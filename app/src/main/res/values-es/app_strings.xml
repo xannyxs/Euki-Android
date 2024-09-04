@@ -238,7 +238,17 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
   <string name="knowledge_base">Información</string>
   <string name="walk_me_through_the_process">Encontrar atención ahora</string>
   <string name="knowledge_base_title">Infórmate</string>
-  <string name="knowledge_base_content">El aborto es un procedimiento que interrumpe el embarazo, y es una parte normal y común en la vida cotidiana de las personas. Todo tipo de personas puede abortar – personas de cualquier raza, etnia, nivel de ingresos, religión, género y clase social. Hay madres que abortan, personas religiosas que abortan, personas transgénero que abortan, personas negras, blancas y de todas las razas que abortan. El aborto nos atañe a muchas personas en algún momento de nuestras vidas. Sean cuales sean tus circunstancias, todos tienen derecho a una atención al aborto segura y compasiva. Si tienes preguntas sobre el aborto, Euki está aquí para ayudar. Fuente: Guttmacher Institute</string>
+  <string name="knowledge_base_content">
+    <![CDATA[
+    El aborto es un procedimiento que interrumpe el embarazo, y es una parte normal y común en la vida cotidiana de las personas. Todo tipo de personas puede abortar – personas de cualquier raza, etnia, nivel de ingresos, religión, género y clase social.<br/><br/>
+
+    Hay madres que abortan, personas religiosas que abortan, personas transgénero que abortan, personas negras, blancas y de todas las razas que abortan. El aborto nos atañe a muchas personas en algún momento de nuestras vidas. Sean cuales sean tus circunstancias, todos tienen derecho a una atención al aborto segura y compasiva.<br/><br/>
+
+    Si tienes preguntas sobre el aborto, Euki está aquí para ayudar.<br/><br/>
+
+    Fuente: Guttmacher Institute
+    ]]>
+</string>
   <string name="abortion_types">Tipos de Aborto</string>
   <string name="abortion_faqs">Preguntas frecuentes sobre el aborto</string>
   <string name="info_care_at_clinic">Atención clínica</string>
@@ -247,11 +257,33 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
   <string name="post_abortion_care">Cuidados posteriores</string>
   <string name="abortion_laws">Leyes sobre el aborto</string>
   <string name="resources">Recursos</string>
-  <string name="abortion_types_content">Mereces tener el aborto que más se ajuste a tus necesidades, en el entorno que sea más cómodo para ti. Si decides abortar, tienes dos opciones:</string>
+  <string name="abortion_types_content">
+    <![CDATA[
+    Mereces tener el aborto que más se ajuste a tus necesidades, en el entorno que sea más cómodo para ti.<br/><br/>
+
+    Si decides abortar, tienes dos opciones:
+    ]]>
+</string>
   <string name="medication">Medicamentos</string>
   <string name="surgical">Quirúrgico</string>
   <string name="medication_abortion_101_title">Aborto con medicación</string>
-  <string name="medication_abortion_101_content">El aborto con medicación se conoce normalmente como “aborto con pastillas.” Consiste en combinar dos medicamentos (mifepristona y misoprostol), o en tomar misoprostol sólo. Los medicamentos generalmente son seguros y provocan un proceso similar a un aborto espontáneo. A pesar de los esfuerzos legales para impugnar la aprobación de la FDA de larga data de la mifepristona, la mifepristona es un método seguro y eficaz para interrumpir el embarazo, y sigue estando disponible. Las personas pueden hacerse un aborto con medicación con la supervisión de un médico, ya sea en persona en una clínica o a través de telesalud. Las personas también pueden autoadministrarse de forma segura sus propios abortos sin supervisión clínica comprando y tomando los medicamentos por su cuenta. La mifepristona generalmente se ingiere, y el misoprostol se disuelve bajo la lengua. Alternativamente, a veces el misoprostol se coloca entre la mejilla y las encías (“uso bucal”). El aborto con medicación tiene una alta tasa de éxito en las primeras 10-12 semanas de embarazo (un 95-98%). La mayoría de las clínicas en los EEUU ofrecen aborto con medicación hasta la semana 7-10 de embarazo. Cuando se toman los dos medicamentos, el sangrado normalmente empieza máximo 24 horas a partir de la toma del segundo medicamento. Los analgésicos de venta libre y las almohadillas térmicas pueden ayudar con los dolores. El aborto con medicación no es lo mismo que el anticonceptivo de emergencia. El anticonceptivo de emergencia evita el embarazo, mientras que el aborto con medicación interrumpe el embarazo. Todo procedimiento médico siempre conlleva riesgos. En caso de duda o si tienes alguna pregunta consulta con un/a proveedor/a de atención médica cualificado.</string>
+  <string name="medication_abortion_101_content">
+    <![CDATA[
+    El aborto con medicación se conoce normalmente como “aborto con pastillas.” Consiste en combinar dos medicamentos (mifepristona y misoprostol), o en tomar misoprostol sólo. Los medicamentos generalmente son seguros y provocan un proceso similar a un aborto espontáneo. A pesar de los esfuerzos legales para impugnar la aprobación de la FDA de larga data de la mifepristona, la mifepristona es un método seguro y eficaz para interrumpir el embarazo, y sigue estando disponible.<br/><br/>
+
+    Las personas pueden hacerse un aborto con medicación con la supervisión de un médico, ya sea en persona en una clínica o a través de telesalud. Las personas también pueden autoadministrarse de forma segura sus propios abortos sin supervisión clínica comprando y tomando los medicamentos por su cuenta.<br/><br/>
+
+    La mifepristona generalmente se ingiere, y el misoprostol se disuelve bajo la lengua. Alternativamente, a veces el misoprostol se coloca entre la mejilla y las encías (“uso bucal”).<br/><br/>
+
+    El aborto con medicación tiene una alta tasa de éxito en las primeras 10-12 semanas de embarazo (un 95-98%). La mayoría de las clínicas en los EEUU ofrecen aborto con medicación hasta la semana 7-10 de embarazo.<br/><br/>
+
+    Cuando se toman los dos medicamentos, el sangrado normalmente empieza dentro de las 24 horas a partir de la toma del segundo medicamento y puede durar de 2 a 4 semanas. Los analgésicos de venta libre y las almohadillas térmicas pueden ayudar con los dolores.<br/><br/>
+
+    El aborto con medicación no es lo mismo que el anticonceptivo de emergencia. El anticonceptivo de emergencia evita el embarazo, mientras que el aborto con medicación interrumpe el embarazo.<br/><br/>
+
+    Todo procedimiento médico siempre conlleva riesgos. En caso de duda o si tienes alguna pregunta consulta con un/a proveedor/a de atención médica cualificado.
+    ]]>
+</string>
   <string name="how_medication_work">¿Cómo funciona el Aborto con medicación?</string>
   <string name="what_should_know_before_pills">Aborto paso a paso</string>
   <string name="what_pills_look_like">¿Qué aspecto tienen las pastillas?</string>
@@ -262,11 +294,40 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
   <string name="medication_abortion_content">Si decides abortar con medicamentos, esto probablemente implicará tomar las pastillas en una clínica o en casa, y expulsar el embarazo en casa. Es importante tener acceso a un retrete. Las personas que abortan con medicamentos encuentran útil tener al alguien que les preste apoyo, trayendo su comida favorita, calentando una almohadilla térmica, y recordándoles que son fuertes y serán capaces de superar esto. Los medicamentos causan cólicos y sangrados que pueden durar varias horas o varios días. Tener a mano analgésicos de venta libre puede ayudar. Los/as proveedores/as de atención médica recomiendan tomar las cosas con calma durante al menos 24 horas después del aborto, lo que probablemente implica, si es posible, tomarse el día libre en el trabajo o en los estudios.</string>
   <string name="women_on_web">Women on Web</string>
   <string name="what_pills_look_like_title">¿Qué aspecto tienen las pastillas?</string>
-  <string name="what_pills_look_like_content">Drugs.com contiene imágenes de pastillas abortivas que muestran qué aspecto tienen el misoprostol y la mifepristona. ¿Todavía tienes dudas? Las web de Women Help Women y Women on Waves contienen más información.</string>
+  <string name="what_pills_look_like_content">
+    <![CDATA[
+    Drugs.com contiene imágenes de pastillas abortivas que muestran qué aspecto tienen el misoprostol y la mifepristona.<br/><br/>
+
+    ¿Todavía tienes dudas? Las web de Women Help Women y Women on Waves contienen más información.
+    ]]>
+</string>
   <string name="what_to_expect_title">¿Cómo será?</string>
-  <string name="what_to_expect_content">La mayoría de las personas que usan medicamentos para abortar presentan sangrados y cólicos. Es normal expulsar coágulos sanguíneos cuyo tamaño varía de pequeño a grande (del tamaño de una pelota de golf o de un limón). Una vez que el embarazo haya sido expulsado, el sangrado puede tener un flujo parecido al de la menstruación. Los cólicos pueden variar enormemente de una persona a otra. Para muchas personas, los cólicos pueden ser dolorosos, aunque tienden a disminuir tras la expulsión del embarazo. Los analgésicos de venta libre, una almohadilla térmica, el reposo o un masaje pueden ser de ayuda. También es normal presentar náuseas, vómitos, diarrea y debilidad. Si estos síntomas duran más de 24 horas tras la toma del misoprostol, se recomienda llamar a un/a proveedor/a de atención médica. Fuente: Federación Nacional del Aborto</string>
+  <string name="what_to_expect_content">
+    <![CDATA[
+    La mayoría de las personas que usan medicamentos para abortar presentan sangrados y cólicos. Es normal expulsar coágulos sanguíneos cuyo tamaño varía de pequeño a grande (del tamaño de una pelota de golf o de un limón). Una vez que el embarazo haya sido expulsado, el sangrado puede tener un flujo parecido al de la menstruación.<br/><br/>
+
+    Los cólicos pueden variar enormemente de una persona a otra. Para muchas personas, los cólicos pueden ser dolorosos, aunque tienden a disminuir tras la expulsión del embarazo. Los analgésicos de venta libre, una almohadilla térmica, el reposo o un masaje pueden ser de ayuda. También es normal presentar náuseas, vómitos, diarrea y debilidad. Si estos síntomas duran más de 24 horas tras la toma del misoprostol, se recomienda llamar a un/a proveedor/a de atención médica.<br/><br/>
+
+    Fuente: Federación Nacional del Aborto
+    ]]>
+</string>
+
   <string name="when_seek_care_title">¿Cuándo buscar ayuda médica?</string>
-  <string name="when_seek_care_content">El aborto con medicación es en general seguro y raramente presenta complicaciones. Aún así, es importante saber cuándo buscar ayuda médica. Estas son algunas señales de alerta: - Sangrado prolongado (el sangrado continúa durante más de tres semanas) - Dolor insoportable que no puede tratarse con remedios en casa como analgésicos de venta libre, una almohadilla térmica o masajes - Coágulos sanguíneos de un tamaño superior al de un limón - Fiebre alta (de más de 38º C - 100.4º F) durante más de un día - Secreciones vaginales con un olor desagradable - Síntomas de la gripe más de 24 horas después de haber tomado el misoprostol Si te preocupan los efectos secundarios, se recomienda que llames a una clínica de confianza o que busques atención médica. La línea directa de abortos espontáneos y abortos (1-833-246-2632) también está disponible por teléfono o por mensaje de texto de 8 a.m. a 11 p.m. en cualquier lugar de Estados Unidos. Si se trata de una urgencia médica, llama al 9-1-1. Independientemente de cómo o dónde se produzca el aborto, es importante recordar que todas las personas tienen siempre derecho a compartir o no información con un proveedor de atención médica — incluyendo información sobre si han tenido un aborto o no. Algunas personas pueden sentirse más cómodas diciendo que tuvieron un aborto espontáneo. Puedes ponerte en contacto con la línea directa de Repro Legal (844-868-2812) para cualquier pregunta legal sobre el aborto. Fuente: Women on Web</string>
+  <string name="when_seek_care_content">
+    <![CDATA[
+    El aborto con medicación es en general seguro y raramente presenta complicaciones. Aún así, es importante saber cuándo buscar ayuda médica. Estas son algunas señales de alerta:<br/><br/>
+    - Sangrado prolongado (el sangrado continúa durante más de tres semanas)<br/>
+    - Dolor insoportable que no puede tratarse con remedios en casa como analgésicos de venta libre, una almohadilla térmica o masajes<br/>
+    - Coágulos sanguíneos de un tamaño superior al de un limón<br/>
+    - Fiebre alta (de más de 38º C - 100.4º F) durante más de un día<br/>
+    - Secreciones vaginales con un olor desagradable<br/>
+    - Síntomas de la gripe más de 24 horas después de haber tomado el misoprostol<br/><br/>
+    Si te preocupan los efectos secundarios, se recomienda que llames a una clínica de confianza o que busques atención médica. La línea directa de abortos espontáneos y abortos (1-833-246-2632) también está disponible por teléfono o por mensaje de texto de 8 a.m. a 11 p.m. en cualquier lugar de Estados Unidos. Si se trata de una urgencia médica, llama al 9-1-1.<br/><br/>
+    Independientemente de cómo o dónde se produzca el aborto, es importante recordar que todas las personas tienen siempre derecho a compartir o no información con un proveedor de atención médica — incluyendo información sobre si han tenido un aborto o no. Algunas personas pueden sentirse más cómodas diciendo que tuvieron un aborto espontáneo. Puedes ponerte en contacto con la línea directa de Repro Legal (844-868-2812) para cualquier pregunta legal sobre el aborto.<br/><br/>
+    Fuente: Women on Web
+    ]]>
+</string>
+
   <string name="suction_abortion_title">Aborto en clínica</string>
   <string name="suction_abortion_content">El aborto en clínica, a veces llamado aborto por aspiración o por succión, se realiza a menudo en un consultorio médico o clínica por un proveedor de atención médica que utiliza instrumentos para retirar un embarazo del útero. En general es un procedimiento seguro, que tiene una alta tasa de éxito (alrededor de un 99%), y que toma unos 5-15 minutos en completarse. En una clínica se puede aplicar anestesia local o sedación para el manejo del dolor. Las clínicas normalmente proporcionan abortos procesales entre la semana 5 y 24 de embarazo. Puede que algunas clínicas no estén en condición de realizar abortos por aspiración más allá de un número concreto de semanas debido a las leyes vigentes en su estado. Todo procedimiento médico siempre conlleva riesgos. En caso de duda o si tienes alguna pregunta consulta con un proveedor de atención médica.</string>
   <string name="suction_abortion_subheading_1">Aspiración por succión o aspiración por vacío</string>
@@ -289,21 +350,123 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
   <string name="abortion_faqs_content_6">Cada persona vive el aborto de manera diferente. Es normal sentir una mezcla de emociones—felicidad, tristeza, alivio, ansiedad. No hay nada malo en necesitar apoyo emocional después de un aborto, o simplemente querer hablar con alguien sobre el tema.</string>
   <string name="getting_care_clinic_title">Atención Clínica</string>
   <string name="getting_care_clinic_subheading_1">Encontrar una clínica</string>
-  <string name="getting_care_clinic_content_1">Para abortar en una clínica, el primer paso es llamar a diferentes sitios para ver qué opción clínica es la más cómoda para ti. Siempre está bien llamar a varios lugares y mirar sus sitios web antes de tomar una decisión. También es adecuado preguntar a tus amigos/as si conocen algún lugar recomendable. Cualquiera de estos sitios web pueden ayudar a encontrar una clínica: - Abortion Care Network - Buscador de Clínicas de Bedsider - I Need an A - National Abortion Federation - Planned Parenthood Está bien si alguien pide una cita para abortar incluso si todavía no tiene claro como pagará el aborto. Las personas que necesiten ayuda financiera pueden ir a la web de la National Network of Abortion Funds para averiguar si hay un fondo local de ayuda para abortos.</string>
+  <string name="getting_care_clinic_content_1">
+    <![CDATA[
+    Para abortar en una clínica, el primer paso es llamar a diferentes sitios para ver qué opción clínica es la más cómoda para ti. Siempre está bien llamar a varios lugares y mirar sus sitios web antes de tomar una decisión.<br/><br/>
+
+    También es adecuado preguntar a tus amigos/as si conocen algún lugar recomendable. Cualquiera de estos sitios web pueden ayudar a encontrar una clínica:<br/><br/>
+
+    - Abortion Care Network<br/>
+    - Buscador de Clínicas de Bedsider<br/>
+    - I Need an A<br/>
+    - National Abortion Federation<br/>
+    - Planned Parenthood<br/><br/>
+
+    Está bien si alguien pide una cita para abortar incluso si todavía no tiene claro cómo pagará el aborto. Las personas que necesiten ayuda financiera pueden ir a la web de la National Network of Abortion Funds para averiguar si hay un fondo local de ayuda para abortos.
+    ]]>
+</string>
   <string name="getting_care_clinic_subheading_2">Preguntas que desde clínica pueden hacerte</string>
-  <string name="getting_care_clinic_content_2">Antes de llamar a una clínica, es bueno tener respuestas preparadas para preguntas como: - ¿Estoy hablando con la persona para la cuál es la cita? - ¿Cuál es su nombre completo, fecha de nacimiento e identidad de género? ¿Dirección? ¿Número de teléfono? ¿Pronombres? - ¿Cuándo fue el primer día de su último periodo? - ¿Tiene seguro médico? ¿De qué tipo? ¿Sabe si cubre el aborto? Si no lo cubre, ¿como piensa pagar el aborto? - ¿Cuál es su historial clínico? - ¿Es su primer embarazo? - ¿Ha dado a luz anteriormente? Si ya dio a luz, ¿fue un parto natural o por cesárea? ¿Tuvo alguna complicación? - ¿Tiene alguna identificación que pueda traer consigo? - Si opta por recibir anestesia, necesitará a alguien para llevarle a casa. ¿Conoce a alguien que pueda venir con usted? - ¿Quién es la persona de contacto en caso de emergencia? - ¿Le gustaría reunirse con el proveedor por telesalud? ⓘ Fuente: Our Bodies Ourselves</string>
-  <string name="getting_care_clinic_subheading_3">Preguntas para hacerle a la clínica</string>
-  <string name="getting_care_clinic_content_3">El momento de llamar a la clínica es ideal para hacer muchas preguntas, como las siguientes. Pero no es el único momento para hacer preguntas, así que si olvidas algo, también está bien preguntar durante la cita. - ¿Hay algo en mi historial clínico que pueda interferir con el aborto? - ¿Cuánto cuesta el aborto? ¿Cuándo hay sobrecostos? - ¿Hay alguna ley del aborto que influya en cuándo puedo abortar? ¿Cuáles son? - ¿Cuánto tiempo deberé permanecer en la clínica? - ¿Habrá personal que hable mi idioma? Si no, ¿proveerán un/a intérprete? - ¿Pueden satisfacer las necesidades de accesibilidad que tengo? - Si eres transgénero y/o de género no-binario: ¿Está el/la proveedor/a de atención médica preparado/a para tratar a pacientes transgénero y queer? ¿Sabrá el personal cómo tratarme con respeto y dignidad? - ¿Habrá manifestantes? En ese caso, dispone su clínica de escoltas para acompañarme a entrar a la clínica? ¿Cómo los reconoceré? - ¿Qué necesito hacer para prepararme para la visita? ¿Puedo comer durante el día del tratamiento? - ¿Qué debo esperar si me reúno con el proveedor a través de telesalud? ⓘ Fuente: Our Bodies, Ourselves</string>
-  <string name="getting_care_clinic_subheading_4">Prepararse para una cita de aborto</string>
-  <string name="getting_care_clinic_content_4">Sea cual sea la manera en la que te sientas sobre tu aborto, está bien. A veces saber qué esperar de tu cita puede ayudar a sentirte preparada. Si algo te preocupa, házselo saber al personal de la clínica para que pueda apoyarte. Esto es lo que debes esperar en los días previos a la cita en la clínica. La clínica deberá seguir las leyes de aborto específicas de su estado. Esto puede implicar esperar al menos 24 horas antes de una cita para un aborto, ver una ecografía antes del aborto, u otras leyes ordenadas por el estado. En algunos estados, es posible que las clínicas no puedan prestar ningún tipo de atención abortiva. Si este es el caso en tu estado, la National Network of Abortion Funds puede ofrecerte recursos, financiación e información sobre cómo viajar fuera del estado para abortar. No siempre hay manifestantes anti-aborto en las clínicas, pero a veces se pueden presentar. Si esto te preocupa, llama y pregunta. Puede que tengan voluntarios para escoltarte al entrar en la clínica. Si eres transgénero, de género queer o no-binario, puede que estar en el ambiente de una clínica abortiva sea desorientador, ya que muchas clínicas se consideran dirigidas a mujeres cisgénero. El personal de la clínica puede errar al asignarte un género, o dar por sentado que estás allí con otra persona. Te mereces un trato respetuoso y compasivo. Si no te sientes con comodidad o seguridad, tienes derecho a buscar atención en otro lugar. Una vez dentro de la clínica, probablemente te pedirán rellenar un formulario de historial clínico. Probablemente el personal sanitario comprobará tus constantes vitales, tomará una prueba de embarazo en orina, y te sacará sangre. Pueden hacer una ecografía para confirmar de cuántas semanas es el embarazo. El personal sanitario cualificado o un/a proveedor/a de atención médica te hablará acerca de la decisión de abortar y te explicará qué esperar durante y tras el tratamiento. Aunque el procedimiento del aborto toma poco tiempo, puede que tengas que esperar varias horas en la clínica. Tómate la libertad de preguntar cualquier cosa que te preocupe. Confía en tus sensaciones sobre cómo te tratan tanto por teléfono como en persona. Fuente: Our Bodies, Ourselves</string>
-  <string name="getting_care_clinic_subheading_5">Evita clínicas falsas de aborto</string>
-  <string name="getting_care_clinic_content_5">Hay lugares que se hacen llamar clínicas, pero que de hecho no realizan abortos. Estos “centros de crisis de embarazo” suelen aparecer en Internet cuando haces una búsqueda con la palabra “aborto”. Los centros de crisis de embarazo a menudo ofrecen pruebas de embarazo o ecografías de forma gratuita, pero las personas que llevan a cabo esos servicios no son médicos. Estas clínicas falsas son anti-aborto y pueden intentar convencerte de no abortar. Para averiguar si estas llamando a un centro de crisis de embarazo, pregunta si realizan abortos y si tienen personal médico. Si no tienes seguridad, llama a una de las clínicas listadas en una de estos sitios web de confianza: - National Abortion Federation - Planned Parenthood - Abortion Care Network - I Need an A</string>
-  <string name="telehealth_popup_info">Telesalud (a veces llamada \"telemedicina\") es donde las personas utilizan la tecnología (un teléfono, una computadora, una tableta, etc.) para conectarse con un proveedor que prescribirá píldoras abortivas.</string>
+    <string name="getting_care_clinic_content_2">
+    <![CDATA[
+    Antes de llamar a una clínica, es buena idea tener respuestas preparadas para preguntas como estas:<br/><br/>
+
+    - ¿Estoy hablando con la persona para la cual es la cita?<br/>
+    - ¿Cuál es su nombre completo, fecha de nacimiento e identidad de género? ¿Dirección? ¿Número de teléfono? ¿Pronombres?<br/>
+    - ¿Cuándo fue el primer día de su último período?<br/>
+    - ¿Tiene seguro médico? ¿De qué tipo? ¿Sabe si cubre el aborto? Si no lo cubre, ¿cómo piensa pagar el aborto?<br/>
+    - ¿Cuál es su historial médico?<br/>
+    - ¿Ha estado embarazada antes? ¿Ha dado a luz? Si es así, ¿fue un parto vaginal o por cesárea? ¿Tuvo alguna complicación?<br/>
+    - ¿Tiene una identificación válida que pueda llevar consigo?<br/>
+    - Si opta por recibir anestesia, necesitará a alguien que la lleve a casa. ¿Conoce a alguien que pueda acompañarla?<br/>
+    - ¿Quién es su contacto en caso de emergencia?<br/>
+    - ¿Le gustaría reunirse con el proveedor a través de telesalud?<br/><br/>
+
+    ⓘ Fuente: Our Bodies Ourselves
+    ]]>
+</string>
+
+    <string name="getting_care_clinic_subheading_3">Preguntas para hacerle a la clínica</string>
+    <string name="getting_care_clinic_content_3">
+    <![CDATA[
+    El momento de llamar a la clínica es ideal para hacer muchas preguntas, como las siguientes. Pero no es el único momento para hacer preguntas, así que si olvidas algo, también está bien preguntar durante la cita.<br/><br/>
+
+    - ¿Hay algo en mi historial médico que pueda interferir con el aborto?<br/>
+    - ¿Cuánto cuesta el aborto? ¿Cuándo sube el costo?<br/>
+    - ¿Existen leyes sobre el aborto que puedan influir en cuándo puedo realizarme el aborto? ¿Cuáles son?<br/>
+    - ¿Cuánto tiempo debería esperar estar en la clínica?<br/>
+    - ¿Habrá personal que hable mi idioma? Si no, ¿proveerán un/a intérprete?<br/>
+    - ¿Pueden satisfacer las necesidades de accesibilidad que tengo?<br/>
+    - Si eres transgénero y/o no binario: ¿Está el/la proveedor/a de atención médica capacitado/a para tratar a pacientes trans y queer? ¿Sabrá el personal cómo tratarme con respeto y dignidad?<br/>
+    - ¿Habrá manifestantes? En ese caso, ¿dispone su clínica de escoltas para acompañarme a la entrada? ¿Cómo los reconoceré?<br/>
+    - ¿Qué necesito hacer para prepararme para la visita? ¿Puedo comer el día del procedimiento?<br/>
+    - ¿Qué debo esperar si me reúno con el proveedor a través de telesalud?<br/><br/>
+
+    ⓘ Fuente: Our Bodies, Ourselves
+    ]]>
+</string>
+
+    <string name="getting_care_clinic_subheading_4">Prepararse para una cita de aborto</string>
+    <string name="getting_care_clinic_content_4">
+    <![CDATA[
+    Sea cual sea la manera en la que te sientas sobre tu aborto, está bien. A veces, saber qué esperar de tu cita puede ayudarte a sentirte preparada. Si algo te preocupa, házselo saber al personal de la clínica para que pueda apoyarte.<br/><br/>
+
+    Esto es lo que debes esperar en los días previos a la cita en la clínica:<br/><br/>
+
+    La clínica deberá seguir las leyes de aborto específicas de su estado. Esto puede implicar esperar al menos 24 horas antes de una cita para un aborto, ver una ecografía antes del aborto u otras leyes ordenadas por el estado. En algunos estados, las clínicas pueden no estar habilitadas para proporcionar atención abortiva. Si este es el caso en tu estado, la National Network of Abortion Funds puede ofrecerte recursos, financiación e información sobre cómo viajar fuera del estado para abortar.<br/><br/>
+
+    No siempre hay manifestantes anti-aborto en las clínicas, pero a veces puedes encontrarlos. Si esto te preocupa, llama y pregunta. Puede que tengan voluntarios para escoltarte hasta la clínica.<br/><br/>
+
+    Si eres transgénero, de género queer o no binario, estar en un entorno de clínica abortiva puede ser desorientador, ya que muchas clínicas se consideran dirigidas a mujeres cisgénero. El personal de la clínica puede errar al asignarte un género o asumir que estás allí con otra persona. Te mereces un trato respetuoso y compasivo. Si no te sientes cómodo o segura, tienes derecho a buscar atención en otro lugar.<br/><br/>
+
+    Una vez dentro de la clínica, probablemente te pedirán rellenar un formulario de historial médico. Es probable que el personal sanitario revise tus constantes vitales, realice una prueba de embarazo en orina y te tome una muestra de sangre. También pueden hacer una ecografía para confirmar cuántas semanas tiene el embarazo. Un/a profesional de salud cualificado/a te hablará sobre tu decisión de abortar y te explicará qué esperar durante y después del procedimiento. Aunque el procedimiento en sí toma poco tiempo, es posible que debas esperar varias horas en la clínica. Siéntete libre de preguntar cualquier cosa que te preocupe. Confía en tus sensaciones sobre cómo te tratan tanto por teléfono como en persona.<br/><br/>
+
+    ⓘ Fuente: Our Bodies, Ourselves
+    ]]>
+</string>
+
+    <string name="getting_care_clinic_subheading_5">Evita clínicas falsas de aborto</string>
+    <string name="getting_care_clinic_content_5">
+    <![CDATA[
+    Hay lugares que se hacen llamar clínicas, pero que en realidad no realizan abortos. Estos “centros de crisis de embarazo” suelen aparecer en Internet cuando haces una búsqueda con la palabra “aborto”. Los centros de crisis de embarazo a menudo ofrecen pruebas de embarazo o ecografías de forma gratuita, pero las personas que llevan a cabo estos servicios no son médicos. Estas clínicas falsas son anti-aborto y pueden intentar convencerte de no abortar.<br/><br/>
+
+    Para averiguar si estás llamando a un centro de crisis de embarazo, pregunta si realizan abortos y si tienen personal médico. Si no estás segura, llama a una de las clínicas listadas en uno de estos sitios web de confianza:<br/><br/>
+
+    - National Abortion Federation<br/>
+    - Planned Parenthood<br/>
+    - Abortion Care Network<br/>
+    - I Need an A
+    ]]>
+</string>
+    <string name="telehealth_popup_info">Telesalud (a veces llamada \"telemedicina\") es donde las personas utilizan la tecnología (un teléfono, una computadora, una tableta, etc.) para conectarse con un proveedor que prescribirá píldoras abortivas.</string>
   <string name="telehealth_title">Telesalud</string>
-  <string name="telehealth_content">Si acudes en persona a una clínica para realizarte un aborto con medicación, es posible que te pidan que te conectes por teléfono o por video con un proveedor que no se encuentra en esa clínica. En ese caso, el/la proveedor/a de atención médica evalúa si cumples los requisitos para el aborto con medicación revisando tu historial médico y cualquier prueba diagnóstica (como una ecografía), igual que si estuviera en la sala contigo. Si cumples los requisitos, el proveedor de atención médica y el personal de la clínica te darán instrucciones sobre cómo tomar las píldoras abortivas. En otros casos, una visita de telesalud significa que no tendrás que acudir a una clínica para recibir las píldoras abortivas. En lugar de ello, te conectas con el proveedor por teléfono o por video en el lugar que elijas (por ejemplo, en tu casa, en el automóvil, etc.). Algunos proveedores te pedirán que te hagas una ecografía u otras pruebas médicas antes de reunirte con ellos. Durante la visita, el proveedor confirmará tu elegibilidad para el aborto con medicación y luego te dirá cómo obtener las píldoras abortivas. Cada proveedor tiene una forma diferente de entregar las píldoras; puede que debas recogerlas en una clínica, en una farmacia o que te las envíen a tu casa por correo a través de una farmacia en línea. La telesalud para el aborto con medicación es segura y eficaz, y la mayoría de las personas que la utilizan están conformes y la recomendarían a otras mujeres que necesiten abortar. Sin embargo, es importante que tengas en cuenta tus preferencias personales a la hora de buscar opciones para abortar. Si haces una cita con una clínica, siempre es conveniente confirmar con el lugar si el proveedor te atenderá en persona o a distancia. Independientemente de si te reúnes con el proveedor en persona o a través de telesalud, tienes derecho a una consulta privada en la que recibas toda la información que necesites para tomar una decisión informada sobre tu atención. Fuente: The Guttmacher Institute y The Kaiser Family Foundation</string>
-  <string name="self_managed_abortion_title">Aborto autoadministrado</string>
-  <string name="self_managed_abortion_content">El aborto autoadministrado es cuando una persona realiza su propio aborto sin supervisión clínica. La autoadministración es una opción que existe para las personas que no pueden, o eligen no buscar atención en un entorno clínico. Puede permitir que las personas decidan si, cuándo y cómo interrumpir un embarazo utilizando métodos seguros y efectivos a pesar de las diversas barreras para la atención del aborto. Otras razones por las que las personas podrían querer autoadministrarse incluyen la privacidad, la comodidad, un mayor control de la experiencia, el lugar y el momento del aborto. Un método cada vez más común de autoadministración es a través del aborto con medicación. La evidencia muestra que con información precisa, el aborto autoadministrado con medicación es una opción segura y eficaz para interrumpir el embarazo. Dada la amplia evidencia que respalda la seguridad y la eficacia del aborto autoadministrado con medicamentos, los riesgos para las personas que autoadministran sus abortos son puramente legales, no médicos. Si tiene preguntas o inquietudes legales específicas sobre la autoadministración, comunícate con la línea directa de Repro Legal. Continúa leyendo sobre la autoadministración del aborto en Aborto en nuestros propios términos. Fuentes: Aborto en nuestros propios términos, Physicians for Reproductive Health, Ibis Reproductive Health</string>
-  <string name="abortion_stories_title">Historias sobre el Aborto</string>
+    <string name="telehealth_content">
+    <![CDATA[
+    Si acudes en persona a una clínica para realizarte un aborto con medicación, es posible que te pidan que te conectes por teléfono o por video con un proveedor que no se encuentra en esa clínica. En ese caso, el/la proveedor/a de atención médica evaluará si cumples con los requisitos para el aborto con medicación revisando tu historial médico y cualquier prueba diagnóstica (como una ecografía), igual que si estuviera en la sala contigo.<br/><br/>
+
+    Si cumples con los requisitos, el proveedor de atención médica y el personal de la clínica te darán instrucciones sobre cómo tomar las píldoras abortivas. En otros casos, una visita de telesalud significa que no tendrás que acudir a una clínica para recibir las píldoras abortivas. En lugar de ello, te conectarás con el proveedor por teléfono o por video en el lugar que elijas (por ejemplo, en tu casa, en el automóvil, etc.). Algunos proveedores te pedirán que te hagas una ecografía u otras pruebas médicas antes de reunirte con ellos. Durante la visita, el proveedor confirmará tu elegibilidad para el aborto con medicación y luego te dirá cómo obtener las píldoras abortivas.<br/><br/>
+
+    Cada proveedor tiene una forma diferente de entregar las píldoras; puede que debas recogerlas en una clínica, en una farmacia o que te las envíen a tu casa por correo a través de una farmacia en línea. La telesalud para el aborto con medicación es segura y eficaz, y la mayoría de las personas que la utilizan están conformes y la recomendarían a otras mujeres que necesiten abortar. Sin embargo, es importante que tengas en cuenta tus preferencias personales a la hora de buscar opciones para abortar.<br/><br/>
+
+    Si haces una cita con una clínica, siempre es conveniente confirmar con el lugar si el proveedor te atenderá en persona o a distancia. Independientemente de si te reúnes con el proveedor en persona o a través de telesalud, tienes derecho a una consulta privada en la que recibirás toda la información que necesites para tomar una decisión informada sobre tu atención.<br/><br/>
+
+    Fuente: The Guttmacher Institute y The Kaiser Family Foundation
+    ]]>
+</string>
+
+    <string name="self_managed_abortion_title">Aborto autoadministrado</string>
+    <string name="self_managed_abortion_content">
+    <![CDATA[
+    El aborto autoadministrado es cuando una persona realiza su propio aborto sin supervisión clínica. La autoadministración es una opción para quienes no pueden o eligen no buscar atención en un entorno clínico. Esto puede permitir a las personas decidir si, cuándo y cómo interrumpir un embarazo utilizando métodos seguros y efectivos, a pesar de las diversas barreras para la atención del aborto.<br/><br/>
+
+    Otras razones por las que las personas podrían querer autoadministrarse incluyen privacidad, comodidad, mayor control sobre la experiencia, ubicación y momento del aborto. Un método cada vez más común de autoadministración es a través del aborto con medicación. La evidencia muestra que, con información precisa, el aborto autoadministrado con medicación es una opción segura y eficaz para interrumpir el embarazo.<br/><br/>
+
+    Dada la amplia evidencia que respalda la seguridad y eficacia del aborto autoadministrado con medicamentos, los riesgos para quienes autoadministran sus abortos son puramente legales, no médicos. Si tienes preguntas o inquietudes legales específicas sobre la autoadministración, comunícate con la línea directa de Repro Legal. Continúa leyendo sobre la autoadministración del aborto en Aborto en nuestros propios términos.<br/><br/>
+
+    Fuentes: Aborto en nuestros propios términos, Physicians for Reproductive Health, Ibis Reproductive Health
+    ]]>
+</string>
+
+    <string name="abortion_stories_title">Historias sobre el Aborto</string>
   <string name="abortion_stories_content">¿Te has preguntado alguna vez cómo es abortar? ¿O has querido saber si alguna otra persona ha tenido una experiencia similar a la tuya? Lee las historias que siguen y busca otras historias en internet.</string>
   <string name="abortion_story_1_title">Aimee</string>
   <string name="abortion_story_1_content">\"Cuando descubrí que estaba embarazada, llevaba años bastante mal. Pasaba semestres en el college transitando entre fases de síndrome maniaco y fases depresivas, y estaba a punto de tocar fondo. No había ninguna duda de que iba a abortar y nunca cuestioné mi decisión ni antes ni después. Mi aborto fue el comienzo de una nueva fase vital en la que reconduje mi vida, reconectando con mi pareja, acabé el college, empecé estudios en leyes y empecé una familia\". Continúa leyendo la historia de Aimee.</string>
@@ -336,8 +499,21 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
   <string name="post_abortion_subheading_6">Cuidados post-aborto: aborto con medicación</string>
   <string name="post_abortion_content_6">Puede ser útil disponer de un amigo/a o familiar cerca durante el proceso de aborto con medicación para proporcionar cuidados similares a los que recibiría una persona con una enfermedad leve. Tras tomar los medicamentos, no es raro tener malestar estomacal. Para minimizar las náuseas, los vómitos o la diarrea, se recomienda en general tomar comidas ligeras, evitar comidas grasientas o muy especiadas, y beber mucho líquido. También es común padecer una fiebre ligera, escalofríos o calenturas. Para aquellas personas que buscaron atención en una clínica, es recomendable llamar a la clínica si la fiebre persiste durante más de 24 horas. Fuente: Federación Nacional del Aborto</string>
   <string name="abortion_laws_title">Leyes sobre el Aborto</string>
-  <string name="abortion_laws_content">El Tribunal Supremo anuló el derecho federal al aborto en 2022. Esto significa que el acceso al aborto depende ahora de las leyes del estado en el que vivas. Los estados de Estados Unidos han aprobado muchas leyes que limitan si una persona puede abortar y cuándo y en qué circunstancias. Para conocer las leyes de tu estado, puedes consultar este mapa del Center for Reproductive Rights. Hay defensores que luchan por los derechos de todas las personas embarazadas a acceder a la atención que necesitan. Si tú o alguien que conoces tienen preguntas legales o necesitan ayuda legal, pueden contactarse con Pregnancy Justice o con la línea directa de Repro Legal (844-868-2812). Repro Legal Defense Fund también cubre la fianza y financia defensas sólidas para las personas que son investigadas, detenidas o procesadas por abortos autogestionados. A veces, el lenguaje médico y legal puede parecer abrumador. A continuación, se presentan algunas definiciones de palabras y frases que quizás no hayas visto antes. Comprender lo que significa cada una de ellas puede ayudarte a navegar tu propia experiencia de atención médica.</string>
-  <string name="resources_title">Recursos</string>
+    <string name="abortion_laws_content">
+    <![CDATA[
+    El Tribunal Supremo anuló el derecho federal al aborto en 2022. Esto significa que el acceso al aborto ahora depende de las leyes del estado en el que vivas.<br/><br/>
+
+    Los estados de Estados Unidos han aprobado muchas leyes que limitan si, cuándo y en qué circunstancias una persona puede abortar.<br/><br/>
+
+    Para conocer las leyes de tu estado, puedes consultar este mapa del Center for Reproductive Rights. Hay defensores que luchan por los derechos de todas las personas embarazadas para acceder a la atención que necesitan.<br/><br/>
+
+    Si tú o alguien que conoces tienen preguntas legales o necesitan ayuda legal, pueden comunicarse con Pregnancy Justice o con la línea directa de Repro Legal (844-868-2812). El Repro Legal Defense Fund también cubre la fianza y financia defensas sólidas para las personas que son investigadas, detenidas o procesadas por abortos autogestionados.<br/><br/>
+
+    A veces, el lenguaje médico y legal puede parecer abrumador. A continuación, se presentan algunas definiciones de palabras y frases que quizás no hayas visto antes. Comprender lo que significa cada una de ellas puede ayudarte a navegar tu propia experiencia de atención médica.
+    ]]>
+</string>
+
+    <string name="resources_title">Recursos</string>
   <string name="resources_description">Hay muchas organizaciones dedicadas a proteger y ampliar el acceso al aborto. Las organizaciones a continuación son algunos de los numerosos grupos que pueden proporcionarte información sobre el aborto.</string>
   <string name="resources_subheading_1">Apoyo interactivo</string>
   <string name="resources_content_1">- I Need an A - SASS - How to Use the Abortion Pill - Women Help Women - Women on Web - Aid Access - Repro Legal Helpline - Miscarriage and Abortion Hotline - World Health Organization - Reddit\'s abortion forum, run by Online Abortion Resource Support</string>

@@ -81,13 +81,13 @@
   <string name="counseling_requirements_dropdown">Counseling requirements</string>
   <string name="counseling_requirements_copy">
         <![CDATA[
-        Many states require a pregnant person to attend a counseling session and wait for a specific amount of time (usually at least 24 hours) before receiving abortion care. Though state mandated, counseling requirements are not medically necessary and often include information about abortion that is incorrect or misleading.
+        Many states require a pregnant person to attend a counseling session and wait for a specific amount of time (usually at least 24 hours) before receiving abortion care.<br/><br/> Though state mandated, counseling requirements are not medically necessary and often include information about abortion that is incorrect or misleading.
         ]]>
     </string>
   <string name="judicial_bypass_dropdown">Judicial bypass/waiver</string>
   <string name="judicial_bypass_copy">
         <![CDATA[
-        In some states, people under a certain age (usually 18, but sometimes younger) can\'t get abortion care without involving a parent. For people who cannot or do not want to involve a parent, there is a court process where a judge can give you permission to have an abortion without involving a parent or legal guardian. This is called a judicial bypass/waiver. If you need support with a judicial bypass, contact the Repro Legal Helpline.
+        In some states, people under a certain age (usually 18, but sometimes younger) can\'t get abortion care without involving a parent. For people who cannot or do not want to involve a parent, there is a court process where a judge can give you permission to have an abortion without involving a parent or legal guardian. This is called a judicial bypass/waiver.<br/><br/> If you need support with a judicial bypass, contact the Repro Legal Helpline.
         ]]>
     </string>
   <string name="legal_risk_dropdown">Legal risk</string>
@@ -99,19 +99,19 @@
   <string name="Parental_involvement_laws_dropdown">Parental involvement laws</string>
   <string name="Parental_involvement_laws_copy">
         <![CDATA[
-        Some states require a young person to tell and/or get written permission from a parent or legal guardian to get an abortion. If/When/How can tell you what the parental involvement laws are in your state.
+        Some states require a young person to tell and/or get written permission from a parent or legal guardian to get an abortion.<br/><br/> If/When/How can tell you what the parental involvement laws are in your state.
         ]]>
     </string>
   <string name="waiting_periods_dropdown">Waiting periods</string>
   <string name="waiting_periods_copy">
         <![CDATA[
-        Many states require a waiting period (typically at least 24 hours) between receiving counseling and having an abortion. These mandatory waiting periods may require a pregnant person to make multiple trips to their provider if the state requires in-person counseling (vs. virtual counseling). Counseling requirements and waiting periods are state mandated, and there is no medical reason to require them.
+        Many states require a waiting period (typically at least 24 hours) between receiving counseling and having an abortion. These mandatory waiting periods may require a pregnant person to make multiple trips to their provider if the state requires in-person counseling (vs. virtual counseling).<br/><br/>Counseling requirements and waiting periods are state mandated, and there is no medical reason to require them.
         ]]>
     </string>
   <string name="shield_laws_dropdown">Shield laws</string>
   <string name="shield_laws_copy">
         <![CDATA[
-        Several states have passed laws generally referred to as “shield laws,” which are intended to protect (or shield) abortion providers, supporters, and seekers within that state from legal actions put forward in other states. Shield laws only impact people when they are in the state with the shield law. For example, if someone in Texas ends their pregnancy using pills from a shield law provider in New York, only the person in New York (the provider) is protected by the shield law—not the person in Texas. To break it down: the law where you are physically located is almost always the law that applies to you.
+        Several states have passed laws generally referred to as “shield laws,” which are intended to protect (or shield) abortion providers, supporters, and seekers within that state from legal actions put forward in other states. Shield laws only impact people when they are in the state with the shield law.<br/><br/> For example, if someone in Texas ends their pregnancy using pills from a shield law provider in New York, only the person in New York (the provider) is protected by the shield law—not the person in Texas.<br/><br/> To break it down: the law where you are physically located is almost always the law that applies to you.
         ]]>
     </string>
   <string name="Ifwhenhow">If/when/how</string>

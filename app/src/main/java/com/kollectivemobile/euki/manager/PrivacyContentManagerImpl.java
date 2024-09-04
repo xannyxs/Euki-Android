@@ -68,8 +68,15 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
         String textHistory = "Protect_your_internet_search_history_dropdown";
         String contentHistory = "Protect_your_internet_search_history_copy";
 
+        Map<String, String> linksHistory = new HashMap<>();
+        linksHistory.put("ProtonVPN’s free tier", "https://protonvpn.com/");
+        linksHistory.put("Tunnelbear’s limited free tier", "https://www.tunnelbear.com/");
+        linksHistory.put("DuckDuckGo", "https://duckduckgo.com/");
+        linksHistory.put("Firefox Focus", "https://play.google.com/store/apps/details?id=org.mozilla.focus&hl=en_US&gl=US");
+
         ContentItem childItemHistory = new ContentItem(textHistory);
         childItemHistory.setContent(contentHistory);
+        childItemHistory.setLinks(linksHistory);
         childItemHistory.setItemId(1);
         childItems.add(childItemHistory);
 
@@ -100,6 +107,7 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
         Map<String, String> linksResources = new HashMap<>();
         linksResources.put("Digital Defense Fund", "https://digitaldefensefund.org/ddf-guides/abortion-privacy");
         linksResources.put("Electronic Frontier Foundation privacy guidance", "https://www.eff.org/issues/privacy");
+        linksResources.put("If/When/How’s Repro Legal Helpline", "https://ifwhenhow.org/");
 
         ContentItem childItemResources = new ContentItem(textResources);
         childItemResources.setContent(contentResources);
