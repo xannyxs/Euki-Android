@@ -69,10 +69,12 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
         String contentHistory = "Protect_your_internet_search_history_copy";
 
         Map<String, String> linksHistory = new HashMap<>();
-        linksHistory.put("ProtonVPN’s free tier", "https://protonvpn.com/");
-        linksHistory.put("Tunnelbear’s limited free tier", "https://www.tunnelbear.com/");
+        linksHistory.put("Tunnelbear", "https://www.vpnranks.com/reviews/tunnelbear/free-trial/");
+        linksHistory.put("ProtonVPN", "https://protonvpn.com/");
+        linksHistory.put("Nivel gratuito de ProtonVPN", "https://protonvpn.com/"); // Adjusted
+        linksHistory.put("Nivel gratuito limitado de Tunnelbear", "https://www.tunnelbear.com/");
         linksHistory.put("DuckDuckGo", "https://duckduckgo.com/");
-        linksHistory.put("Firefox Focus", "https://play.google.com/store/apps/details?id=org.mozilla.focus&hl=en_US&gl=US");
+        linksHistory.put("Firefox Focus", "https://play.google.com/store/apps/details?id=org.mozilla.focus&hl=es&gl=ES"); // Adjusted
 
         ContentItem childItemHistory = new ContentItem(textHistory);
         childItemHistory.setContent(contentHistory);
@@ -93,7 +95,7 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
 
         Map<String, String> linksLocation = new HashMap<>();
         linksLocation.put("DuckDuckGo", "https://duckduckgo.com/");
-        linksLocation.put("Firefox Focus", "https://play.google.com/store/apps/details?id=org.mozilla.focus&hl=en_US&gl=US");
+        linksLocation.put("Firefox Focus", "https://play.google.com/store/apps/details?id=org.mozilla.focus&hl=es&gl=ES"); // Adjusted
 
         ContentItem childItemLocation = new ContentItem(textLocation);
         childItemLocation.setContent(contentLocation);
@@ -107,8 +109,8 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
         Map<String, String> linksResources = new HashMap<>();
         linksResources.put("Digital Defense Fund", "https://digitaldefensefund.org/ddf-guides/abortion-privacy");
         linksResources.put("Electronic Frontier Foundation privacy guidance", "https://www.eff.org/issues/privacy");
-        linksResources.put("If/When/How’s Repro Legal Helpline", "https://ifwhenhow.org/");
-
+        linksResources.put("If/When/How", "https://ifwhenhow.org/");
+        linksResources.put("Repro Legal Helpline", "https://ifwhenhow.org/");
         ContentItem childItemResources = new ContentItem(textResources);
         childItemResources.setContent(contentResources);
         childItemResources.setLinks(linksResources);
@@ -119,5 +121,4 @@ public class PrivacyContentManagerImpl implements PrivacyContentManager {
 
         return item;
     }
-
 }
