@@ -27,13 +27,13 @@ public class SelectableValueConverter {
                 selectItems.add(new SelectableValue(bleedingClots.getImageName(), bleedingClots.getText(), counter));
             }
         }
-    /*    for (int index = 0; index<calendarItem.getBleedingProductsCounter().size(); index++) {
+        for (int index = 0; index<calendarItem.getBleedingProductsCounter().size(); index++) {
             int counter = calendarItem.getBleedingProductsCounter().get(index);
             if (counter > 0) {
                 Constants.BleedingProducts bleedingProducts = Constants.BleedingProducts.values[index];
                 selectItems.add(new SelectableValue(bleedingProducts.getImageName(), bleedingProducts.getText(), counter));
             }
-        }*/
+        }
 
         //Emotions Items
 
