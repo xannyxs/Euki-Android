@@ -131,11 +131,6 @@ public class CycleFragment extends BaseFragment {
             }
         });
 
-        binding.sbSections.setListener(new SegmentedButtonListener() {
-            @Override
-            public void onSegmentedChanged(Integer index) {
-                binding.vpMain.setCurrentItem(index);
-            }
-        });
+        binding.sbSections.setListener(index -> binding.vpMain.setCurrentItem(index));
     }
 }
