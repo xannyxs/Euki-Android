@@ -27,6 +27,8 @@ public class SelectableButton extends LinearLayout {
     private Boolean mIsEnabled = true;
     private OnClickListener mOnClickListener;
 
+    private boolean disableCounter = false;
+
     public SelectableButton(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -107,6 +109,11 @@ public class SelectableButton extends LinearLayout {
         ivIcon.setImageResource(imageResId);
     }
 
+    // Setter for disableCounter flag
+    public void setDisableCounter(boolean disable) {
+        disableCounter = disable;
+    }
+
     private void updateUIElements() {
         Boolean isSelected = false;
         if (mSingleSelection) {
@@ -151,15 +158,17 @@ public class SelectableButton extends LinearLayout {
             return;
         }
 
-        if (mSingleSelection) {
-            changeSelected(!mSelected);
-            changeRadioButtons();
-        } else {
-            mCounter++;
-            if (mCounter == 11) {
-                mCounter = 0;
+        if (!disableCounter) {
+            if (mSingleSelection) {
+                changeSelected(!mSelected);
+                changeRadioButtons();
+            } else {
+                mCounter++;
+                if (mCounter == 11) {
+                    mCounter = 0;
+                }
+                setCounter(mCounter);
             }
-            setCounter(mCounter);
         }
 
         if (mOnClickListener != null) {
@@ -172,7 +181,7 @@ public class SelectableButton extends LinearLayout {
             return false;
         }
 
-        if (!mSingleSelection) {
+        if (!mSingleSelection && !disableCounter) {
             setCounter(0);
             if (mOnClickListener != null) {
                 mOnClickListener.onClick(this);

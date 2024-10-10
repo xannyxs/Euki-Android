@@ -27,7 +27,7 @@ import com.kollectivemobile.euki.ui.track.TrackActivity;
 
 import java.util.List;
 
-public class DaySummaryFragment extends BaseFragment implements DaysFragmentListener {
+public class DaySummaryFragment extends BaseFragment implements DaysFragmentListener, CycleDaySummaryAdapter.OnItemClickListener {
 
     private CycleDaySummaryAdapter mAdapter;
     private CycleDayItem mCurrentItem;
@@ -65,13 +65,18 @@ public class DaySummaryFragment extends BaseFragment implements DaysFragmentList
         FragmentManagerHelper mFragmentManagerHelper = new FragmentManagerHelper(getChildFragmentManager());
         mFragmentManagerHelper.replace(R.id.fl_header_content, DaysFragment.newInstance(this), false);
 
-        mAdapter = new CycleDaySummaryAdapter(getContext());
+        mAdapter = new CycleDaySummaryAdapter(getContext(), this);
         binding.rvMain.setAdapter(mAdapter);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 3);
         binding.rvMain.setLayoutManager(layoutManager);
 
         binding.btnLogNow.setOnClickListener(v -> logNow());
+    }
+
+    @Override
+    public void onItemClick(SelectableValue item) {
+        logNow();
     }
 
     @Override

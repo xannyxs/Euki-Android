@@ -18,9 +18,15 @@ import java.util.List;
 public class CycleDaySummaryAdapter extends RecyclerView.Adapter {
     private List<SelectableValue> mItems = new ArrayList<>();
     private WeakReference<Context> mContext;
+    private OnItemClickListener mListener;
 
-    public CycleDaySummaryAdapter(Context context) {
+    public interface OnItemClickListener {
+        void onItemClick(SelectableValue item);
+    }
+
+    public CycleDaySummaryAdapter(Context context, OnItemClickListener listener) {
         mContext = new WeakReference<>(context);
+        mListener = listener;
     }
 
     @Override
@@ -38,7 +44,12 @@ public class CycleDaySummaryAdapter extends RecyclerView.Adapter {
         rowHolder.sbItem.setTitle(item.getTitle());
         rowHolder.sbItem.setCounter(item.getCounter());
         rowHolder.sbItem.setImageRes(Utils.getImageId(item.getIconName()));
-        rowHolder.sbItem.setIsEnabled(false);
+        rowHolder.sbItem.setIsEnabled(true);
+        rowHolder.sbItem.setDisableCounter(true);
+        rowHolder.sbItem.setOnClickListener(view -> {
+            mListener.onItemClick(item);
+
+        });
     }
 
     @Override

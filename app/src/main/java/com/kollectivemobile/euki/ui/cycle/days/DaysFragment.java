@@ -127,8 +127,8 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
         rvMain.setListener(this);
         ivRight.setVisibility(View.GONE);
 
-        ivLeft.setOnClickListener(view -> rvMain.smoothScrollToPosition(rvMain.getCurrentIndex() - 1));
-        ivRight.setOnClickListener(view -> rvMain.smoothScrollToPosition(rvMain.getCurrentIndex() + 3));
+        ivLeft.setOnClickListener(view -> rvMain.smoothScrollToPosition(rvMain.getCurrentIndex()));
+        ivRight.setOnClickListener(view -> rvMain.smoothScrollToPosition(rvMain.getCurrentIndex() + 2));
     }
 
     @Override
