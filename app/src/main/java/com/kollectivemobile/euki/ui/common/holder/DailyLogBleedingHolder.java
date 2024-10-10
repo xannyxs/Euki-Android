@@ -103,6 +103,12 @@ public class DailyLogBleedingHolder extends BaseDailyLogHolder implements View.O
     public void bind(CalendarItem calendarItem, Boolean selected, DailyLogAdapter.ViewType selectedType) {
         super.bind(calendarItem, selected, selectedType);
 
+        // Set IncludeCycleSummary to true by default if it hasn't been initialized
+        if (calendarItem.getIncludeCycleSummary() != null) {
+            calendarItem.setIncludeCycleSummary(true);
+            mCalendarItem.setIncludeCycleSummary(true);
+        }
+
         if (calendarItem.getBleedingSize() != null) {
             sbBleedingSizes.get(calendarItem.getBleedingSize().ordinal()).changeSelected(true);
         }
@@ -121,7 +127,7 @@ public class DailyLogBleedingHolder extends BaseDailyLogHolder implements View.O
 
     private void updateIncludeCycle() {
         if (!mCalendarItem.hasBleeding()) {
-            mCalendarItem.setIncludeCycleSummary(false);
+            mCalendarItem.setIncludeCycleSummary(true);
         }
 
         llIncludeCycle.setVisibility(mCalendarItem.hasBleeding() ? View.VISIBLE : View.GONE);
