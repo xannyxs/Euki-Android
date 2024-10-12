@@ -103,29 +103,37 @@ public class DailyLogAdapter extends RecyclerView.Adapter implements DailyLogVie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof DailyLogBleedingHolder) {
             DailyLogBleedingHolder dailyHolder = (DailyLogBleedingHolder)holder;
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.BLEEDING), mSelectedViewType);
+            boolean isExpanded = mCalendarItem.hasBleeding();
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.BLEEDING), mSelectedViewType);
         } else if (holder instanceof DailyLogEmotionsHolder) {
+            boolean isExpanded = mCalendarItem.hasEmotions();
             DailyLogEmotionsHolder dailyHolder = (DailyLogEmotionsHolder)holder;
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.EMOTIONS), mSelectedViewType);
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.EMOTIONS), mSelectedViewType);
         } else if (holder instanceof DailyLogBodyHolder) {
             DailyLogBodyHolder dailyHolder = (DailyLogBodyHolder)holder;
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.BODY), mSelectedViewType);
+            boolean isExpanded = mCalendarItem.hasBody();
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.BODY), mSelectedViewType);
         } else if (holder instanceof DailyLogSexualActivityHolder) {
             DailyLogSexualActivityHolder dailyHolder = (DailyLogSexualActivityHolder)holder;
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.SEXUALACTIVITY), mSelectedViewType);
+            boolean isExpanded = mCalendarItem.hasSexualActivity();
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.SEXUALACTIVITY), mSelectedViewType);
         } else if (holder instanceof DailyLogContraceptionHolder) {
             DailyLogContraceptionHolder dailyHolder = (DailyLogContraceptionHolder)holder;
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.CONTRACEPTION), mSelectedViewType);
+            boolean isExpanded = mCalendarItem.hasContraception();
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.CONTRACEPTION), mSelectedViewType);
         } else if (holder instanceof DailyLogTestHolder) {
             DailyLogTestHolder dailyHolder = (DailyLogTestHolder)holder;
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.TEST), mSelectedViewType);
+            boolean isExpanded = mCalendarItem.hasTest();
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.TEST), mSelectedViewType);
         } else if (holder instanceof DailyLogNoteHolder) {
             DailyLogNoteHolder dailyHolder = (DailyLogNoteHolder)holder;
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.NOTE), mSelectedViewType);
+            boolean isExpanded = mCalendarItem.hasNote();
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.NOTE), mSelectedViewType);
         } else if (holder instanceof DailyLogAppointmentHolder) {
             DailyLogAppointmentHolder dailyHolder = (DailyLogAppointmentHolder)holder;
+            boolean isExpanded = mCalendarItem.hasAppointment();
             mDailyLogAppointmentHolder = new WeakReference<>(dailyHolder);
-            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? false : (mSelectedViewType == ViewType.APPOINTMENT), mSelectedViewType);
+            dailyHolder.bind(mCalendarItem, mSelectedViewType == null ? isExpanded : (mSelectedViewType == ViewType.APPOINTMENT), mSelectedViewType);
         } else if (holder instanceof DailyLogAppointmentNewHolder) {
             DailyLogAppointmentNewHolder dailyHolder = (DailyLogAppointmentNewHolder)holder;
             dailyHolder.bind(mCalendarItem, mNewAppointmentSelected);

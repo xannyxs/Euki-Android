@@ -48,7 +48,6 @@ public class CycleDaySummaryAdapter extends RecyclerView.Adapter {
         rowHolder.sbItem.setDisableCounter(true);
         rowHolder.sbItem.setOnClickListener(view -> {
             mListener.onItemClick(item);
-
         });
     }
 
