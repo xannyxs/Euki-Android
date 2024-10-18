@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.model.CycleDayItem;
+import com.kollectivemobile.euki.model.CyclePeriodData;
+import com.kollectivemobile.euki.model.CyclePeriodItem;
 import com.kollectivemobile.euki.utils.DateUtils;
 import com.kollectivemobile.euki.utils.strings.StringUtils;
 
@@ -24,10 +26,18 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
     public static final Integer VIEW_TYPE_EMPTY = 0;
     public static final Integer VIEW_TYPE_ITEM = 1;
     private List<CycleDayItem> mItems = new ArrayList<>();
+    private CyclePeriodData mCyclePeriodData;
     private WeakReference<Context> mContext;
 
     public CycleSummaryDaysAdapter(Context context) {
         mContext = new WeakReference<>(context);
+    }
+
+    private Integer mCurrentDayCycle;
+
+    public void setCurrentDayCycle(Integer currentDayCycle) {
+        mCurrentDayCycle = currentDayCycle;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -58,7 +68,7 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
         String dateString = StringUtils.capitalizeAll(DateUtils.toString(item.getDate(), DateUtils.eeeMMMdd));
         rowHolder.tvDate.setText(dateString);
 
-        Integer dayCycle = item.getDayCycle();
+        Integer dayCycle = mCurrentDayCycle;
         if (dayCycle != null) {
             String cycleDay = String.format(App.getContext().getString(R.string.cycle_day_format), dayCycle);
             rowHolder.tvCycleDay.setText(cycleDay);

@@ -1,23 +1,21 @@
 package com.kollectivemobile.euki.ui.cycle.days;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.viewbinding.ViewBinding;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.databinding.FragmentCycleDaysBinding;
 import com.kollectivemobile.euki.manager.CycleManager;
 import com.kollectivemobile.euki.model.CycleDayItem;
+import com.kollectivemobile.euki.model.CyclePeriodData;
 import com.kollectivemobile.euki.networking.EukiCallback;
 import com.kollectivemobile.euki.networking.ServerError;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
@@ -81,39 +79,68 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
     }
 
     private void requestData() {
-        mCycleManager.requestCycleItems(new EukiCallback<>() {
+        mCycleManager.requestCycleItems(new EukiCallback<List<CycleDayItem>>() {
             @Override
             public void onSuccess(final List<CycleDayItem> cycleDayItems) {
                 mItems = cycleDayItems;
                 binding.rvMain.updateData(cycleDayItems);
 
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(() -> {
-                    if (cycleDayItems != null) {
-                        binding.rvMain.scrollToPosition(cycleDayItems.size());
-                        binding.rvMain.smoothScrollToPosition(cycleDayItems.size() + 1);
-                    }
-                }, 100);
+                // Request CyclePeriodData
+                fetchCyclePeriodData();
+
+                // Existing code...
             }
 
             @Override
             public void onError(ServerError serverError) {
+                // Handle error
+            }
+        });
+    }
+
+    private void fetchCyclePeriodData() {
+        mCycleManager.requestCyclePeriodData(new EukiCallback<CyclePeriodData>() {
+            @Override
+            public void onSuccess(CyclePeriodData cyclePeriodData) {
+                binding.rvMain.setCurrentDayCycle(cyclePeriodData.getCurrentDayCycle());
+            }
+
+            @Override
+            public void onError(ServerError serverError) {
+                // Handle error
             }
         });
     }
 
     private void refreshData() {
-        mCycleManager.requestCycleItems(new EukiCallback<>() {
+        mCycleManager.requestCycleItems(new EukiCallback<List<CycleDayItem>>() {
             @Override
             public void onSuccess(final List<CycleDayItem> cycleDayItems) {
                 mItems = cycleDayItems;
                 binding.rvMain.updateData(cycleDayItems);
-                mListener.itemChanged(mItems.get(binding.rvMain.getCurrentIndex()));
-                binding.rvMain.smoothScrollToPosition(binding.rvMain.getCurrentIndex() + 1);
+
+                // Now request CyclePeriodData to get currentDayCycle
+                mCycleManager.requestCyclePeriodData(new EukiCallback<CyclePeriodData>() {
+                    @Override
+                    public void onSuccess(CyclePeriodData cyclePeriodData) {
+                        Integer currentDayCycle = cyclePeriodData.getCurrentDayCycle();
+                        binding.rvMain.setCurrentDayCycle(currentDayCycle);
+
+                        // Now that we have currentDayCycle, we can update the listener and UI
+                        mListener.itemChanged(mItems.get(binding.rvMain.getCurrentIndex()));
+                        binding.rvMain.smoothScrollToPosition(binding.rvMain.getCurrentIndex() + 1);
+                    }
+
+                    @Override
+                    public void onError(ServerError serverError) {
+                        // Handle error appropriately
+                    }
+                });
             }
 
             @Override
             public void onError(ServerError serverError) {
+                // Handle error appropriately
             }
         });
     }
