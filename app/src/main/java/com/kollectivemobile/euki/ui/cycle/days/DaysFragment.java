@@ -1,6 +1,8 @@
 package com.kollectivemobile.euki.ui.cycle.days;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,7 +90,13 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
                 // Request CyclePeriodData
                 fetchCyclePeriodData();
 
-                // Existing code...
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(() -> {
+                    if (cycleDayItems != null) {
+                        binding.rvMain.scrollToPosition(cycleDayItems.size());
+                        binding.rvMain.smoothScrollToPosition(cycleDayItems.size() + 1);
+                    }
+                }, 100);
             }
 
             @Override
@@ -119,14 +127,12 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
                 mItems = cycleDayItems;
                 binding.rvMain.updateData(cycleDayItems);
 
-                // Now request CyclePeriodData to get currentDayCycle
                 mCycleManager.requestCyclePeriodData(new EukiCallback<CyclePeriodData>() {
                     @Override
                     public void onSuccess(CyclePeriodData cyclePeriodData) {
                         Integer currentDayCycle = cyclePeriodData.getCurrentDayCycle();
                         binding.rvMain.setCurrentDayCycle(currentDayCycle);
 
-                        // Now that we have currentDayCycle, we can update the listener and UI
                         mListener.itemChanged(mItems.get(binding.rvMain.getCurrentIndex()));
                         binding.rvMain.smoothScrollToPosition(binding.rvMain.getCurrentIndex() + 1);
                     }
