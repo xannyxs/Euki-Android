@@ -20,6 +20,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
 
@@ -28,6 +29,8 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
     private List<CycleDayItem> mItems = new ArrayList<>();
     private CyclePeriodData mCyclePeriodData;
     private WeakReference<Context> mContext;
+    private CyclePeriodItem mCurrentCyclePeriod;
+    private Date mCycleStartDate;
 
     public CycleSummaryDaysAdapter(Context context) {
         mContext = new WeakReference<>(context);
@@ -37,6 +40,11 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
 
     public void setCurrentDayCycle(Integer currentDayCycle) {
         mCurrentDayCycle = currentDayCycle;
+        notifyDataSetChanged();
+    }
+
+    public void setCurrentCycleStartDate(Date cycleStartDate) {
+        mCycleStartDate = cycleStartDate;
         notifyDataSetChanged();
     }
 
@@ -65,12 +73,27 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
         CycleSummaryDaysHolder rowHolder = (CycleSummaryDaysHolder) holder;
         CycleDayItem item = mItems.get(position - 1);
 
-        String dateString = StringUtils.capitalizeAll(DateUtils.toString(item.getDate(), DateUtils.eeeMMMdd));
+        // Set date string
+        String dateString = StringUtils.capitalizeAll(DateUtils.toString(
+                item.getDate(), DateUtils.eeeMMMdd));
         rowHolder.tvDate.setText(dateString);
 
-        Integer dayCycle = mCurrentDayCycle;
+        Integer dayCycle = null;
+
+        if (mCycleStartDate != null) {
+            Date itemDate = DateUtils.truncateTime(item.getDate());
+            Date cycleStartDate = DateUtils.truncateTime(mCycleStartDate);
+
+            long daysDifference = TimeUnit.MILLISECONDS.toDays(itemDate.getTime() - cycleStartDate.getTime());
+
+            if (daysDifference >= 0) {
+                dayCycle = (int) daysDifference + 1;
+            }
+        }
+
         if (dayCycle != null) {
-            String cycleDay = String.format(App.getContext().getString(R.string.cycle_day_format), dayCycle);
+            String cycleDay = String.format(
+                    App.getContext().getString(R.string.cycle_day_format), dayCycle);
             rowHolder.tvCycleDay.setText(cycleDay);
             rowHolder.tvCycleDay.setVisibility(View.VISIBLE);
         } else {

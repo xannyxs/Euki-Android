@@ -16,6 +16,7 @@ import com.kollectivemobile.euki.model.CyclePeriodItem;
 import com.kollectivemobile.euki.ui.common.adapter.CycleSummaryDaysAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HorizontalCarouselRecyclerView extends RecyclerView {
@@ -42,6 +43,12 @@ public class HorizontalCarouselRecyclerView extends RecyclerView {
     public void setCurrentDayCycle(Integer currentDayCycle) {
         if (adapter != null) {
             adapter.setCurrentDayCycle(currentDayCycle);
+        }
+    }
+
+    public void setCurrentCycleStartDate(Date cycleStartDate) {
+        if (adapter != null) {
+            adapter.setCurrentCycleStartDate(cycleStartDate);
         }
     }
 

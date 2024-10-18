@@ -23,6 +23,8 @@ import com.kollectivemobile.euki.networking.ServerError;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -87,6 +89,10 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
                 mItems = cycleDayItems;
                 binding.rvMain.updateData(cycleDayItems);
 
+                // Fetch CyclePeriodData to get currentDayCycle and cycleStartDate
+                fetchCyclePeriodData();
+
+
                 // Request CyclePeriodData
                 fetchCyclePeriodData();
 
@@ -110,7 +116,20 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
         mCycleManager.requestCyclePeriodData(new EukiCallback<CyclePeriodData>() {
             @Override
             public void onSuccess(CyclePeriodData cyclePeriodData) {
-                binding.rvMain.setCurrentDayCycle(cyclePeriodData.getCurrentDayCycle());
+                Integer currentDayCycle = cyclePeriodData.getCurrentDayCycle();
+                binding.rvMain.setCurrentDayCycle(currentDayCycle);
+
+                if (currentDayCycle != null && currentDayCycle > 0) {
+                    // Calculate the start date of the current cycle period
+                    Date today = new Date();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(today);
+                    calendar.add(Calendar.DAY_OF_YEAR, - (currentDayCycle - 1)); // Subtract days
+                    Date cycleStartDate = calendar.getTime();
+
+                    // Pass the cycleStartDate to the RecyclerView
+                    binding.rvMain.setCurrentCycleStartDate(cycleStartDate);
+                }
             }
 
             @Override
@@ -126,6 +145,10 @@ public class DaysFragment extends BaseFragment implements DaysFragmentListener {
             public void onSuccess(final List<CycleDayItem> cycleDayItems) {
                 mItems = cycleDayItems;
                 binding.rvMain.updateData(cycleDayItems);
+
+                // Fetch CyclePeriodData to get currentDayCycle and cycleStartDate
+                fetchCyclePeriodData();
+
 
                 mCycleManager.requestCyclePeriodData(new EukiCallback<CyclePeriodData>() {
                     @Override
