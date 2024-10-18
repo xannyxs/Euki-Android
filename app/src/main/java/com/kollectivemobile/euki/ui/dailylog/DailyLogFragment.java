@@ -8,6 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.drawable.NinePatchDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,10 +19,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
@@ -204,9 +203,26 @@ public class DailyLogFragment extends BaseFragment implements DailyLogAdapter.Da
     }
 
     public void save(EukiCallback<Boolean> callback) {
-        mCalendarItem.setAppointments(mAdapter.getAppointments());
-        mCalendarManager.saveItem(mCalendarItem, callback);
-        mCalendarManager.updateLatestBleedingTracking(mCalendarItem.getDate());
+        if(mCalendarItem.hasBleeding()){
+            if (mCalendarItem.hasBleeding()) {
+                if(mCalendarItem.getIncludeCycleSummary()){
+                    mCalendarItem.setIncludeCycleSummary(true);
+                    mCalendarItem.setAppointments(mAdapter.getAppointments());
+                    mCalendarManager.saveItem(mCalendarItem, callback);
+                    mCalendarManager.updateLatestBleedingTracking(mCalendarItem.getDate());
+                }else{
+                    mCalendarItem.setAppointments(mAdapter.getAppointments());
+                    mCalendarManager.saveItem(mCalendarItem, callback);
+                    mCalendarManager.updateLatestBleedingTracking(mCalendarItem.getDate());
+                }
+            }
+        }else{
+            mCalendarItem.setIncludeCycleSummary(false);
+            mCalendarItem.setAppointments(mAdapter.getAppointments());
+            mCalendarManager.saveItem(mCalendarItem, callback);
+            mCalendarManager.updateLatestBleedingTracking(mCalendarItem.getDate());
+        }
+
     }
 
     @Override
