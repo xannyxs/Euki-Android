@@ -7,30 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.model.Appointment;
 import com.kollectivemobile.euki.ui.common.adapter.DailyLogAdapter;
 
 import java.lang.ref.WeakReference;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class DailyLogAppointmentExistentHolder extends RecyclerView.ViewHolder {
-    public @BindView(R.id.tv_title) TextView tvTitle;
+    private TextView tvTitle;
+    private final AppointmentExistentListener mListener;
+    private WeakReference<Appointment> mAppointment;
 
-    public AppointmentExistentListener mListener;
-    public WeakReference<Appointment> mAppointment;
-
-    public DailyLogAppointmentExistentHolder(@NonNull View itemView, AppointmentExistentListener listener) {
+    private DailyLogAppointmentExistentHolder(@NonNull View itemView, AppointmentExistentListener listener) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
         mListener = listener;
+        tvTitle = itemView.findViewById(R.id.tv_title); // View Binding replacement for ButterKnife
+        itemView.findViewById(R.id.ll_main).setOnClickListener(v -> appointmentSelected());
     }
 
-    static public DailyLogAppointmentExistentHolder create(ViewGroup parent, AppointmentExistentListener listener) {
+    public static DailyLogAppointmentExistentHolder create(ViewGroup parent, AppointmentExistentListener listener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_daily_log_appointment_existent, parent, false);
         return new DailyLogAppointmentExistentHolder(view, listener);
@@ -45,8 +40,7 @@ public class DailyLogAppointmentExistentHolder extends RecyclerView.ViewHolder {
         tvTitle.setText(appointment.getTitle());
     }
 
-    @OnClick(R.id.ll_main)
-    void appointmentSelected() {
+    private void appointmentSelected() {
         if (mListener != null) {
             mListener.selectedAppointment(mAppointment.get());
         }

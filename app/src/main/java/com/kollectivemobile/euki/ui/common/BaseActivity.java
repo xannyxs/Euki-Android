@@ -26,7 +26,6 @@ import com.kollectivemobile.euki.utils.Utils;
 
 import javax.inject.Inject;
 
-import butterknife.ButterKnife;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 /**
@@ -68,8 +67,6 @@ public class BaseActivity extends AppCompatActivity implements BaseFragment.Inte
         tbToolbar = findViewById(R.id.tb_toolbar);
         pbProgress = findViewById(R.id.pb_loading);
 
-//        tbToolbar = ButterKnife.findById(this, R.id.tb_toolbar);
-//        pbProgress = ButterKnife.findById(this, R.id.pb_loading);
         if (tbToolbar != null) {
             setSupportActionBar(tbToolbar);
             if (getSupportActionBar() != null) {
@@ -170,11 +167,12 @@ public class BaseActivity extends AppCompatActivity implements BaseFragment.Inte
     }
 
     protected void updateToolbar(String title, boolean showBack) {
+        tbToolbar = findViewById(R.id.tb_toolbar);
         if (tbToolbar != null && getSupportActionBar() != null) {
             tbToolbar.setTitle("");
 
             TextView tvTitle = tbToolbar.findViewById(R.id.tv_title);
-//            TextView tvTitle = ButterKnife.findById(tbToolbar, R.id.tv_title);
+
             if (tvTitle != null) {
                 tvTitle.setText(title);
             }

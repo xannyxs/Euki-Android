@@ -71,6 +71,56 @@ public class AbortionContentManagerImpl implements AbortionContentManager {
     }
 
     @Override
+    public ContentItem getAbortionMifeMiso12NoExpandables() {
+        ContentItem item = new ContentItem();
+        item.setAbottionItem(true);
+        item.setId("mife_miso_12_weeks");
+
+        List<ContentItem> childItems = new ArrayList<>();
+        for (int i=1; i<=7; i++) {
+            String text = "mife_miso_12_text_" + i;
+            String image = "icon_mife_miso_12_" + i;
+            ContentItem childItem = new ContentItem(text);
+
+            if (i < 7) {
+                childItem.setImageIcon(image);
+            }
+
+            childItem.setLinks(links);
+            childItem.setItemId(i);
+            childItems.add(childItem);
+        }
+        item.setContentItems(childItems);
+
+        return item;
+    }
+
+    @Override
+    public ContentItem getAbortionMiso12NoExpandables() {
+        ContentItem item = new ContentItem();
+        item.setAbottionItem(true);
+        item.setId("misoprostol_12_weeks");
+
+        List<ContentItem> childItems = new ArrayList<>();
+        for (int i=1; i<=6; i++) {
+            String text = "misoprostol_12_text_" + i;
+            String image = "icon_miso_12_" + i;
+            ContentItem childItem = new ContentItem(text);
+
+            if (i < 6) {
+                childItem.setImageIcon(image);
+            }
+
+            childItem.setLinks(links);
+            childItem.setItemId(i);
+            childItems.add(childItem);
+        }
+        item.setContentItems(childItems);
+        return item;
+    }
+
+
+    @Override
     public ContentItem getAbortionSuctionVacuum() {
         ContentItem item = new ContentItem();
         item.setAbottionItem(true);
@@ -130,6 +180,68 @@ public class AbortionContentManagerImpl implements AbortionContentManager {
         }
         item.setContentItems(childItems);
         item.setExpandableItems(getAbortionSuctionExpandableItems("dilation_evacuation_subheading_%d", item));
+
+        return item;
+    }
+
+    @Override
+    public ContentItem getAbortionSuctionVacuumNoExpandables() {
+        ContentItem item = new ContentItem();
+        item.setAbottionItem(true);
+        item.setId("suction_or_vacuum");
+
+        List<ContentItem> childItems = new ArrayList<>();
+        for (int i=1; i<=5; i++) {
+            String text = "suction_or_vacuum_text_" + (i-1);
+            String image = "icon_surgical_" + i;
+            ContentItem childItem;
+
+            if (i == 1) {
+                childItem = new ContentItem();
+            } else {
+                childItem = new ContentItem(text);
+            }
+
+            if (i < 5) {
+                childItem.setImageIcon(image);
+            }
+
+            childItem.setLinks(links);
+            childItem.setItemId(i);
+            childItems.add(childItem);
+        }
+        item.setContentItems(childItems);
+
+        return item;
+    }
+
+    @Override
+    public ContentItem getAbortionDilationEvacuationNoExpandables() {
+        ContentItem item = new ContentItem();
+        item.setAbottionItem(true);
+        item.setId("dilation_evacuation");
+
+        List<ContentItem> childItems = new ArrayList<>();
+        for (int i=1; i<=5; i++) {
+            String text = "dilation_evacuation_text_" + (i-1);
+            String image = "icon_dilation_" + i;
+            ContentItem childItem;
+
+            if (i == 1) {
+                childItem = new ContentItem();
+            } else {
+                childItem = new ContentItem(text);
+            }
+
+            if (i < 5) {
+                childItem.setImageIcon(image);
+            }
+
+            childItem.setLinks(links);
+            childItem.setItemId(i);
+            childItems.add(childItem);
+        }
+        item.setContentItems(childItems);
 
         return item;
     }

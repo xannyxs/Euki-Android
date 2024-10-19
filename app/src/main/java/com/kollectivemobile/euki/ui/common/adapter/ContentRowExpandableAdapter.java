@@ -1,7 +1,10 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +28,6 @@ import com.kollectivemobile.euki.utils.siwperview.CustomContainerView;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<ContentRowExpandableAdapter.TitleHolder, ContentRowExpandableAdapter.TextHolder> {
     private List<ContentItem> mContentItems;
@@ -118,8 +117,26 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
     public void onBindChildViewHolder(@NonNull final TextHolder holder, int groupPosition, int childPosition, int viewType) {
         final ContentItem contentItem = mContentItems.get(groupPosition);
 
-        Spannable spannable = TextUtils.getSpannable(contentItem.getLocalizedContent(), contentItem.getLinks(), mLinkListener, contentItem.getBoldStrings());
-        holder.tvTitle.setText(spannable);
+        String originalText = contentItem.getLocalizedContent();
+        Spanned spannedFormattedText = Html.fromHtml(originalText, Html.FROM_HTML_MODE_LEGACY);
+        Spannable spannableFormattedText = new SpannableString(spannedFormattedText);
+        Spannable linkSpannable = TextUtils.getSpannable(originalText, contentItem.getLinks(), mLinkListener, contentItem.getBoldStrings());
+
+        for (Object span : linkSpannable.getSpans(0, linkSpannable.length(), Object.class)) {
+            int start = linkSpannable.getSpanStart(span);
+            int end = linkSpannable.getSpanEnd(span);
+
+            String spanText = linkSpannable.subSequence(start, end).toString();
+
+            int newStart = spannedFormattedText.toString().indexOf(spanText);
+            int newEnd = newStart + spanText.length();
+
+            if (newStart >= 0 && newEnd <= spannedFormattedText.length()) {
+                spannableFormattedText.setSpan(span, newStart, newEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+
+        holder.tvTitle.setText(spannableFormattedText);
         holder.tvTitle.setMovementMethod(LinkMovementMethod.getInstance());
         holder.vSeparatorBottom.setVisibility(groupPosition == mContentItems.size() - 1 ? View.VISIBLE : View.GONE);
 
@@ -144,6 +161,7 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
         }
     }
 
+
     @Override
     public boolean onCheckCanExpandOrCollapseGroup(@NonNull TitleHolder holder, int groupPosition, int x, int y, boolean expand) {
         return true;
@@ -151,19 +169,23 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
 
     static class TitleHolder extends AbstractExpandableItemViewHolder {
         private ContentRowExpandableListener mListener;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.iv_arrow) ImageView ivArrow;
-        @BindView(R.id.v_separator_top) View vSeparatorTop;
-        @BindView(R.id.v_separator_bottom) View vSeparatorBottom;
+        private TextView tvTitle;
+        private ImageView ivArrow;
+        private View vSeparatorTop;
+        private View vSeparatorBottom;
 
         public TitleHolder(View itemView, ContentRowExpandableListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            ivArrow = itemView.findViewById(R.id.iv_arrow);
+            vSeparatorTop = itemView.findViewById(R.id.v_separator_top);
+            vSeparatorBottom = itemView.findViewById(R.id.v_separator_bottom);
             mListener = listener;
+
+            itemView.findViewById(R.id.rl_main).setOnClickListener(v -> onClick());
         }
 
-        @OnClick(R.id.rl_main)
-        void onClick() {
+        private void onClick() {
             if (mListener != null) {
                 mListener.rowExpandableSelected(getLayoutPosition() - 1);
             }
@@ -171,16 +193,17 @@ public class ContentRowExpandableAdapter extends AbstractExpandableItemAdapter<C
     }
 
     static class TextHolder extends AbstractExpandableItemViewHolder {
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.v_separator_bottom) View vSeparatorBottom;
-        @BindView(R.id.iv_bookmark) ImageView ivBookmark;
-
-        @BindView(R.id.swiper_view)
-        CustomContainerView swiperView;
+        private TextView tvTitle;
+        private View vSeparatorBottom;
+        private ImageView ivBookmark;
+        private CustomContainerView swiperView;
 
         public TextHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            vSeparatorBottom = itemView.findViewById(R.id.v_separator_bottom);
+            ivBookmark = itemView.findViewById(R.id.iv_bookmark);
+            swiperView = itemView.findViewById(R.id.swiper_view);
         }
     }
 

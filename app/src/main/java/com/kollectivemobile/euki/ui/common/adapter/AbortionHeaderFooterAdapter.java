@@ -1,11 +1,11 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.text.Spannable;
+
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,13 +21,8 @@ import com.kollectivemobile.euki.listeners.HeightListener;
 import com.kollectivemobile.euki.listeners.LinkListener;
 import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.ui.calendar.reminders.RemindersActivity;
-import com.kollectivemobile.euki.utils.TextUtils;
 import com.kollectivemobile.euki.utils.Utils;
 import com.kollectivemobile.euki.utils.advrecyclerview.headerfooter.AbstractHeaderFooterWrapperAdapter;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AbortionHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapter<AbortionHeaderFooterAdapter.HeaderViewHolder, AbortionHeaderFooterAdapter.FooterViewHolder> {
     private Context mContext;
@@ -91,10 +86,10 @@ public class AbortionHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdap
                 ivIcon.setImageResource(Utils.getImageId(contentItem.getImageIcon()));
             }
 
-            Spannable spannable = TextUtils.getSpannable(contentItem.getLocalizedTitle(), contentItem.getLinks(), mLinkListener, contentItem.getBoldStrings());
-            tvTitle.setText(spannable);
+            CharSequence formattedText = Html.fromHtml(contentItem.getLocalizedTitle(), Html.FROM_HTML_MODE_LEGACY);
+            tvTitle.setText(formattedText);
             tvTitle.setMovementMethod(LinkMovementMethod.getInstance());
-            tvTitle.setVisibility(spannable.toString().isEmpty() ? View.GONE : View.VISIBLE);
+            tvTitle.setVisibility(formattedText.toString().isEmpty() ? View.GONE : View.VISIBLE);
         }
     }
 
@@ -139,17 +134,21 @@ public class AbortionHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdap
     }
 
     class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.ll_main) LinearLayout llmain;
+        TextView tvTitle;
+        LinearLayout llmain;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
 
-        @OnClick(R.id.b_set_reminders)
-        void setReminders() {
-            mContext.startActivity(RemindersActivity.makeIntent(mContext));
+            // Replace Butter Knife binding with findViewById
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            llmain = itemView.findViewById(R.id.ll_main);
+
+            // Set up click listener manually for setReminders
+            Button setRemindersButton = itemView.findViewById(R.id.b_set_reminders);
+            setRemindersButton.setOnClickListener(v -> {
+                mContext.startActivity(RemindersActivity.makeIntent(mContext));
+            });
         }
     }
 

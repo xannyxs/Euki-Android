@@ -11,9 +11,12 @@ import android.view.View;
 
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.model.CycleDayItem;
+import com.kollectivemobile.euki.model.CyclePeriodData;
+import com.kollectivemobile.euki.model.CyclePeriodItem;
 import com.kollectivemobile.euki.ui.common.adapter.CycleSummaryDaysAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HorizontalCarouselRecyclerView extends RecyclerView {
@@ -35,6 +38,18 @@ public class HorizontalCarouselRecyclerView extends RecyclerView {
     public HorizontalCarouselRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
+    }
+
+    public void setCurrentDayCycle(Integer currentDayCycle) {
+        if (adapter != null) {
+            adapter.setCurrentDayCycle(currentDayCycle);
+        }
+    }
+
+    public void setCurrentCycleStartDate(Date cycleStartDate) {
+        if (adapter != null) {
+            adapter.setCurrentCycleStartDate(cycleStartDate);
+        }
     }
 
     private void init(Context context) {

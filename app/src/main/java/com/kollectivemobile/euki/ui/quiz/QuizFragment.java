@@ -4,7 +4,9 @@ import static com.kollectivemobile.euki.ui.quiz.QuizActivity.QUIZ_TYPE;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentQuizBinding;
 import com.kollectivemobile.euki.manager.ContraceptionContentManager;
 import com.kollectivemobile.euki.manager.MenstruationContentManager;
 import com.kollectivemobile.euki.manager.QuizManager;
@@ -31,7 +34,6 @@ import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.adapter.MethodAdapter;
 import com.kollectivemobile.euki.ui.common.adapter.QuizQuestionsFragmentAdapter;
 import com.kollectivemobile.euki.ui.home.content.ContentItemActivity;
-import com.kollectivemobile.euki.utils.KKViewPager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,8 +44,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class QuizFragment extends BaseFragment implements MethodAdapter.MethodListener {
     @Inject
     QuizManager mQuizManager;
@@ -51,11 +51,8 @@ public class QuizFragment extends BaseFragment implements MethodAdapter.MethodLi
     ContraceptionContentManager mContraceptionContentManager;
     @Inject
     MenstruationContentManager mMenstruationContentManager;
-    @BindView(R.id.kkvp_questions)
-    KKViewPager vpQuestions;
-    @BindView(R.id.rv_methods)
-    RecyclerView rvMethods;
 
+    private FragmentQuizBinding binding;
     private MethodAdapter mMethodAdapter;
     private Quiz mQuiz;
     private List<QuizMethod> mMethods;
@@ -81,6 +78,12 @@ public class QuizFragment extends BaseFragment implements MethodAdapter.MethodLi
         ((App) getActivity().getApplication()).getAppComponent().inject(this);
         requestQuiz();
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentQuizBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -113,10 +116,8 @@ public class QuizFragment extends BaseFragment implements MethodAdapter.MethodLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_done:
-                getActivity().finish();
-                break;
+        if (item.getItemId() == R.id.item_done) {
+            getActivity().finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -168,9 +169,9 @@ public class QuizFragment extends BaseFragment implements MethodAdapter.MethodLi
     }
 
     private void setUIElements() {
-        vpQuestions.setAdapter(new QuizQuestionsFragmentAdapter(getFragmentManager(), getActivity(), mQuiz, quizType));
-        vpQuestions.setAnimationEnabled(true);
-        vpQuestions.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        binding.kkvpQuestions.setAdapter(new QuizQuestionsFragmentAdapter(getFragmentManager(), getActivity(), mQuiz, quizType));
+        binding.kkvpQuestions.setAnimationEnabled(true);
+        binding.kkvpQuestions.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
             }
@@ -188,8 +189,8 @@ public class QuizFragment extends BaseFragment implements MethodAdapter.MethodLi
 
         mMethods = mQuizManager.getMethods(quizType);
         mMethodAdapter = new MethodAdapter(getActivity(), mMethods, this);
-        rvMethods.setAdapter(mMethodAdapter);
-        rvMethods.setLayoutManager(new GridLayoutManager(requireContext(), 3, RecyclerView.VERTICAL, false));
+        binding.rvMethods.setAdapter(mMethodAdapter);
+        binding.rvMethods.setLayoutManager(new GridLayoutManager(requireContext(), 3, RecyclerView.VERTICAL, false));
     }
 
     @Override

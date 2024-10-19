@@ -13,14 +13,17 @@
           "icon": "IconMedicalAbortion",
           "title": "medication_abortion_101_title",
           "content": "medication_abortion_101_content",
-          "source": "national_abortion_federation",
-          "expandable_items": [
+          "selectable_items": [
             {
-              "id": "how_medication_work",
-              "title": "medication_abortion_title",
-              "content": "medication_abortion_content",
-              "source": "national_abortion_federation"
+              "id": "mife_miso",
+              "icon": "icon_pill_mife_miso"
             },
+            {
+              "id": "miso",
+              "icon": "icon_pill_miso"
+            }
+          ],
+          "expandable_items": [
             {
               "id": "what_pills_look_like",
               "title": "what_pills_look_like_title",
@@ -43,7 +46,7 @@
               "content": "when_seek_care_content",
               "source": "women_on_web",
               "links": {
-                "The Miscarriage and Abortion hotline": "https://www.mahotline.org/",
+                "Miscarriage and Abortion hotline": "https://www.mahotline.org/",
                 "Repro Legal Hotline": "https://www.reprolegalhelpline.org/sma-contact-the-helpline/"
               }
             }
@@ -55,14 +58,21 @@
           "title": "suction_abortion_title",
           "content": "suction_abortion_content",
           "source": "national_abortion_federation",
-          "expandable_items": [
+          "selectable_items": [
             {
-              "id": "suction_abortion_subheading_1",
-              "content": "suction_abortion_content_1"
+              "id": "suction_or_vacuum_no_expandable",
+              "icon": "icon_abortion_suction_aspiration"
             },
             {
-              "id": "suction_abortion_subheading_2",
-              "content": "suction_abortion_content_2"
+              "id": "dilation_evacuation_no_expandable",
+              "icon": "icon_abortion_dilation"
+            }
+          ],
+          "expandable_items": [
+            {
+              "id": "what_to_expect_title",
+              "content": "suction_abortion_what_to_expect_content",
+              "source": "suction_abortion_what_to_expect_source"
             },
             {
               "id": "suction_abortion_subheading_3",
@@ -331,6 +341,42 @@
       "icon": "IconAbortion",
       "title": "abortion_laws_title",
       "content": "abortion_laws_content",
+      "expandable_items": [
+        {
+          "id": "counseling_requirements_dropdown",
+          "content": "counseling_requirements_copy",
+          "links": {}
+        },
+        {
+          "id": "judicial_bypass_dropdown",
+          "content": "judicial_bypass_copy",
+          "links": {
+            "Repro Legal Helpline": "https://www.reprolegalhelpline.org/contact-the-helpline/"
+          }
+        },
+        {
+          "id": "legal_risk_dropdown",
+          "content": "Legal_risk_copy",
+          "links": {}
+        },
+        {
+          "id": "Parental_involvement_laws_dropdown",
+          "content": "Parental_involvement_laws_copy",
+          "links": {
+            "parental involvement laws": "https://www.reprolegalhelpline.org/abortion-laws-by-state/"
+          }
+        },
+        {
+          "id": "waiting_periods_dropdown",
+          "content": "waiting_periods_copy",
+          "links": {}
+        },
+        {
+          "id": "shield_laws_dropdown",
+          "content": "shield_laws_copy",
+          "links": {}
+        }
+      ],
       "links": {
         "Center for Reproductive Rights": "https://reproductiverights.org/maps/abortion-laws-by-state/",
         "Repro Legal Hotline": "https://www.reprolegalhelpline.org/",

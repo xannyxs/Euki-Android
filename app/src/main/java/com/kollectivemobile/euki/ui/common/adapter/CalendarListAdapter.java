@@ -19,13 +19,8 @@ import com.kollectivemobile.euki.utils.DateUtils;
 import com.kollectivemobile.euki.utils.Utils;
 import com.kollectivemobile.euki.utils.strings.StringUtils;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class CalendarListAdapter extends RecyclerView.Adapter {
     private CalendarFilter mCalendarFilter;
@@ -223,20 +218,23 @@ public class CalendarListAdapter extends RecyclerView.Adapter {
 
     static class CalendarListHolder extends RecyclerView.ViewHolder {
         private CalendarListListener mListener;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.ll_container) LinearLayout llContainer;
+        private TextView tvTitle;
+        private LinearLayout llContainer;
 
         public CalendarListHolder(View itemView, CalendarListListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mListener = listener;
-        }
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            llContainer = itemView.findViewById(R.id.ll_container);
 
-        @OnClick(R.id.ll_main)
-        void onClick() {
-            if (mListener != null) {
-                mListener.daySelected(getLayoutPosition());
-            }
+            itemView.findViewById(R.id.ll_main).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.daySelected(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 

@@ -2,12 +2,13 @@ package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,9 +19,6 @@ import com.kollectivemobile.euki.utils.DateUtils;
 import com.kollectivemobile.euki.utils.strings.StringUtils;
 
 import java.util.Date;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CycleSummaryAdapter extends RecyclerView.Adapter {
     public static final Integer VIEW_TYPE_TODAY = 0;
@@ -74,7 +72,7 @@ public class CycleSummaryAdapter extends RecyclerView.Adapter {
         Date now = new Date();
         ItemHolder rowHolder = (ItemHolder) holder;
 
-        Integer maxWidth  = Resources.getSystem().getDisplayMetrics().widthPixels - (int)mContext.getResources().getDimension(R.dimen.dimen_x6_5);
+        Integer maxWidth = Resources.getSystem().getDisplayMetrics().widthPixels - (int) mContext.getResources().getDimension(R.dimen.dimen_x6_5);
 
         if (mCyclePeriodData.getItems().isEmpty()) {
             rowHolder.tvRange.setText(mContext.getString(R.string.date_starting_period));
@@ -116,8 +114,8 @@ public class CycleSummaryAdapter extends RecyclerView.Adapter {
 
         long cycleLength = DateUtils.daysDiff(item.getInitialDate(), item.getEndDate());
 
-        int cycleMargin = (int)(maxWidth * (1.0 - cycleLength / (double)maxCycleLength));
-        int periodMargin = (int)(maxWidth * (1.0 - item.getDuration() / (double)maxCycleLength)) - (int)mContext.getResources().getDimension(R.dimen.dimen_x5_5);
+        int cycleMargin = (int) (maxWidth * (1.0 - cycleLength / (double) maxCycleLength));
+        int periodMargin = (int) (maxWidth * (1.0 - item.getDuration() / (double) maxCycleLength)) - (int) mContext.getResources().getDimension(R.dimen.dimen_x5_5);
 
         if (isCurrentPeriod) {
             cycleMargin = 0;
@@ -135,7 +133,7 @@ public class CycleSummaryAdapter extends RecyclerView.Adapter {
 
         Integer currentDayCycle = mCyclePeriodData.getCurrentDayCycle();
         if (currentDayCycle != null && isCurrentPeriod) {
-            int dayMargin = (int)(maxWidth * currentDayCycle / maxCycleLength + mContext.getResources().getDimension(R.dimen.dimen_x2_9));
+            int dayMargin = (int) (maxWidth * currentDayCycle / maxCycleLength + mContext.getResources().getDimension(R.dimen.dimen_x2_9));
             rowHolder.vDayIndicator.setVisibility(View.VISIBLE);
 
             RelativeLayout.LayoutParams indicatorParams = (RelativeLayout.LayoutParams) rowHolder.vDayIndicator.getLayoutParams();
@@ -190,26 +188,31 @@ public class CycleSummaryAdapter extends RecyclerView.Adapter {
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_range) TextView tvRange;
-        @BindView(R.id.tv_bleeding) TextView tvBleeding;
-        @BindView(R.id.v_day_indicator) View vDayIndicator;
-        @BindView(R.id.rl_sliders) RelativeLayout rlSliders;
-        @BindView(R.id.rl_bleeding) RelativeLayout rlBleeding;
+        public TextView tvRange;
+        public TextView tvBleeding;
+        public View vDayIndicator;
+        public RelativeLayout rlSliders;
+        public RelativeLayout rlBleeding;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvRange = itemView.findViewById(R.id.tv_range);
+            tvBleeding = itemView.findViewById(R.id.tv_bleeding);
+            vDayIndicator = itemView.findViewById(R.id.v_day_indicator);
+            rlSliders = itemView.findViewById(R.id.rl_sliders);
+            rlBleeding = itemView.findViewById(R.id.rl_bleeding);
         }
     }
 
     public static class SeePastHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_see_past) TextView tvSeePast;
+        public TextView tvSeePast;
 
         public SeePastHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvSeePast = itemView.findViewById(R.id.tv_see_past);
         }
     }
+
 
     public void update(CyclePeriodData data) {
         mCyclePeriodData = data;

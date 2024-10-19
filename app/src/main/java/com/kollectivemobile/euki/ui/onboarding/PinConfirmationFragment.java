@@ -1,21 +1,22 @@
 package com.kollectivemobile.euki.ui.onboarding;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentPinConfirmationBinding;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 public class PinConfirmationFragment extends BaseFragment {
-    @BindView(R.id.tv_message) TextView tvMessage;
 
+    private FragmentPinConfirmationBinding binding;
     private Boolean mHasPin;
 
     public static PinConfirmationFragment newInstance(Boolean hasPin) {
@@ -27,23 +28,31 @@ public class PinConfirmationFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUIElements();
+
+        // Set up click listener using the binding instance
+        binding.btnGotIt.setOnClickListener(v -> gotIt());
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentPinConfirmationBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
     protected View onCreateViewCalled(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_pin_confirmation, container, false);
+        return binding.getRoot(); // Return the root view from the binding
     }
 
     private void setUIElements() {
         int textRes = mHasPin ? R.string.pin_code_message : R.string.no_pin_code_message;
-        tvMessage.setText(getString(textRes));
+        binding.tvMessage.setText(getString(textRes));
     }
 
-    @OnClick(R.id.btn_got_it)
-    void gotIt() {
+    private void gotIt() {
         mInteractionListener.replaceFragment(OnboardingFakeCodeFragment.newInstance(), true);
     }
 }

@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,6 @@ import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.utils.TextUtils;
 import com.kollectivemobile.euki.utils.Utils;
 import com.kollectivemobile.euki.utils.advrecyclerview.headerfooter.AbstractHeaderFooterWrapperAdapter;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ContentHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapter<ContentHeaderFooterAdapter.HeaderViewHolder, ContentHeaderFooterAdapter.FooterViewHolder> {
     private final ContentItem mContentItem;
@@ -82,10 +81,33 @@ public class ContentHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapt
             holder.ivIcon.setImageResource(Utils.getImageId(mContentItem.getImageIcon()));
         }
 
-        String content = mContentItem.getLocalizedContent();
-        holder.tvContent.setVisibility(!content.isEmpty() ? View.VISIBLE : View.GONE);
-        holder.tvContent.setText(TextUtils.getSpannable(content, mContentItem.getLinks(), mLinkListener, mContentItem.getBoldStrings()));
-        holder.tvContent.setMovementMethod(LinkMovementMethod.getInstance());
+        String originalContent = mContentItem.getLocalizedContent();
+        if (!originalContent.isEmpty()) {
+            holder.tvContent.setVisibility(View.VISIBLE);
+
+            CharSequence formattedContent = Html.fromHtml(originalContent, Html.FROM_HTML_MODE_LEGACY);
+            Spannable spannableFormattedContent = new SpannableString(formattedContent);
+
+            Spannable linkSpannable = TextUtils.getSpannable(originalContent, mContentItem.getLinks(), mLinkListener, mContentItem.getBoldStrings());
+
+            for (Object span : linkSpannable.getSpans(0, linkSpannable.length(), Object.class)) {
+                int start = linkSpannable.getSpanStart(span);
+                int end = linkSpannable.getSpanEnd(span);
+
+                String spanText = originalContent.substring(start, end);
+                int newStart = formattedContent.toString().indexOf(spanText);
+                int newEnd = newStart + spanText.length();
+
+                if (newStart != -1) {
+                    spannableFormattedContent.setSpan(span, newStart, newEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+
+            holder.tvContent.setText(spannableFormattedContent);
+            holder.tvContent.setMovementMethod(LinkMovementMethod.getInstance());
+        } else {
+            holder.tvContent.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -129,16 +151,15 @@ public class ContentHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapt
     }
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.iv_icon)
-        ImageView ivIcon;
-        @BindView(R.id.tv_content)
-        TextView tvContent;
+        public TextView tvTitle;
+        public ImageView ivIcon;
+        public TextView tvContent;
 
         public HeaderViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            ivIcon = itemView.findViewById(R.id.iv_icon);
+            tvContent = itemView.findViewById(R.id.tv_content);
         }
     }
 

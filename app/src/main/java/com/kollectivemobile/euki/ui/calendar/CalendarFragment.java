@@ -1,7 +1,11 @@
 package com.kollectivemobile.euki.ui.calendar;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCalendarBinding;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.manager.ReminderManager;
 import com.kollectivemobile.euki.model.CalendarFilter;
@@ -21,9 +26,6 @@ import com.kollectivemobile.euki.ui.calendar.filter.FilterActivity;
 import com.kollectivemobile.euki.ui.calendar.reminders.RemindersActivity;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.adapter.CalendarFragmentAdapter;
-import com.kollectivemobile.euki.ui.common.views.NoSwipeViewPager;
-import com.kollectivemobile.euki.ui.common.views.SegmentedButton;
-import com.kollectivemobile.euki.ui.common.views.SegmentedButtonListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,13 +35,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class CalendarFragment extends BaseFragment {
-    @BindView(R.id.vp_main) NoSwipeViewPager vpMain;
-    @BindView(R.id.sb_sections) SegmentedButton sbSections;
+
     @Inject CalendarManager mCalendarManager;
     @Inject ReminderManager mReminderManager;
+
+    private FragmentCalendarBinding binding;
 
     public static CalendarFragment newInstance() {
         Bundle args = new Bundle();
@@ -51,9 +52,13 @@ public class CalendarFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
+
         setUIElements();
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true); // Ensure this fragment participates in the options menu
         EventBus.getDefault().register(this);
     }
 
@@ -64,9 +69,17 @@ public class CalendarFragment extends BaseFragment {
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCalendarBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        getActivity().invalidateOptionsMenu();
+        if (getActivity() != null) {
+            getActivity().invalidateOptionsMenu();  // This will trigger onCreateOptionsMenu
+        }
     }
 
     @Override
@@ -79,49 +92,46 @@ public class CalendarFragment extends BaseFragment {
         inflater.inflate(R.menu.menu_calendar, menu);
 
         final com.kollectivemobile.euki.ui.common.views.MenuItem filterItem =
-                (com.kollectivemobile.euki.ui.common.views.MenuItem)menu.getItem(1).getActionView();
-        filterItem.setTitle(getString(R.string.filter));
-        filterItem.updateCount(mCalendarManager.getCalendarFilter().getFiltersCount());
-        filterItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(FilterActivity.makeIntent(getActivity(), mCalendarManager.getCalendarFilter()));
-            }
-        });
+                (com.kollectivemobile.euki.ui.common.views.MenuItem) menu.findItem(R.id.item_filter).getActionView();
+        if (filterItem != null) {
+            filterItem.setTitle(getString(R.string.filter));
+            filterItem.updateCount(mCalendarManager.getCalendarFilter().getFiltersCount());
+            filterItem.setOnClickListener(view -> startActivity(FilterActivity.makeIntent(getActivity(), mCalendarManager.getCalendarFilter())));
+        }
 
         final com.kollectivemobile.euki.ui.common.views.MenuItem reminderItem =
-                (com.kollectivemobile.euki.ui.common.views.MenuItem)menu.getItem(0).getActionView();
-        reminderItem.setTitle(getString(R.string.reminders));
-        reminderItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(RemindersActivity.makeIntent(getActivity()));
-            }
-        });
-        mReminderManager.getReminders(new EukiCallback<List<ReminderItem>>() {
-            @Override
-            public void onSuccess(List<ReminderItem> reminderItems) {
-                reminderItem.updateCount(reminderItems.size());
-            }
+                (com.kollectivemobile.euki.ui.common.views.MenuItem) menu.findItem(R.id.item_reminders).getActionView();
+        if (reminderItem != null) {
+            reminderItem.setTitle(getString(R.string.reminders));
+            reminderItem.setOnClickListener(view -> startActivity(RemindersActivity.makeIntent(getActivity())));
 
-            @Override
-            public void onError(ServerError serverError) {
-                reminderItem.updateCount(0);
-            }
-        });
+            mReminderManager.getReminders(new EukiCallback<>() {
+                @Override
+                public void onSuccess(List<ReminderItem> reminderItems) {
+                    if (reminderItem != null) {
+                        reminderItem.updateCount(reminderItems.size());
+                    }
+                }
 
-        super.onCreateOptionsMenu(menu, inflater);
+                @Override
+                public void onError(ServerError serverError) {
+                    if (reminderItem != null) {
+                        reminderItem.updateCount(0);
+                    }
+                }
+            });
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_reminders:
-                startActivity(RemindersActivity.makeIntent(getActivity()));
-                break;
-            case R.id.item_filter:
-                startActivity(FilterActivity.makeIntent(getActivity(), mCalendarManager.getCalendarFilter()));
-                break;
+        int itemId = item.getItemId();
+        if (itemId == R.id.item_reminders) {
+            startActivity(RemindersActivity.makeIntent(getActivity()));
+            return true;
+        } else if (itemId == R.id.item_filter) {
+            startActivity(FilterActivity.makeIntent(getActivity(), mCalendarManager.getCalendarFilter()));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -134,15 +144,10 @@ public class CalendarFragment extends BaseFragment {
 
     private void setUIElements() {
         CalendarFragmentAdapter adapter = new CalendarFragmentAdapter(getActivity(), getChildFragmentManager(), mCalendarManager.getCalendarFilter());
-        vpMain.setAdapter(adapter);
-        vpMain.setPagingEnabled(false);
+        binding.vpMain.setAdapter(adapter);
+        binding.vpMain.setPagingEnabled(false);
 
-        sbSections.setListener(new SegmentedButtonListener() {
-            @Override
-            public void onSegmentedChanged(Integer index) {
-                vpMain.setCurrentItem(index);
-            }
-        });
+        binding.sbSections.setListener(index -> binding.vpMain.setCurrentItem(index));
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -150,3 +155,4 @@ public class CalendarFragment extends BaseFragment {
         mCalendarManager.updateCalendarFilter(calendarFilter);
     }
 }
+

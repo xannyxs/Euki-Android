@@ -9,18 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kollectivemobile.euki.R;
-import com.kollectivemobile.euki.model.Bookmark;
 import com.kollectivemobile.euki.model.Question;
 import com.kollectivemobile.euki.model.Quiz;
 import com.kollectivemobile.euki.utils.Utils;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class QuizOptionAdapter extends RecyclerView.Adapter {
     private Quiz mQuiz;
@@ -59,20 +53,25 @@ public class QuizOptionAdapter extends RecyclerView.Adapter {
 
     static class QuizOptionHolder extends RecyclerView.ViewHolder {
         private QuizOptionListener mListener;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.iv_icon) ImageView ivIcon;
+        public TextView tvTitle;
+        public ImageView ivIcon;
 
         public QuizOptionHolder(View itemView, QuizOptionListener listener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mListener = listener;
-        }
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            ivIcon = itemView.findViewById(R.id.iv_icon);
 
-        @OnClick(R.id.ll_main)
-        void onClick() {
-            if (mListener != null) {
-                mListener.optionSelected(getLayoutPosition());
-            }
+            // Set click listener manually
+            View llMain = itemView.findViewById(R.id.ll_main);
+            llMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        mListener.optionSelected(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 

@@ -1,9 +1,12 @@
 package com.kollectivemobile.euki.ui.calendar.filter;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCalendarFilterBinding;
 import com.kollectivemobile.euki.model.CalendarFilter;
 import com.kollectivemobile.euki.model.FilterItem;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
@@ -23,11 +27,9 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-
 public class FilterFragment extends BaseFragment implements CalendarFilterAdapter.CalendarFilterListener {
-    @BindView(R.id.rv_main) RecyclerView rvMain;
 
+    private FragmentCalendarFilterBinding binding;
     private CalendarFilter mCalendarFilter;
     private CalendarFilterAdapter mAdapter;
     private List<FilterItem> mFilterItems;
@@ -50,6 +52,12 @@ public class FilterFragment extends BaseFragment implements CalendarFilterAdapte
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCalendarFilterBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     protected View onCreateViewCalled(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_calendar_filter, container, false);
     }
@@ -62,10 +70,8 @@ public class FilterFragment extends BaseFragment implements CalendarFilterAdapte
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_cancel:
-                getActivity().finish();
-                break;
+        if (item.getItemId() == R.id.item_cancel) {
+            getActivity().finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -91,8 +97,8 @@ public class FilterFragment extends BaseFragment implements CalendarFilterAdapte
 
     private void setUIElements() {
         mAdapter = new CalendarFilterAdapter(getActivity(), mFilterItems, this);
-        rvMain.setAdapter(mAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvMain.setAdapter(mAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override

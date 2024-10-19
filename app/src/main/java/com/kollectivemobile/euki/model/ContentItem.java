@@ -87,7 +87,15 @@ public class ContentItem implements Parcelable {
                 Log.d("IMAGES!!", mImageIcon);
             }
             if (json.has("content")) {
-                this.mContent = json.getString("content");
+                Object content = json.get("content");
+                if (content instanceof String) {
+                    this.mContent = (String) content;
+                } else if (content instanceof JSONArray contentArray) {
+                    for (int i = 0; i < contentArray.length(); i++) {
+                        JSONObject itemJson = contentArray.getJSONObject(i);
+                        this.mContentItems.add(new ContentItem(itemJson)); // Assuming mContentItems is initialized already
+                    }
+                }
             }
             if (json.has("source")) {
                 this.mSource = json.getString("source");

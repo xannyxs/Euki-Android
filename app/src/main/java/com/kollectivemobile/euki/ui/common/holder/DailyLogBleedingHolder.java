@@ -15,36 +15,53 @@ import com.kollectivemobile.euki.ui.common.listeners.DailyLogViewListener;
 import com.kollectivemobile.euki.ui.common.views.SelectableButton;
 import com.kollectivemobile.euki.utils.Constants;
 
+import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-
 public class DailyLogBleedingHolder extends BaseDailyLogHolder implements View.OnClickListener {
-    public @BindViews({R.id.sb_bleeding_size_1, R.id.sb_bleeding_size_2, R.id.sb_bleeding_size_3,
-            R.id.sb_bleeding_size_4}) List<SelectableButton> sbBleedingSizes;
-    public @BindViews({R.id.sb_bleeding_product_1, R.id.sb_bleeding_product_2,
-            R.id.sb_bleeding_product_3, R.id.sb_bleeding_product_4,
-            R.id.sb_bleeding_product_5, R.id.sb_bleeding_product_6, R.id.sb_bleeding_product_7}) List<SelectableButton> sbBleedingProducts;
+    public List<SelectableButton> sbBleedingSizes;
+    public List<SelectableButton> sbBleedingProducts;
+    public List<SelectableButton> sbBleedingClots;
 
-    public @BindViews({R.id.sb_clot_1, R.id.sb_clot_2}) List<SelectableButton> sbBleedingClots;
-
-    @BindView(R.id.tv_info)
-    ImageView ivInfo;
-    @BindView(R.id.ll_include_cycle)
-    LinearLayout llIncludeCycle;
-    @BindView(R.id.iv_include_cycle)
-    ImageView ivIncludeCycle;
+    public ImageView ivInfo;
+    public LinearLayout llIncludeCycle;
+    public ImageView ivIncludeCycle;
 
     private boolean mBleedingTrackingEnabled;
 
     public DailyLogBleedingHolder(@NonNull View itemView, DailyLogViewListener listener, Boolean bleedingTrackingEnabled) {
         super(itemView, listener);
-        ButterKnife.bind(this, itemView);
+
+        // Manual view binding
+        sbBleedingSizes = Arrays.asList(
+                itemView.findViewById(R.id.sb_bleeding_size_1),
+                itemView.findViewById(R.id.sb_bleeding_size_2),
+                itemView.findViewById(R.id.sb_bleeding_size_3),
+                itemView.findViewById(R.id.sb_bleeding_size_4)
+        );
+
+        sbBleedingProducts = Arrays.asList(
+                itemView.findViewById(R.id.sb_bleeding_product_1),
+                itemView.findViewById(R.id.sb_bleeding_product_2),
+                itemView.findViewById(R.id.sb_bleeding_product_3),
+                itemView.findViewById(R.id.sb_bleeding_product_4),
+                itemView.findViewById(R.id.sb_bleeding_product_5),
+                itemView.findViewById(R.id.sb_bleeding_product_6),
+                itemView.findViewById(R.id.sb_bleeding_product_7)
+        );
+
+        sbBleedingClots = Arrays.asList(
+                itemView.findViewById(R.id.sb_clot_1),
+                itemView.findViewById(R.id.sb_clot_2)
+        );
+
+        ivInfo = itemView.findViewById(R.id.tv_info);
+        llIncludeCycle = itemView.findViewById(R.id.ll_include_cycle);
+        ivIncludeCycle = itemView.findViewById(R.id.iv_include_cycle);
 
         mBleedingTrackingEnabled = bleedingTrackingEnabled;
 
+        // Set click listeners manually
         for (SelectableButton selectableButton : sbBleedingSizes) {
             selectableButton.setOnClickListener(this);
         }
@@ -54,9 +71,19 @@ public class DailyLogBleedingHolder extends BaseDailyLogHolder implements View.O
         for (SelectableButton selectableButton : sbBleedingClots) {
             selectableButton.setOnClickListener(this);
         }
+
+        ivInfo.setOnClickListener(view -> mListener.infoAction());
+        ivIncludeCycle.setOnClickListener(view -> {
+            if (mBleedingTrackingEnabled) {
+                mCalendarItem.setIncludeCycleSummary(!mCalendarItem.getIncludeCycleSummary());
+                updateIncludeCycle();
+            }
+        });
+
+        llIncludeCycle.setAlpha(mBleedingTrackingEnabled ? 1.0f : 0.5f);
     }
 
-    static public DailyLogBleedingHolder create(ViewGroup parent, DailyLogViewListener listener, Boolean bleedingTrackingEnabled) {
+    public static DailyLogBleedingHolder create(ViewGroup parent, DailyLogViewListener listener, Boolean bleedingTrackingEnabled) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_daily_log_bleeding, parent, false);
         return new DailyLogBleedingHolder(view, listener, bleedingTrackingEnabled);
@@ -76,6 +103,12 @@ public class DailyLogBleedingHolder extends BaseDailyLogHolder implements View.O
     public void bind(CalendarItem calendarItem, Boolean selected, DailyLogAdapter.ViewType selectedType) {
         super.bind(calendarItem, selected, selectedType);
 
+        // Set IncludeCycleSummary to true by default if it hasn't been initialized
+       /* if (calendarItem.getIncludeCycleSummary() != null) {
+            calendarItem.setIncludeCycleSummary(true);
+            mCalendarItem.setIncludeCycleSummary(true);
+        }*/
+
         if (calendarItem.getBleedingSize() != null) {
             sbBleedingSizes.get(calendarItem.getBleedingSize().ordinal()).changeSelected(true);
         }
@@ -89,21 +122,12 @@ public class DailyLogBleedingHolder extends BaseDailyLogHolder implements View.O
         }
 
         ivInfo.setVisibility(selected ? View.VISIBLE : View.GONE);
-        ivInfo.setOnClickListener(view -> mListener.infoAction());
-
         updateIncludeCycle();
-        ivIncludeCycle.setOnClickListener(view -> {
-            if (mBleedingTrackingEnabled) {
-                mCalendarItem.setIncludeCycleSummary(!mCalendarItem.getIncludeCycleSummary());
-                updateIncludeCycle();
-            }
-        });
-        llIncludeCycle.setAlpha(mBleedingTrackingEnabled ? 1.0f : 0.5f);
     }
 
     private void updateIncludeCycle() {
         if (!mCalendarItem.hasBleeding()) {
-            mCalendarItem.setIncludeCycleSummary(false);
+            mCalendarItem.setIncludeCycleSummary(true);
         }
 
         llIncludeCycle.setVisibility(mCalendarItem.hasBleeding() ? View.VISIBLE : View.GONE);

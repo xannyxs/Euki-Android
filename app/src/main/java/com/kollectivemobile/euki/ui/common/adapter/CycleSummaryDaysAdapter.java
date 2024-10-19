@@ -1,7 +1,7 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
-import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.model.CycleDayItem;
+import com.kollectivemobile.euki.model.CyclePeriodData;
+import com.kollectivemobile.euki.model.CyclePeriodItem;
 import com.kollectivemobile.euki.utils.DateUtils;
 import com.kollectivemobile.euki.utils.strings.StringUtils;
 
@@ -18,19 +20,32 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import java.util.concurrent.TimeUnit;
 
 public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
 
     public static final Integer VIEW_TYPE_EMPTY = 0;
     public static final Integer VIEW_TYPE_ITEM = 1;
     private List<CycleDayItem> mItems = new ArrayList<>();
+    private CyclePeriodData mCyclePeriodData;
     private WeakReference<Context> mContext;
+    private CyclePeriodItem mCurrentCyclePeriod;
+    private Date mCycleStartDate;
 
     public CycleSummaryDaysAdapter(Context context) {
         mContext = new WeakReference<>(context);
+    }
+
+    private Integer mCurrentDayCycle;
+
+    public void setCurrentDayCycle(Integer currentDayCycle) {
+        mCurrentDayCycle = currentDayCycle;
+        notifyDataSetChanged();
+    }
+
+    public void setCurrentCycleStartDate(Date cycleStartDate) {
+        mCycleStartDate = cycleStartDate;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -58,12 +73,27 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
         CycleSummaryDaysHolder rowHolder = (CycleSummaryDaysHolder) holder;
         CycleDayItem item = mItems.get(position - 1);
 
-        String dateString = StringUtils.capitalizeAll(DateUtils.toString(item.getDate(), DateUtils.eeeMMMdd));
+        // Set date string
+        String dateString = StringUtils.capitalizeAll(DateUtils.toString(
+                item.getDate(), DateUtils.eeeMMMdd));
         rowHolder.tvDate.setText(dateString);
 
-        Integer dayCycle = item.getDayCycle();
+        Integer dayCycle = null;
+
+        if (mCycleStartDate != null) {
+            Date itemDate = DateUtils.truncateTime(item.getDate());
+            Date cycleStartDate = DateUtils.truncateTime(mCycleStartDate);
+
+            long daysDifference = TimeUnit.MILLISECONDS.toDays(itemDate.getTime() - cycleStartDate.getTime());
+
+            if (daysDifference >= 0) {
+                dayCycle = (int) daysDifference + 1;
+            }
+        }
+
         if (dayCycle != null) {
-            String cycleDay = String.format(App.getContext().getString(R.string.cycle_day_format), dayCycle);
+            String cycleDay = String.format(
+                    App.getContext().getString(R.string.cycle_day_format), dayCycle);
             rowHolder.tvCycleDay.setText(cycleDay);
             rowHolder.tvCycleDay.setVisibility(View.VISIBLE);
         } else {
@@ -112,18 +142,24 @@ public class CycleSummaryDaysAdapter extends RecyclerView.Adapter {
     }
 
     public class CycleSummaryDaysHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.ll_container) View llContainer;
-        @BindView(R.id.ll_content) View llContent;
-        @BindView(R.id.tv_date) TextView tvDate;
-        @BindView(R.id.tv_cycle_day) TextView tvCycleDay;
-        @BindView(R.id.ll_next_cycle) View llNextCycle;
-        @BindView(R.id.tv_next_cycle_day) TextView tvNextCycleDay;
+        public View llContainer;
+        public View llContent;
+        public TextView tvDate;
+        public TextView tvCycleDay;
+        public View llNextCycle;
+        public TextView tvNextCycleDay;
 
         public CycleSummaryDaysHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            llContainer = itemView.findViewById(R.id.ll_container);
+            llContent = itemView.findViewById(R.id.ll_content);
+            tvDate = itemView.findViewById(R.id.tv_date);
+            tvCycleDay = itemView.findViewById(R.id.tv_cycle_day);
+            llNextCycle = itemView.findViewById(R.id.ll_next_cycle);
+            tvNextCycleDay = itemView.findViewById(R.id.tv_next_cycle_day);
         }
     }
+
 
     public void update(List<CycleDayItem> items) {
         if (items != null) {

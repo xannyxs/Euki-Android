@@ -5,10 +5,14 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +24,7 @@ import android.widget.TimePicker;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentRemindersBinding;
 import com.kollectivemobile.euki.manager.ReminderManager;
 import com.kollectivemobile.euki.model.database.entity.ReminderItem;
 import com.kollectivemobile.euki.networking.EukiCallback;
@@ -38,13 +43,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
 
 public class RemindersFragment extends BaseFragment implements ReminderAdapter.RemindersDataListener {
     @Inject ReminderManager mReminderManager;
 
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-
+    private FragmentRemindersBinding binding;
     private List<ReminderItem> mReminderItems;
     private ReminderAdapter mAdapter;
     private SwipeController swipeController = null;
@@ -66,6 +69,12 @@ public class RemindersFragment extends BaseFragment implements ReminderAdapter.R
     }
 
     @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentRemindersBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
+    @Override
     protected View onCreateViewCalled(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reminders, container, false);
     }
@@ -78,10 +87,8 @@ public class RemindersFragment extends BaseFragment implements ReminderAdapter.R
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_done:
-                getActivity().finish();
-                break;
+        if (item.getItemId() == R.id.item_done) {
+            getActivity().finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -90,9 +97,9 @@ public class RemindersFragment extends BaseFragment implements ReminderAdapter.R
     private void setUIElements() {
         mReminderItems = new ArrayList<>();
         mAdapter = new ReminderAdapter(getContext(), this);
-        rvMain.setAdapter(mAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
+        binding.rvMain.setAdapter(mAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
 
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
@@ -109,9 +116,9 @@ public class RemindersFragment extends BaseFragment implements ReminderAdapter.R
         });
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(rvMain);
+        itemTouchhelper.attachToRecyclerView(binding.rvMain);
 
-        rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
+        binding.rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
                 swipeController.onDraw(c);

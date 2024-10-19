@@ -15,58 +15,84 @@ import com.kollectivemobile.euki.ui.common.views.SelectableButton;
 import com.kollectivemobile.euki.utils.Constants;
 import com.kollectivemobile.euki.utils.Utils;
 
+import java.util.Arrays;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class DailyLogContraceptionHolder extends BaseDailyLogHolder implements View.OnClickListener {
-    public @BindView(R.id.ll_daily_container) LinearLayout llDailyContainer;
-    public @BindView(R.id.ll_longer_term_methods_container) LinearLayout llLongTermContainer;
+    public LinearLayout llDailyContainer;
+    public LinearLayout llLongTermContainer;
 
-    public @BindViews({R.id.sb_contraception_pill_1, R.id.sb_contraception_pill_2,
-            R.id.sb_contraception_pill_3}) List<SelectableButton> sbPills;
-    public @BindViews({R.id.sb_contraception_other_1, R.id.sb_contraception_other_2,
-            R.id.sb_contraception_other_3, R.id.sb_contraception_other_4,
-            R.id.sb_contraception_other_5, R.id.sb_contraception_other_6,
-            R.id.sb_contraception_other_7}) List<SelectableButton> sbOther;
-    public @BindViews({R.id.sb_uid_1, R.id.sb_uid_2, R.id.sb_uid_3}) List<SelectableButton> sbIUD;
-    public @BindViews({R.id.sb_implant_1, R.id.sb_implant_2}) List<SelectableButton> sbImplant;
-    public @BindViews({R.id.sb_patch_1, R.id.sb_patch_2}) List<SelectableButton> sbPatch;
-    public @BindViews({R.id.sb_ring_1, R.id.sb_ring_2}) List<SelectableButton> sbRing;
-    public @BindViews({R.id.sb_shot_1}) List<SelectableButton> sbShot;
+    public List<SelectableButton> sbPills;
+    public List<SelectableButton> sbOther;
+    public List<SelectableButton> sbIUD;
+    public List<SelectableButton> sbImplant;
+    public List<SelectableButton> sbPatch;
+    public List<SelectableButton> sbRing;
+    public List<SelectableButton> sbShot;
 
     public DailyLogContraceptionHolder(@NonNull View itemView, DailyLogViewListener listener) {
         super(itemView, listener);
-        ButterKnife.bind(this, itemView);
 
-        for (SelectableButton selectableButton : sbPills) {
-            selectableButton.setOnClickListener(this);
-        }
-        for (SelectableButton selectableButton : sbOther) {
-            selectableButton.setOnClickListener(this);
-        }
-        for (SelectableButton selectableButton : sbIUD) {
-            selectableButton.setOnClickListener(this);
-        }
-        for (SelectableButton selectableButton : sbImplant) {
-            selectableButton.setOnClickListener(this);
-        }
-        for (SelectableButton selectableButton : sbPatch) {
-            selectableButton.setOnClickListener(this);
-        }
-        for (SelectableButton selectableButton : sbRing) {
-            selectableButton.setOnClickListener(this);
-        }
+        // Manual view binding
+        llDailyContainer = itemView.findViewById(R.id.ll_daily_container);
+        llLongTermContainer = itemView.findViewById(R.id.ll_longer_term_methods_container);
 
-        for (SelectableButton selectableButton : sbShot) {
-            selectableButton.setOnClickListener(this);
+        sbPills = Arrays.asList(
+                itemView.findViewById(R.id.sb_contraception_pill_1),
+                itemView.findViewById(R.id.sb_contraception_pill_2),
+                itemView.findViewById(R.id.sb_contraception_pill_3)
+        );
+        sbOther = Arrays.asList(
+                itemView.findViewById(R.id.sb_contraception_other_1),
+                itemView.findViewById(R.id.sb_contraception_other_2),
+                itemView.findViewById(R.id.sb_contraception_other_3),
+                itemView.findViewById(R.id.sb_contraception_other_4),
+                itemView.findViewById(R.id.sb_contraception_other_5),
+                itemView.findViewById(R.id.sb_contraception_other_6),
+                itemView.findViewById(R.id.sb_contraception_other_7)
+        );
+        sbIUD = Arrays.asList(
+                itemView.findViewById(R.id.sb_uid_1),
+                itemView.findViewById(R.id.sb_uid_2),
+                itemView.findViewById(R.id.sb_uid_3)
+        );
+        sbImplant = Arrays.asList(
+                itemView.findViewById(R.id.sb_implant_1),
+                itemView.findViewById(R.id.sb_implant_2)
+        );
+        sbPatch = Arrays.asList(
+                itemView.findViewById(R.id.sb_patch_1),
+                itemView.findViewById(R.id.sb_patch_2)
+        );
+        sbRing = Arrays.asList(
+                itemView.findViewById(R.id.sb_ring_1),
+                itemView.findViewById(R.id.sb_ring_2)
+        );
+        sbShot = Arrays.asList(
+                itemView.findViewById(R.id.sb_shot_1)
+        );
+
+        // Set click listeners manually
+        setOnClickListeners(sbPills);
+        setOnClickListeners(sbOther);
+        setOnClickListeners(sbIUD);
+        setOnClickListeners(sbImplant);
+        setOnClickListeners(sbPatch);
+        setOnClickListeners(sbRing);
+        setOnClickListeners(sbShot);
+
+        // Set click listeners for section titles
+        itemView.findViewById(R.id.ll_daily_title).setOnClickListener(this);
+        itemView.findViewById(R.id.ll_longer_term_methods_title).setOnClickListener(this);
+    }
+
+    private void setOnClickListeners(List<SelectableButton> buttons) {
+        for (SelectableButton button : buttons) {
+            button.setOnClickListener(this);
         }
     }
 
-    static public DailyLogContraceptionHolder create(ViewGroup parent, DailyLogViewListener listener) {
+    public static DailyLogContraceptionHolder create(ViewGroup parent, DailyLogViewListener listener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_daily_log_contraception, parent, false);
         return new DailyLogContraceptionHolder(view, listener);
@@ -141,11 +167,14 @@ public class DailyLogContraceptionHolder extends BaseDailyLogHolder implements V
 
             updateTitle();
             mListener.dataChanged();
+        } else if (view.getId() == R.id.ll_daily_title) {
+            onClickDailyTitle();
+        } else if (view.getId() == R.id.ll_longer_term_methods_title) {
+            onClickLongerTermsTitle();
         }
     }
 
-    @OnClick(R.id.ll_daily_title)
-    void onClickDailyTitle() {
+    private void onClickDailyTitle() {
         if (llDailyContainer.getVisibility() == View.VISIBLE) {
             llDailyContainer.setVisibility(View.GONE);
         } else {
@@ -155,8 +184,7 @@ public class DailyLogContraceptionHolder extends BaseDailyLogHolder implements V
         mListener.categorySelected(getLayoutPosition(), Utils.dpFromInt(85));
     }
 
-    @OnClick(R.id.ll_longer_term_methods_title)
-    void onClickLongerTermsTitle() {
+    private void onClickLongerTermsTitle() {
         if (llLongTermContainer.getVisibility() == View.VISIBLE) {
             llLongTermContainer.setVisibility(View.GONE);
         } else {

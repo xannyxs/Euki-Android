@@ -4,19 +4,19 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentFutureAppointmentBinding;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.model.Appointment;
 import com.kollectivemobile.euki.networking.EukiCallback;
@@ -33,18 +33,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 public class FutureAppointmentFragment extends BaseFragment {
-    @Inject CalendarManager mCalendarManager;
+    @Inject
+    CalendarManager mCalendarManager;
 
-    public @BindView(R.id.et_title) EditText etTitle;
-    public @BindView(R.id.et_location) EditText etLocation;
-    public @BindView(R.id.tv_day_time) TextView tvDayTime;
-    public @BindView(R.id.tv_alert) TextView tvAlert;
-    public @BindView(R.id.btn_add) Button btnAdd;
-
+    private FragmentFutureAppointmentBinding binding;
     private Date mSelectedDate;
     private Integer mSelectedAlertOption;
 
@@ -59,8 +52,17 @@ public class FutureAppointmentFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App)getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
+        setupClickListeners();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentFutureAppointmentBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -74,19 +76,19 @@ public class FutureAppointmentFragment extends BaseFragment {
 
     private void updateUIElements() {
         if (mSelectedDate == null) {
-            tvDayTime.setText(getString(R.string.day_time));
+            binding.llAf.tvDayTime.setText(getString(R.string.day_time));
         } else {
-            tvDayTime.setText(DateUtils.toString(mSelectedDate, DateUtils.eeeMMMdyyyyhmma));
+            binding.llAf.tvDayTime.setText(DateUtils.toString(mSelectedDate, DateUtils.eeeMMMdyyyyhmma));
         }
         if (mSelectedAlertOption == null) {
-            tvAlert.setTextColor(ContextCompat.getColor(getContext(), R.color.light_gray));
-            tvAlert.setText(getString(R.string.alert));
+            binding.llAf.tvAlert.setTextColor(ContextCompat.getColor(getContext(), R.color.light_gray));
+            binding.llAf.tvAlert.setText(getString(R.string.alert));
         } else {
-            tvAlert.setTextColor(ContextCompat.getColor(getContext(), R.color.euki_main));
+            binding.llAf.tvAlert.setTextColor(ContextCompat.getColor(getContext(), R.color.euki_main));
             if (mSelectedAlertOption == 0) {
-                tvAlert.setText(getString(R.string.none));
+                binding.llAf.tvAlert.setText(getString(R.string.none));
             } else {
-                tvAlert.setText(App.getContext().getString(Constants.sAlertOptions.get(mSelectedAlertOption)));
+                binding.llAf.tvAlert.setText(App.getContext().getString(Constants.sAlertOptions.get(mSelectedAlertOption)));
             }
         }
     }
@@ -98,14 +100,11 @@ public class FutureAppointmentFragment extends BaseFragment {
         }
 
         DatePickerDialog dpd = new DatePickerDialog(getContext(),
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        cal.set(Calendar.MONTH, monthOfYear);
-                        cal.set(Calendar.YEAR, year);
-                        showTimePicker(cal.getTime());
-                    }
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    cal.set(Calendar.MONTH, monthOfYear);
+                    cal.set(Calendar.YEAR, year);
+                    showTimePicker(cal.getTime());
                 }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
         dpd.getDatePicker().setMinDate(new Date().getTime());
         dpd.show();
@@ -116,23 +115,20 @@ public class FutureAppointmentFragment extends BaseFragment {
         cal.setTime(date);
 
         TimePickerDialog dpd = new TimePickerDialog(getContext(),
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hours, int mins) {
-                        cal.set(Calendar.HOUR_OF_DAY, hours);
-                        cal.set(Calendar.MINUTE, mins);
-                        cal.set(Calendar.SECOND, 0);
-                        mSelectedDate = cal.getTime();
-                        updateUIElements();
-                    }
+                (timePicker, hours, mins) -> {
+                    cal.set(Calendar.HOUR_OF_DAY, hours);
+                    cal.set(Calendar.MINUTE, mins);
+                    cal.set(Calendar.SECOND, 0);
+                    mSelectedDate = cal.getTime();
+                    updateUIElements();
                 }, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), false);
         dpd.show();
     }
 
     private void saveAppointment() {
         Appointment appointment = new Appointment();
-        appointment.setTitle(etTitle.getText().toString());
-        appointment.setLocation(etLocation.getText().toString());
+        appointment.setTitle(binding.llAf.etTitle.getText().toString());
+        appointment.setLocation(binding.llAf.etLocation.getText().toString());
         appointment.setDate(mSelectedDate);
         appointment.setAlertOption(mSelectedAlertOption == null ? 0 : mSelectedAlertOption);
 
@@ -163,13 +159,14 @@ public class FutureAppointmentFragment extends BaseFragment {
         });
     }
 
-    @OnClick(R.id.tv_day_time)
-    void dayTimePressed() {
-        dayTimeSelected();
+    private void setupClickListeners() {
+        binding.llAf.tvDayTime.setOnClickListener(v -> dayTimeSelected());
+        binding.llAf.tvAlert.setOnClickListener(v -> alertPressed());
+        binding.llAf.btnCancel.setOnClickListener(v -> cancelPressed());
+        binding.llAf.btnAdd.setOnClickListener(v -> addPressed());
     }
 
-    @OnClick(R.id.tv_alert)
-    void alertPressed() {
+    private void alertPressed() {
         List<Object> objects = new ArrayList<>();
         for (Integer alertRes : Constants.sAlertOptions) {
             objects.add(App.getContext().getString(alertRes));
@@ -184,13 +181,11 @@ public class FutureAppointmentFragment extends BaseFragment {
         }).show();
     }
 
-    @OnClick(R.id.btn_cancel)
-    void cancelPressed() {
+    private void cancelPressed() {
         getActivity().finish();
     }
 
-    @OnClick(R.id.btn_add)
-    void addPressed() {
+    private void addPressed() {
         saveAppointment();
     }
 }

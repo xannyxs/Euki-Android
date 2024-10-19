@@ -2,15 +2,17 @@ package com.kollectivemobile.euki.ui.quiz;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentQuizResultBinding;
 import com.kollectivemobile.euki.manager.QuizManager;
 import com.kollectivemobile.euki.model.Quiz;
 import com.kollectivemobile.euki.model.QuizType;
@@ -23,14 +25,11 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class ResultFragment extends BaseFragment {
     @Inject
     QuizManager mQuizManager;
 
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
+    private FragmentQuizResultBinding binding;
 
     private Quiz mQuiz;
 
@@ -48,7 +47,9 @@ public class ResultFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
         EventBus.getDefault().register(this);
     }
@@ -64,13 +65,19 @@ public class ResultFragment extends BaseFragment {
         EventBus.getDefault().unregister(this);
     }
 
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentQuizResultBinding.inflate(inflater, container, false);
+        return binding;
+    }
+
     private void setUIElements() {
         switch (mQuizType) {
             case CONTRACEPTION:
-                tvTitle.setText(Utils.getLocalized(mQuizManager.getresultContraception(mQuiz).first));
+                binding.tvTitle.setText(Utils.getLocalized(mQuizManager.getresultContraception(mQuiz).first));
                 break;
             case MENSTRUATION:
-                tvTitle.setText(Utils.getLocalized(mQuizManager.getResultMenstruation(mQuiz).first));
+                binding.tvTitle.setText(Utils.getLocalized(mQuizManager.getResultMenstruation(mQuiz).first));
                 break;
         }
     }

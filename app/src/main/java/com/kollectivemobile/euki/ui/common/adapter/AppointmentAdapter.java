@@ -1,8 +1,10 @@
 package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -24,10 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class AppointmentAdapter extends RecyclerView.Adapter implements AppointmentsListener {
     public static final Integer VIEW_TYPE_HEADER = 0;
@@ -86,11 +84,11 @@ public class AppointmentAdapter extends RecyclerView.Adapter implements Appointm
         }
 
         if (holder instanceof FieldHolder) {
-            FieldHolder fieldHolder = (FieldHolder)holder;
+            FieldHolder fieldHolder = (FieldHolder) holder;
             fieldHolder.llFields.setVisibility(View.GONE);
         }
         if (holder instanceof ExistentHolder) {
-            ExistentHolder existentHolder = (ExistentHolder)holder;
+            ExistentHolder existentHolder = (ExistentHolder) holder;
             existentHolder.tvTitle.setText(mItems.get(position - 1).getTitle());
         }
 
@@ -113,7 +111,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter implements Appointm
         }
 
         if (holder instanceof FieldHolder) {
-            FieldHolder fieldHolder = (FieldHolder)holder;
+            FieldHolder fieldHolder = (FieldHolder) holder;
             fieldHolder.llFields.setVisibility(View.VISIBLE);
             fieldHolder.etTitle.setText(item.getTitle());
             fieldHolder.etLocation.setText(item.getLocation());
@@ -173,7 +171,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter implements Appointm
         }
 
         if (holder instanceof ExistentHolder) {
-            ExistentHolder existentHolder = (ExistentHolder)holder;
+            ExistentHolder existentHolder = (ExistentHolder) holder;
             existentHolder.tvTitle.setText(item.getTitle());
         }
     }
@@ -251,77 +249,84 @@ public class AppointmentAdapter extends RecyclerView.Adapter implements Appointm
         }
     }
 
+    public class FieldHolder extends RecyclerView.ViewHolder {
+        EditText etTitle;
+        EditText etLocation;
+        TextView tvDayTime;
+        TextView tvAlert;
+        Button btnAdd;
+        LinearLayout llFields;
+        protected AppointmentsListener mListener;
+
+        public FieldHolder(@NonNull View itemView, AppointmentsListener listener) {
+            super(itemView);
+            mListener = listener;
+
+            // Replace Butter Knife binding with findViewById
+            etTitle = itemView.findViewById(R.id.et_title);
+            etLocation = itemView.findViewById(R.id.et_location);
+            tvDayTime = itemView.findViewById(R.id.tv_day_time);
+            tvAlert = itemView.findViewById(R.id.tv_alert);
+            btnAdd = itemView.findViewById(R.id.btn_add);
+            llFields = itemView.findViewById(R.id.ll_fields);
+
+            // Set up click listeners manually
+            tvDayTime.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.dayTimeSelected();
+                }
+            });
+
+            tvAlert.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.alertSelected();
+                }
+            });
+
+            btnAdd.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.saveSelected();
+                }
+            });
+
+            Button btnCancel = itemView.findViewById(R.id.btn_cancel);
+            btnCancel.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.cancelSelected();
+                }
+            });
+        }
+    }
+
     public class ExistentHolder extends FieldHolder {
-        public @BindView(R.id.tv_title) TextView tvTitle;
+        TextView tvTitle;
 
         public ExistentHolder(@NonNull View itemView, AppointmentsListener listener) {
             super(itemView, listener);
-            ButterKnife.bind(this, itemView);
-        }
 
-        @OnClick(R.id.tv_title)
-        void onClick() {
-            if (mListener != null) {
-                mListener.appointmentSelected(getLayoutPosition() - 1);
-            }
+            // Replace Butter Knife binding with findViewById
+            tvTitle = itemView.findViewById(R.id.tv_title);
+
+            // Set up click listener manually
+            tvTitle.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.appointmentSelected(getLayoutPosition() - 1);
+                }
+            });
         }
     }
 
     public class NewHolder extends FieldHolder {
         public NewHolder(@NonNull View itemView, AppointmentsListener listener) {
             super(itemView, listener);
-            ButterKnife.bind(this, itemView);
-        }
 
-        @OnClick(R.id.ll_new)
-        void onClick() {
-            if (mListener != null) {
-                mListener.newSelected();
-            }
-        }
-    }
-
-    public class FieldHolder extends RecyclerView.ViewHolder {
-        public @BindView(R.id.et_title) EditText etTitle;
-        public @BindView(R.id.et_location) EditText etLocation;
-        public @BindView(R.id.tv_day_time) TextView tvDayTime;
-        public @BindView(R.id.tv_alert) TextView tvAlert;
-        public @BindView(R.id.btn_add) Button btnAdd;
-        public @BindView(R.id.ll_fields) LinearLayout llFields;
-        protected AppointmentsListener mListener;
-
-        public FieldHolder(@NonNull View itemView, AppointmentsListener listener) {
-            super(itemView);
-            mListener = listener;
-            ButterKnife.bind(this, itemView);
-        }
-
-        @OnClick(R.id.tv_day_time)
-        void dayTimePressed() {
-            if (mListener != null) {
-                mListener.dayTimeSelected();
-            }
-        }
-
-        @OnClick(R.id.tv_alert)
-        void alertPressed() {
-            if (mListener != null) {
-                mListener.alertSelected();
-            }
-        }
-
-        @OnClick(R.id.btn_cancel)
-        void cancelPressed() {
-            if (mListener != null) {
-                mListener.cancelSelected();
-            }
-        }
-
-        @OnClick(R.id.btn_add)
-        void addPressed() {
-            if (mListener != null) {
-                mListener.saveSelected();
-            }
+            // Set up click listener manually
+            LinearLayout llNew = itemView.findViewById(R.id.ll_new);
+            llNew.setOnClickListener(v -> {
+                if (mListener != null) {
+                    mListener.newSelected();
+                }
+            });
         }
     }
 
@@ -362,7 +367,9 @@ public class AppointmentAdapter extends RecyclerView.Adapter implements Appointm
 
     public interface AppointmentsDataListener {
         void saveAppointment(Appointment appointment);
+
         void dayTimeSelected(Date date);
+
         void alertSelected();
     }
 }

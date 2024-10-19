@@ -280,6 +280,36 @@
                 android:src="@drawable/ic_arrow_right"/>
 
             <Button
+                android:id="@+id/b_privacy_best_practices"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/dimen_x3_5"
+                android:gravity="left|center_vertical"
+                android:text="@string/Privacy_best_practices_header"
+                android:background="@null"
+                android:textAllCaps="false"
+                style="@style/LinkExpandableOnTap"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/euki_main" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_x8_10"
+            android:background="@color/white">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimen_x3_5"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_arrow_right"/>
+
+            <Button
                 android:id="@+id/b_privacy_statement"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

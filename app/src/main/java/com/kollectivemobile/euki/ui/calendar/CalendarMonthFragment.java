@@ -1,19 +1,24 @@
 package com.kollectivemobile.euki.ui.calendar;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.SavedStateViewModelFactory;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCalendarMonthBinding;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.model.CalendarFilter;
 import com.kollectivemobile.euki.model.MonthItem;
@@ -40,15 +45,11 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 public class CalendarMonthFragment extends BaseFragment implements CalendarDayListener {
-    @Inject CalendarManager mCalendarManager;
+    @Inject
+    CalendarManager mCalendarManager;
 
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-    @BindView(R.id.tv_current_month) TextView tvCurrentMonth;
-
+    private FragmentCalendarMonthBinding binding;
     private Map<String, CalendarItem> mCalendarItems;
     private List<MonthItem> mMonthItems;
     private MonthItem mTodayItem;
@@ -57,6 +58,7 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
     private List<Range<Date>> predictionRange = new ArrayList<>();
 
     private CalendarMonthAdapter mAdapter;
+    private CalendarMonthViewModel viewModel;
 
     public static CalendarMonthFragment newInstance(CalendarFilter calendarFilter) {
         Bundle args = new Bundle();
@@ -68,7 +70,13 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App)getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
+
+        viewModel = new ViewModelProvider(this, new SavedStateViewModelFactory(requireActivity().getApplication(), this))
+                .get(CalendarMonthViewModel.class);
+
         setUIElements();
         EventBus.getDefault().register(this);
     }
@@ -77,6 +85,12 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCalendarMonthBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -103,11 +117,11 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
         mCurrentItem = pair.second;
 
         mAdapter = new CalendarMonthAdapter(getActivity(), this);
-        rvMain.setAdapter(mAdapter);
+        binding.rvMain.setAdapter(mAdapter);
         final GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 7, RecyclerView.VERTICAL, false);
-        rvMain.setLayoutManager(layoutManager);
+        binding.rvMain.setLayoutManager(layoutManager);
 
-        rvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        binding.rvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -137,7 +151,7 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
             public int getSpanSize(int i) {
                 Object object = mAdapter.getObjects().get(i);
                 if (object instanceof String) {
-                    String value = (String)object;
+                    String value = (String) object;
                     if (!value.isEmpty()) {
                         return 7;
                     }
@@ -145,10 +159,14 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
                 return 1;
             }
         });
+
+        binding.tvToday.setOnClickListener(v -> todayAction());
+        binding.ivMonthPrevious.setOnClickListener(v -> showPreviousMonth());
+        binding.ivMonthNext.setOnClickListener(v -> showNextMonth());
     }
 
     private void requestCalendarItems() {
-        mCalendarManager.getCalendarItems(new EukiCallback<Map<String, CalendarItem>>() {
+        mCalendarManager.getCalendarItems(new EukiCallback<>() {
             @Override
             public void onSuccess(final Map<String, CalendarItem> stringCalendarItemMap) {
                 mCalendarManager.getPredictionRange(new EukiCallback<List<Range<Date>>>() {
@@ -174,16 +192,21 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
 
     private void updateCalendar() {
         mAdapter.updateObjects(mMonthItems, mCalendarItems, mCalendarManager.getCalendarFilter(), predictionRange);
-        calculateTodayPosition();
-        showToday();
+        Date selectedDay = viewModel.getSelectedDay();
+        if (selectedDay != null) {
+            showSelectedDay(selectedDay);
+        } else {
+            calculateTodayPosition();
+            showToday();
+        }
     }
 
     private void calculateTodayPosition() {
         Date today = new Date();
-        for (int i=0; i<mAdapter.getObjects().size(); i++) {
+        for (int i = 0; i < mAdapter.getObjects().size(); i++) {
             Object object = mAdapter.getObjects().get(i);
             if (object instanceof Date) {
-                Date date = (Date)object;
+                Date date = (Date) object;
                 if (DateUtils.isSameDate(today, date)) {
                     mTodayPosition = i - 14;
                     return;
@@ -196,16 +219,65 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
         if (mTodayPosition == null) {
             return;
         }
-        ((GridLayoutManager)rvMain.getLayoutManager()).scrollToPositionWithOffset(mTodayPosition, 0);
+        ((GridLayoutManager) binding.rvMain.getLayoutManager()).scrollToPositionWithOffset(mTodayPosition, 0);
         showMonth(mTodayItem);
     }
+
+
+    private void showSelectedDay(Date date) {
+        MonthItem monthItem = getMonthItemForDate(date);
+        if (monthItem != null) {
+            int minIndex = monthItem.getMinIndex();
+            int maxIndex = minIndex + monthItem.getNumDays() + monthItem.getFirstDayWeek() - 2;
+
+            GridLayoutManager layoutManager = (GridLayoutManager) binding.rvMain.getLayoutManager();
+            int firstVisiblePosition = layoutManager.findFirstVisibleItemPosition();
+            int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
+
+            if (minIndex >= firstVisiblePosition && maxIndex <= lastVisiblePosition) {
+                return;
+            }
+
+            layoutManager.scrollToPositionWithOffset(minIndex, 0);
+            showMonth(monthItem);
+        }
+    }
+
+
+
+    private int getPositionForDate(Date date) {
+        for (int i = 0; i < mAdapter.getObjects().size(); i++) {
+            Object object = mAdapter.getObjects().get(i);
+            if (object instanceof Date) {
+                Date itemDate = (Date) object;
+                if (DateUtils.isSameDate(itemDate, date)) {
+                    return i;
+                }
+            }
+        }
+        return -1; // Return -1 if the date is not found
+    }
+
+    private MonthItem getMonthItemForDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        for (MonthItem monthItem : mMonthItems) {
+            if (monthItem.getYear() == calendar.get(Calendar.YEAR) &&
+                    monthItem.getMonth() == calendar.get(Calendar.MONTH)) {
+                return monthItem;
+            }
+        }
+        return null; // Return null if no matching MonthItem is found
+    }
+
 
     private void changeCurrentMonth(Boolean isNext) {
         Integer currentIndex = mMonthItems.indexOf(mCurrentItem);
         Integer searchedIndex = currentIndex + (isNext ? 1 : -1);
         MonthItem item = mMonthItems.get(searchedIndex);
         showMonth(item);
-        ((GridLayoutManager)rvMain.getLayoutManager()).scrollToPositionWithOffset(item.getMinIndex(), 0);
+        ((GridLayoutManager) binding.rvMain.getLayoutManager()).scrollToPositionWithOffset(item.getMinIndex(), 0);
     }
 
     private void showMonth(MonthItem item) {
@@ -215,12 +287,13 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
         calendar.set(Calendar.MONTH, item.getMonth());
         String dateString = DateUtils.toString(calendar.getTime(), DateUtils.CalendarFormat);
         dateString = StringUtils.capitalize(dateString);
-        tvCurrentMonth.setText(dateString);
+        binding.tvCurrentMonth.setText(dateString);
     }
 
     @Override
     public void daySelected(Date date) {
-        mCalendarManager.getCalendarItem(date, new EukiCallback<CalendarItem>() {
+        viewModel.saveSelectedDay(date);
+        mCalendarManager.getCalendarItem(date, new EukiCallback<>() {
             @Override
             public void onSuccess(CalendarItem calendarItem) {
                 mInteractionListener.replaceFragment(CalendarDayFragment.newInstance(calendarItem), true);
@@ -237,18 +310,15 @@ public class CalendarMonthFragment extends BaseFragment implements CalendarDayLi
         updateCalendar();
     }
 
-    @OnClick(R.id.tv_today)
-    void todayAction() {
+    private void todayAction() {
         showToday();
     }
 
-    @OnClick(R.id.iv_month_previous)
-    void showPreviousMonth() {
+    private void showPreviousMonth() {
         changeCurrentMonth(false);
     }
 
-    @OnClick(R.id.iv_month_next)
-    void showNextMonth() {
+    private void showNextMonth() {
         changeCurrentMonth(true);
     }
 }

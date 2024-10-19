@@ -10,14 +10,10 @@ import com.kollectivemobile.euki.model.database.entity.CalendarItem;
 import com.kollectivemobile.euki.ui.common.adapter.DailyLogAdapter;
 import com.kollectivemobile.euki.ui.common.listeners.DailyLogViewListener;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public abstract class BaseDailyLogHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.ll_title) LinearLayout llTitle;
-    @BindView(R.id.v_circle) View vCircle;
-    @BindView(R.id.ll_content) LinearLayout llContent;
+    protected LinearLayout llTitle;
+    protected View vCircle;
+    protected LinearLayout llContent;
 
     protected CalendarItem mCalendarItem;
     protected DailyLogViewListener mListener;
@@ -25,8 +21,17 @@ public abstract class BaseDailyLogHolder extends RecyclerView.ViewHolder {
 
     public BaseDailyLogHolder(@NonNull View itemView, DailyLogViewListener listener) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
         mListener = listener;
+
+        llTitle = itemView.findViewById(R.id.ll_title);
+        vCircle = itemView.findViewById(R.id.v_circle);
+        llContent = itemView.findViewById(R.id.ll_content);
+
+        llTitle.setOnClickListener(v -> {
+            if (mListener != null) {
+                mListener.selectedViewType(getViewType(), getLayoutPosition());
+            }
+        });
     }
 
     public void bind(CalendarItem calendarItem, Boolean selected, DailyLogAdapter.ViewType selectedType) {
@@ -41,14 +46,7 @@ public abstract class BaseDailyLogHolder extends RecyclerView.ViewHolder {
         vCircle.setBackgroundResource(hasData() ? R.drawable.bkg_circular_daily_log_on : R.drawable.bkg_circular_daily_log_off);
     }
 
-    abstract public DailyLogAdapter.ViewType getViewType();
+    public abstract DailyLogAdapter.ViewType getViewType();
 
-    abstract public Boolean hasData();
-
-    @OnClick(R.id.ll_title)
-    void titleClicked() {
-        if (mListener != null) {
-            mListener.selectedViewType(getViewType(), getLayoutPosition());
-        }
-    }
+    public abstract Boolean hasData();
 }

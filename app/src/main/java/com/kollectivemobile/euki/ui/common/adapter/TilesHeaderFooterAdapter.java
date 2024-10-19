@@ -16,9 +16,6 @@ import com.kollectivemobile.euki.model.Appointment;
 import com.kollectivemobile.euki.model.database.entity.ReminderItem;
 import com.kollectivemobile.euki.utils.advrecyclerview.headerfooter.AbstractHeaderFooterWrapperAdapter;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TilesHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapter<TilesHeaderFooterAdapter.HeaderViewHolder, TilesHeaderFooterAdapter.FooterViewHolder> {
     private HeaderListener mHeaderListener;
@@ -112,58 +109,60 @@ public class TilesHeaderFooterAdapter extends AbstractHeaderFooterWrapperAdapter
     }
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.rl_main) RelativeLayout rlMain;
-        @BindView(R.id.tv_title) TextView tvTitle;
-        @BindView(R.id.tv_text) TextView tvText;
-        @BindView(R.id.btn_go_to_daily_log) Button btnDailyLog;
+        RelativeLayout rlMain;
+        TextView tvTitle;
+        TextView tvText;
+        Button btnDailyLog;
 
         private HeaderListener mHeaderListener;
 
         public HeaderViewHolder(View itemView, HeaderListener headerListener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mHeaderListener = headerListener;
-        }
 
-        @OnClick(R.id.btn_dismiss)
-        void dismiss() {
-            if (mHeaderListener != null) {
-                mHeaderListener.dismissPressed();
-            }
-        }
+            rlMain = itemView.findViewById(R.id.rl_main);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvText = itemView.findViewById(R.id.tv_text);
+            btnDailyLog = itemView.findViewById(R.id.btn_go_to_daily_log);
 
-        @OnClick(R.id.btn_go_to_daily_log)
-        void goToDailyLog() {
-            if (mHeaderListener != null) {
-                mHeaderListener.goToDailyLogPressed();
-            }
+            itemView.findViewById(R.id.btn_dismiss).setOnClickListener(v -> {
+                if (mHeaderListener != null) {
+                    mHeaderListener.dismissPressed();
+                }
+            });
+
+            btnDailyLog.setOnClickListener(v -> {
+                if (mHeaderListener != null) {
+                    mHeaderListener.goToDailyLogPressed();
+                }
+            });
         }
     }
 
     static class FooterViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.cv_bookmarks) View cvBookmarks;
-        @BindView(R.id.btn_edit) Button btnEdit;
+        View cvBookmarks;
+        Button btnEdit;
 
         private FooterListener mFooterListener;
 
         public FooterViewHolder(View itemView, FooterListener footerListener) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mFooterListener = footerListener;
-        }
 
-        @OnClick(R.id.cv_bookmarks)
-        void bookmarksPressed() {
-            if (mFooterListener != null) {
-                mFooterListener.bookmarksPressed();
-            }
-        }
+            cvBookmarks = itemView.findViewById(R.id.cv_bookmarks);
+            btnEdit = itemView.findViewById(R.id.btn_edit);
 
-        @OnClick(R.id.btn_edit)
-        void editPressed() {
-            if (mFooterListener != null) {
-                mFooterListener.editPressed();
-            }
+            cvBookmarks.setOnClickListener(v -> {
+                if (mFooterListener != null) {
+                    mFooterListener.bookmarksPressed();
+                }
+            });
+
+            btnEdit.setOnClickListener(v -> {
+                if (mFooterListener != null) {
+                    mFooterListener.editPressed();
+                }
+            });
         }
     }
 

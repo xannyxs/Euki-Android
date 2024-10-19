@@ -23,9 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class CalendarMonthAdapter extends RecyclerView.Adapter {
     private final Integer VIEW_TYPE_HEADER = 0;
     private final Integer VIEW_TYPE_EMPTY = 1;
@@ -156,11 +153,11 @@ public class CalendarMonthAdapter extends RecyclerView.Adapter {
     }
 
     public class CalendarHeaderHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_title) TextView tvTitle;
+        private TextView tvTitle;
 
         public CalendarHeaderHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            tvTitle = itemView.findViewById(R.id.tv_title);
         }
     }
 

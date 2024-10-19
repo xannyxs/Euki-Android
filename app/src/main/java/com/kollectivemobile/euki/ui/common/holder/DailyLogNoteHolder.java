@@ -14,39 +14,19 @@ import com.kollectivemobile.euki.model.database.entity.CalendarItem;
 import com.kollectivemobile.euki.ui.common.adapter.DailyLogAdapter;
 import com.kollectivemobile.euki.ui.common.listeners.DailyLogViewListener;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class DailyLogNoteHolder extends BaseDailyLogHolder {
-    public @BindView(R.id.et_title) EditText etTitle;
-    public @BindView(R.id.tv_counter) TextView tvCounter;
+    private EditText etTitle;
+    private TextView tvCounter;
 
     public DailyLogNoteHolder(@NonNull View itemView, DailyLogViewListener listener) {
         super(itemView, listener);
-        ButterKnife.bind(this, itemView);
-    }
 
-    static public DailyLogNoteHolder create(ViewGroup parent, DailyLogViewListener listener) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.layout_daily_log_note, parent, false);
-        return new DailyLogNoteHolder(view, listener);
-    }
+        // Manual view binding
+        etTitle = itemView.findViewById(R.id.et_title);
+        tvCounter = itemView.findViewById(R.id.tv_counter);
 
-    @Override
-    public DailyLogAdapter.ViewType getViewType() {
-        return DailyLogAdapter.ViewType.NOTE;
-    }
-
-    @Override
-    public Boolean hasData() {
-        return mCalendarItem.hasNote();
-    }
-
-    @Override
-    public void bind(CalendarItem calendarItem, Boolean selected, DailyLogAdapter.ViewType selectedType) {
-        super.bind(calendarItem, selected, selectedType);
-        etTitle.setText(calendarItem.getNote());
-
+        // Set up text watcher for the EditText
         etTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -70,9 +50,31 @@ public class DailyLogNoteHolder extends BaseDailyLogHolder {
                 mListener.dataChanged();
             }
         });
+    }
 
-        if (mCalendarItem.getNote() != null && !mCalendarItem.getNote().isEmpty()) {
-            etTitle.setSelection(mCalendarItem.getNote().length());
+    public static DailyLogNoteHolder create(ViewGroup parent, DailyLogViewListener listener) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.layout_daily_log_note, parent, false);
+        return new DailyLogNoteHolder(view, listener);
+    }
+
+    @Override
+    public DailyLogAdapter.ViewType getViewType() {
+        return DailyLogAdapter.ViewType.NOTE;
+    }
+
+    @Override
+    public Boolean hasData() {
+        return mCalendarItem.hasNote();
+    }
+
+    @Override
+    public void bind(CalendarItem calendarItem, Boolean selected, DailyLogAdapter.ViewType selectedType) {
+        super.bind(calendarItem, selected, selectedType);
+        etTitle.setText(calendarItem.getNote());
+
+        if (calendarItem.getNote() != null && !calendarItem.getNote().isEmpty()) {
+            etTitle.setSelection(calendarItem.getNote().length());
         }
 
         updateCounter();

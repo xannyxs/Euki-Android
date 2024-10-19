@@ -3,17 +3,22 @@ package com.kollectivemobile.euki.ui.bookmarks;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentBookmarksBinding;
 import com.kollectivemobile.euki.manager.BookmarkManager;
 import com.kollectivemobile.euki.manager.ContentManager;
 import com.kollectivemobile.euki.model.Bookmark;
@@ -32,14 +37,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class BookmarksFragment extends BaseFragment implements BookmarkAdapter.BookMarksListener {
     @Inject BookmarkManager mBookmarkManager;
     @Inject ContentManager mContentManager;
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-    @BindView(R.id.ll_empty) View vEmpty;
 
+    private FragmentBookmarksBinding binding;
     private BookmarkAdapter mBookmarkAdapter;
     private List<Bookmark> mBookmarks;
     private SwipeController swipeController = null;
@@ -56,6 +58,12 @@ public class BookmarksFragment extends BaseFragment implements BookmarkAdapter.B
         super.onViewCreated(view, savedInstanceState);
         ((App)getActivity().getApplication()).getAppComponent().inject(this);
         setUIElements();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentBookmarksBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -78,8 +86,8 @@ public class BookmarksFragment extends BaseFragment implements BookmarkAdapter.B
         mBookmarks = new ArrayList<>();
         mBookmarkAdapter = new BookmarkAdapter(getActivity(), this);
         BookmarkHeaderFooterAdapter headerFooterAdapter = new BookmarkHeaderFooterAdapter(mBookmarkAdapter);
-        rvMain.setAdapter(headerFooterAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvMain.setAdapter(headerFooterAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
@@ -91,9 +99,9 @@ public class BookmarksFragment extends BaseFragment implements BookmarkAdapter.B
         });
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(rvMain);
+        itemTouchhelper.attachToRecyclerView(binding.rvMain);
 
-        rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
+        binding.rvMain.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
                 swipeController.onDraw(c);
@@ -108,7 +116,7 @@ public class BookmarksFragment extends BaseFragment implements BookmarkAdapter.B
                 mBookmarks.clear();
                 mBookmarks.addAll(bookmarks);
                 mBookmarkAdapter.update(mBookmarks);
-                vEmpty.setVisibility(bookmarks.isEmpty() ? View.VISIBLE : View.GONE);
+                binding.llEmpty.setVisibility(bookmarks.isEmpty() ? View.VISIBLE : View.GONE);
             }
 
             @Override

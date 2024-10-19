@@ -32,37 +32,101 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 public class DailyLogAppointmentNewHolder extends RecyclerView.ViewHolder {
-    public @BindView(R.id.ll_new_container) LinearLayout llContainer;
-    public @BindView(R.id.et_title) EditText etTitle;
-    public @BindView(R.id.et_location) EditText etLocation;
-    public @BindView(R.id.tv_day_time) TextView tvDayTime;
-    public @BindView(R.id.tv_alert) TextView tvAlert;
+    public LinearLayout llContainer;
+    public EditText etTitle;
+    public EditText etLocation;
+    public TextView tvDayTime;
+    public TextView tvAlert;
 
     private CalendarItem mCalendarItem;
-
     private List<Integer> mAlertOptions = Arrays.asList(R.string.none,
             R.string.option_30_mins, R.string.option_1_hr, R.string.option_2_hrs, R.string.option_3_hrs,
             R.string.option_1_day, R.string.option_2_day, R.string.option_3_day);
     private WeakReference<Activity> mActivity;
     private AppointmentsDataListener mListener;
-
     private Appointment mAppointment;
     private Date mDate;
 
     public DailyLogAppointmentNewHolder(@NonNull View itemView, WeakReference<Activity> activity, AppointmentsDataListener listener) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
         mActivity = activity;
         mListener = listener;
         mAppointment = new Appointment();
+
+        // Manual view binding
+        llContainer = itemView.findViewById(R.id.ll_new_container);
+        etTitle = itemView.findViewById(R.id.et_title);
+        etLocation = itemView.findViewById(R.id.et_location);
+        tvDayTime = itemView.findViewById(R.id.tv_day_time);
+        tvAlert = itemView.findViewById(R.id.tv_alert);
+
+        // Set click listeners manually
+        itemView.findViewById(R.id.ll_title_container).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.newAppointmentSelected();
+                }
+            }
+        });
+
+        itemView.findViewById(R.id.btn_set_future_appointment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.showFutureAppointment();
+                }
+            }
+        });
+
+        tvDayTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDayTimePicker();
+            }
+        });
+
+        tvAlert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertOptions();
+            }
+        });
+
+        itemView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clear();
+                if (mListener != null) {
+                    mListener.cancelAppointment();
+                }
+            }
+        });
+
+        itemView.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAppointment.setTitle(etTitle.getText().toString());
+                mAppointment.setLocation(etLocation.getText().toString());
+
+                if (!mAppointment.isDataCompleted()) {
+                    if (mActivity.get() instanceof BaseActivity) {
+                        ((BaseActivity) mActivity.get()).showError(App.getContext().getString(R.string.appointment_all_fields));
+                    }
+                    return;
+                }
+
+                if (mListener != null) {
+                    mListener.saveAppointment(mAppointment);
+                }
+
+                clear();
+            }
+        });
     }
 
-    static public DailyLogAppointmentNewHolder create(ViewGroup parent, WeakReference<Activity> activity, AppointmentsDataListener appointmentsDataListener) {
+    public static DailyLogAppointmentNewHolder create(ViewGroup parent, WeakReference<Activity> activity, AppointmentsDataListener appointmentsDataListener) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.layout_daily_log_appointment_new, parent, false);
         return new DailyLogAppointmentNewHolder(view, activity, appointmentsDataListener);
@@ -84,13 +148,6 @@ public class DailyLogAppointmentNewHolder extends RecyclerView.ViewHolder {
         etLocation.setText(mAppointment.getLocation());
         showDate();
         showAlertOption();
-    }
-
-    @OnClick(R.id.ll_title_container)
-    void titleClicked() {
-        if (mListener != null) {
-            mListener.newAppointmentSelected();
-        }
     }
 
     public void showDayTimePicker() {
@@ -130,7 +187,7 @@ public class DailyLogAppointmentNewHolder extends RecyclerView.ViewHolder {
                         mAppointment.setDate(cal.getTime());
                         showDate();
                     }
-                }, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), false);
+                }, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false);
         dpd.show();
     }
 
@@ -165,54 +222,9 @@ public class DailyLogAppointmentNewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    @OnClick(R.id.btn_set_future_appointment)
-    void setFutureAppointment() {
-        if (mListener != null) {
-            mListener.showFutureAppointment();
-        }
-    }
-
-    @OnClick(R.id.tv_day_time)
-    void dayTimePressed() {
-        showDayTimePicker();
-    }
-
-    @OnClick(R.id.tv_alert)
-    void alertPressed() {
-        showAlertOptions();
-    }
-
-    @OnClick(R.id.btn_cancel)
-    void cancelPressed() {
-        clear();
-        if (mListener != null) {
-            mListener.cancelAppointment();
-        }
-    }
-
-    @OnClick(R.id.btn_save)
-    void savePressed() {
-        mAppointment.setTitle(etTitle.getText().toString());
-        mAppointment.setLocation(etLocation.getText().toString());
-
-        if (!mAppointment.isDataCompleted()) {
-            if (mActivity.get() instanceof BaseActivity) {
-                ((BaseActivity)mActivity.get()).showError(App.getContext().getString(R.string.appointment_all_fields));
-            }
-            return;
-        }
-
-        if (mListener != null) {
-            mListener.saveAppointment(mAppointment);
-        }
-
-        clear();
-    }
-
     private void clear() {
         mAppointment = new Appointment();
         mAppointment.setDate(mDate);
         updateUIElements();
     }
-
 }

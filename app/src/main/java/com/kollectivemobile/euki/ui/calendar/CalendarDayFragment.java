@@ -1,21 +1,23 @@
 package com.kollectivemobile.euki.ui.calendar;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCalendarDayBinding;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.model.FilterItem;
 import com.kollectivemobile.euki.model.database.entity.CalendarItem;
@@ -34,19 +36,10 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-
 public class CalendarDayFragment extends BaseFragment {
     @Inject CalendarManager mCalendarManager;
 
-    @BindView(R.id.tv_day) TextView tvDay;
-    @BindView(R.id.rl_logged_data) RelativeLayout rlLoggedData;
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-    @BindView(R.id.ll_main_bottom) LinearLayout llMainBottom;
-    @BindView(R.id.ll_past) LinearLayout llPast;
-    @BindView(R.id.rl_future) RelativeLayout llFuture;
-
+    private FragmentCalendarDayBinding binding;
     private CalendarItem mCalendarItem;
     private CalendarDayAdapter mCalendarDayAdapter;
 
@@ -64,6 +57,12 @@ public class CalendarDayFragment extends BaseFragment {
         ((App)getActivity().getApplication()).getAppComponent().inject(this);
         setUIElements();
         updateUIElements();
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCalendarDayBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -94,10 +93,8 @@ public class CalendarDayFragment extends BaseFragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_edit:
-                startActivity(TrackActivity.makeIntent(getContext(), mCalendarItem.getDate(), mCalendarItem));
-                break;
+        if (item.getItemId() == R.id.item_edit) {
+            startActivity(TrackActivity.makeIntent(getContext(), mCalendarItem.getDate(), mCalendarItem));
         }
 
         return super.onOptionsItemSelected(item);
@@ -116,9 +113,9 @@ public class CalendarDayFragment extends BaseFragment {
 
     private void setUIElements() {
         mCalendarDayAdapter = new CalendarDayAdapter(getContext());
-        rvMain.setAdapter(mCalendarDayAdapter);
+        binding.rvMain.setAdapter(mCalendarDayAdapter);
         GridLayoutManager layoutManager = new GridLayoutManager(requireContext(), 3, RecyclerView.VERTICAL, false);
-        rvMain.setLayoutManager(layoutManager);
+        binding.rvMain.setLayoutManager(layoutManager);
 
         layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -136,6 +133,28 @@ public class CalendarDayFragment extends BaseFragment {
                 return 1;
             }
         });
+
+        binding.btnSetReminder.setOnClickListener(v -> setReminder());
+        binding.btnSetReminder1.setOnClickListener(v -> setReminder());
+        binding.btnSetAppointment.setOnClickListener(v -> setAppointment());
+        binding.btnSetAppointment1.setOnClickListener(v -> setAppointment());
+        binding.btnLogNow.setOnClickListener(v -> logNow());
+    }
+
+    private void setReminder() {
+        startActivity(RemindersActivity.makeIntent(getActivity()));
+    }
+
+    private void setAppointment() {
+        if (mCalendarItem.getAppointments().isEmpty()) {
+            startActivity(FutureAppointmentActivity.makeIntent(getActivity(), mCalendarItem.getDate()));
+        } else {
+            startActivity(AppointmentsActivity.makeIntent(getContext(), mCalendarItem.getDate()));
+        }
+    }
+
+    private void logNow() {
+        startActivity(TrackActivity.makeIntent(getContext(), mCalendarItem.getDate(), mCalendarItem));
     }
 
     private void updateUIElements() {
@@ -151,25 +170,25 @@ public class CalendarDayFragment extends BaseFragment {
         }
 
         String dateTitle = StringUtils.capitalizeAll(DateUtils.toString(date, DateUtils.eeeMMMMdd));
-        tvDay.setText(dateTitle);
+        binding.tvDay.setText(dateTitle);
 
-        rlLoggedData.setVisibility(View.GONE);
-        llMainBottom.setVisibility(View.GONE);
-        llPast.setVisibility(View.GONE);
-        llFuture.setVisibility(View.GONE);
+        binding.rlLoggedData.setVisibility(View.GONE);
+        binding.llMainBottom.setVisibility(View.GONE);
+        binding.llPast.setVisibility(View.GONE);
+        binding.rlFuture.setVisibility(View.GONE);
 
         if (isFutureDate) {
             if (mCalendarItem.hasData()) {
-                rlLoggedData.setVisibility(View.VISIBLE);
-                llMainBottom.setVisibility(View.VISIBLE);
+                binding.rlLoggedData.setVisibility(View.VISIBLE);
+                binding.llMainBottom.setVisibility(View.VISIBLE);
             } else {
-                llFuture.setVisibility(View.VISIBLE);
+                binding.rlFuture.setVisibility(View.VISIBLE);
             }
         } else {
             if (mCalendarItem.hasData()) {
-                rlLoggedData.setVisibility(View.VISIBLE);
+                binding.rlLoggedData.setVisibility(View.VISIBLE);
             } else {
-                llPast.setVisibility(View.VISIBLE);
+                binding.llPast.setVisibility(View.VISIBLE);
             }
         }
 
@@ -191,24 +210,5 @@ public class CalendarDayFragment extends BaseFragment {
             public void onError(ServerError serverError) {
             }
         });
-    }
-
-    @OnClick({R.id.btn_set_reminder, R.id.btn_set_reminder_1})
-    void setReminder() {
-        startActivity(RemindersActivity.makeIntent(getActivity()));
-    }
-
-    @OnClick({R.id.btn_set_appointment, R.id.btn_set_appointment_1})
-    void setAppointment() {
-        if (mCalendarItem.getAppointments().size() == 0) {
-            startActivity(FutureAppointmentActivity.makeIntent(getActivity(), mCalendarItem.getDate()));
-        } else {
-            startActivity(AppointmentsActivity.makeIntent(getContext(), mCalendarItem.getDate()));
-        }
-    }
-
-    @OnClick(R.id.btn_log_now)
-    void logNow() {
-        startActivity(TrackActivity.makeIntent(getContext(), mCalendarItem.getDate(), mCalendarItem));
     }
 }

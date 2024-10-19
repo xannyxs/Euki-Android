@@ -6,15 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.LayoutFilterItemFooterBinding;
 import com.kollectivemobile.euki.utils.advrecyclerview.headerfooter.AbstractHeaderFooterWrapperAdapter;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class DailyLogFilterFooterAdapter extends AbstractHeaderFooterWrapperAdapter<DailyLogFilterFooterAdapter.HeaderViewHolder, DailyLogFilterFooterAdapter.FooterViewHolder> {
     private View.OnClickListener mOnClickListener;
@@ -28,16 +24,14 @@ public class DailyLogFilterFooterAdapter extends AbstractHeaderFooterWrapperAdap
     @Override
     public HeaderViewHolder onCreateHeaderItemViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_filter_item_footer, parent, false);
-        HeaderViewHolder viewHolder = new HeaderViewHolder(view);
-        return viewHolder;
+        return new HeaderViewHolder(view);
     }
 
     @NonNull
     @Override
     public FooterViewHolder onCreateFooterItemViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_filter_item_footer, parent, false);
-        FooterViewHolder viewHolder = new FooterViewHolder(view, mOnClickListener);
-        return viewHolder;
+        LayoutFilterItemFooterBinding binding = LayoutFilterItemFooterBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new FooterViewHolder(binding, mOnClickListener);
     }
 
     @Override
@@ -52,7 +46,7 @@ public class DailyLogFilterFooterAdapter extends AbstractHeaderFooterWrapperAdap
 
     @Override
     public void onBindFooterItemViewHolder(@NonNull FooterViewHolder holder, int localPosition) {
-        holder.btnAction.setText(App.getContext().getString(R.string.done));
+        holder.binding.btnAction.setText(App.getContext().getString(R.string.done));
     }
 
     @Override
@@ -98,21 +92,20 @@ public class DailyLogFilterFooterAdapter extends AbstractHeaderFooterWrapperAdap
     }
 
     static class FooterViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.btn_action) Button btnAction;
+        final LayoutFilterItemFooterBinding binding;
 
         private View.OnClickListener mOnClickListener;
 
-        public FooterViewHolder(View itemView, View.OnClickListener onClickListener) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-            mOnClickListener = onClickListener;
-        }
+        public FooterViewHolder(LayoutFilterItemFooterBinding binding, View.OnClickListener onClickListener) {
+            super(binding.getRoot());
+            this.binding = binding;
+            this.mOnClickListener = onClickListener;
 
-        @OnClick(R.id.btn_action)
-        void actionPressed(View view) {
-            if (mOnClickListener != null) {
-                mOnClickListener.onClick(view);
-            }
+            this.binding.btnAction.setOnClickListener(v -> {
+                if (mOnClickListener != null) {
+                    mOnClickListener.onClick(v);
+                }
+            });
         }
     }
 }

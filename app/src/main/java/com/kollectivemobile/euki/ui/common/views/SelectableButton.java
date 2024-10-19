@@ -15,10 +15,6 @@ import android.widget.TextView;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.utils.Utils;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnLongClick;
-
 public class SelectableButton extends LinearLayout {
     private View mView;
     private View mBorderView;
@@ -30,6 +26,8 @@ public class SelectableButton extends LinearLayout {
     private Boolean mIsRadio = false;
     private Boolean mIsEnabled = true;
     private OnClickListener mOnClickListener;
+
+    private boolean disableCounter = false;
 
     public SelectableButton(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -61,12 +59,11 @@ public class SelectableButton extends LinearLayout {
         ivIcon.setImageResource(imageResId);
 
         updateUIElements();
-    }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        ButterKnife.bind(this);
+        // Set click listeners manually
+        mBorderView.setOnClickListener(v -> handleClick());
+
+        mBorderView.setOnLongClickListener(v -> handleLongClick());
     }
 
     public SelectableButton(Context context) {
@@ -112,6 +109,11 @@ public class SelectableButton extends LinearLayout {
         ivIcon.setImageResource(imageResId);
     }
 
+    // Setter for disableCounter flag
+    public void setDisableCounter(boolean disable) {
+        disableCounter = disable;
+    }
+
     private void updateUIElements() {
         Boolean isSelected = false;
         if (mSingleSelection) {
@@ -129,12 +131,12 @@ public class SelectableButton extends LinearLayout {
             return;
         }
 
-        ViewGroup parentView = (ViewGroup)getParent();
-        for (int i=0; i<parentView.getChildCount(); i++) {
+        ViewGroup parentView = (ViewGroup) getParent();
+        for (int i = 0; i < parentView.getChildCount(); i++) {
             View view = parentView.getChildAt(i);
 
             if (view instanceof SelectableButton) {
-                SelectableButton selectableButton = (SelectableButton)view;
+                SelectableButton selectableButton = (SelectableButton) view;
                 if (selectableButton != this && selectableButton.mIsRadio) {
                     selectableButton.changeSelected(false);
                 }
@@ -151,21 +153,22 @@ public class SelectableButton extends LinearLayout {
         mOnClickListener = onClickListener;
     }
 
-    @OnClick(R.id.v_border)
-    void onClick() {
+    private void handleClick() {
         if (!mIsEnabled) {
             return;
         }
 
-        if (mSingleSelection) {
-            changeSelected(!mSelected);
-            changeRadioButtons();
-        } else {
-            mCounter++;
-            if (mCounter == 11) {
-                mCounter = 0;
+        if (!disableCounter) {
+            if (mSingleSelection) {
+                changeSelected(!mSelected);
+                changeRadioButtons();
+            } else {
+                mCounter++;
+                if (mCounter == 11) {
+                    mCounter = 0;
+                }
+                setCounter(mCounter);
             }
-            setCounter(mCounter);
         }
 
         if (mOnClickListener != null) {
@@ -173,13 +176,12 @@ public class SelectableButton extends LinearLayout {
         }
     }
 
-    @OnLongClick(R.id.v_border)
-    boolean onLongClick() {
+    private boolean handleLongClick() {
         if (!mIsEnabled) {
             return false;
         }
 
-        if (!mSingleSelection) {
+        if (!mSingleSelection && !disableCounter) {
             setCounter(0);
             if (mOnClickListener != null) {
                 mOnClickListener.onClick(this);

@@ -1,15 +1,19 @@
 package com.kollectivemobile.euki.ui.calendar;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
+import com.kollectivemobile.euki.databinding.FragmentCalendarListBinding;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.model.CalendarFilter;
 import com.kollectivemobile.euki.model.database.entity.CalendarItem;
@@ -28,13 +32,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-
 public class CalendarListFragment extends BaseFragment implements CalendarListAdapter.CalendarListListener {
     @Inject CalendarManager mCalendarManager;
 
-    @BindView(R.id.rv_main) RecyclerView rvMain;
-
+    private FragmentCalendarListBinding binding;
     private CalendarFilter mCalendarFilter;
     private CalendarListAdapter mAdapter;
     private List<CalendarItem> mCalendarItems;
@@ -51,7 +52,9 @@ public class CalendarListFragment extends BaseFragment implements CalendarListAd
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        if (getActivity() != null) {
+            ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        }
         setUIElements();
         EventBus.getDefault().register(this);
     }
@@ -60,6 +63,12 @@ public class CalendarListFragment extends BaseFragment implements CalendarListAd
     public void onDestroyView() {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    protected ViewBinding getViewBinding(@NonNull LayoutInflater inflater, @Nullable ViewGroup container) {
+        binding = FragmentCalendarListBinding.inflate(inflater, container, false);
+        return binding;
     }
 
     @Override
@@ -82,9 +91,9 @@ public class CalendarListFragment extends BaseFragment implements CalendarListAd
         mCalendarItems = new ArrayList<>();
         mFilteredItems = new ArrayList<>();
         mAdapter = new CalendarListAdapter(getActivity(), this);
-        rvMain.setAdapter(mAdapter);
-        rvMain.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
+        binding.rvMain.setAdapter(mAdapter);
+        binding.rvMain.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvMain.addItemDecoration(new InsetDecoration(getContext(), InsetDecoration.VERTICAL_LIST));
     }
 
     private void requestCalendarItems() {
