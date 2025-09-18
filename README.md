@@ -35,12 +35,10 @@ Euki App is part of Euki, Inc - an independent 501(c)3 nonprofit organization. O
 
 **Help**
 
-[Contact support ](https://eukiapp.org/contact)
+[Contact support](https://eukiapp.org/contact)
 
 **Compliance: Legal and Security**
 
 License: [GNU GPL v3.0](https://choosealicense.com/licenses/gpl-3.0/)
 
 [Privacy Policy](https://eukiapp.org/privacy-policy)
-
-We are working towards our first third party security audit, which will be shared here upon completion.
