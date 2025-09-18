@@ -2,6 +2,7 @@ package com.kollectivemobile.euki.ui.common.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +56,7 @@ public class CycleSummaryAdapter extends RecyclerView.Adapter {
         return null;
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof SeePastHolder) {
