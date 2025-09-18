@@ -29,94 +29,103 @@ import com.kollectivemobile.euki.manager.ReminderManagerImpl;
 import com.kollectivemobile.euki.model.database.dao.AppSettingsDAO;
 import com.kollectivemobile.euki.model.database.dao.CalendarItemDAO;
 import com.kollectivemobile.euki.model.database.dao.ReminderItemDAO;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+import javax.inject.Singleton;
 
 @Module
 public class ManagersModule {
-    public ManagersModule(){
-    }
+  public ManagersModule() {}
 
-    @Singleton
-    @Provides
-    public AbortionContentManager providesAbortionContentManager() {
-        return new AbortionContentManagerImpl();
-    }
+  @Singleton
+  @Provides
+  public AbortionContentManager providesAbortionContentManager() {
+    return new AbortionContentManagerImpl();
+  }
 
-    @Singleton
-    @Provides
-    public AppSettingsManager providesAppSettingsManager(AppSettingsDAO appSettingsDAO) {
-        return new AppSettingsManagerImpl(appSettingsDAO);
-    }
+  @Singleton
+  @Provides
+  public AppSettingsManager providesAppSettingsManager(AppSettingsDAO appSettingsDAO) {
+    return new AppSettingsManagerImpl(appSettingsDAO);
+  }
 
-    @Singleton
-    @Provides
-    public CalendarManager providesCalendarManager(CalendarItemDAO calendarItemDAO, LocalNotificationManager localNotificationManager, AppSettingsManager appSettingsManager) {
-        return new CalendarManagerImpl(calendarItemDAO, localNotificationManager, appSettingsManager);
-    }
+  @Singleton
+  @Provides
+  public CalendarManager providesCalendarManager(
+      CalendarItemDAO calendarItemDAO,
+      LocalNotificationManager localNotificationManager,
+      AppSettingsManager appSettingsManager) {
+    return new CalendarManagerImpl(calendarItemDAO, localNotificationManager, appSettingsManager);
+  }
 
-    @Singleton
-    @Provides
-    public ContentManager providesContentManager(AbortionContentManager abortionContentManager, PrivacyContentManager privacyContentManager) {
-        return new ContentManagerImpl(abortionContentManager, privacyContentManager);
-    }
+  @Singleton
+  @Provides
+  public ContentManager providesContentManager(
+      AbortionContentManager abortionContentManager, PrivacyContentManager privacyContentManager) {
+    return new ContentManagerImpl(abortionContentManager, privacyContentManager);
+  }
 
-    @Singleton
-    @Provides
-    public ContraceptionContentManager providesContraceptionContentManager(ContentManager contentManager) {
-        return new ContraceptionContentManagerImpl(contentManager);
-    }
+  @Singleton
+  @Provides
+  public ContraceptionContentManager providesContraceptionContentManager(
+      ContentManager contentManager) {
+    return new ContraceptionContentManagerImpl(contentManager);
+  }
 
-    @Singleton
-    @Provides
-    public MenstruationContentManager providesMenstruationContentManager(ContentManager contentManager) {
-        return new MenstruationContentManagerImpl(contentManager);
-    }
+  @Singleton
+  @Provides
+  public MenstruationContentManager providesMenstruationContentManager(
+      ContentManager contentManager) {
+    return new MenstruationContentManagerImpl(contentManager);
+  }
 
-    @Singleton
-    @Provides
-    public HomeManager providesHomeManager(AppSettingsDAO appSettingsDAO) {
-        return new HomeManagerImpl(appSettingsDAO);
-    }
+  @Singleton
+  @Provides
+  public HomeManager providesHomeManager(AppSettingsDAO appSettingsDAO) {
+    return new HomeManagerImpl(appSettingsDAO);
+  }
 
-    @Singleton
-    @Provides
-    public LocalNotificationManager providesLocalNotificationManager() {
-        return new LocalNotificationManagerImpl();
-    }
+  @Singleton
+  @Provides
+  public LocalNotificationManager providesLocalNotificationManager() {
+    return new LocalNotificationManagerImpl();
+  }
 
-    @Singleton
-    @Provides
-    public PrivacyContentManager providesPrivacyContentManager(AppSettingsManager appSettingsManager) {
-        return new PrivacyContentManagerImpl(appSettingsManager);
-    }
+  @Singleton
+  @Provides
+  public PrivacyContentManager providesPrivacyContentManager(
+      AppSettingsManager appSettingsManager) {
+    return new PrivacyContentManagerImpl(appSettingsManager);
+  }
 
-    @Singleton
-    @Provides
-    public PrivacyManager providesPrivacyManager(CalendarManager calendarManager, LocalNotificationManager localNotificationManager,
-                                                 ReminderManager reminderManager, AppSettingsManager appSettingsManager
-                                                 ) {
-        return new PrivacyManagerImpl(calendarManager, localNotificationManager, reminderManager, appSettingsManager);
-    }
+  @Singleton
+  @Provides
+  public PrivacyManager providesPrivacyManager(
+      CalendarManager calendarManager,
+      LocalNotificationManager localNotificationManager,
+      ReminderManager reminderManager,
+      AppSettingsManager appSettingsManager) {
+    return new PrivacyManagerImpl(
+        calendarManager, localNotificationManager, reminderManager, appSettingsManager);
+  }
 
-    @Singleton
-    @Provides
-    public QuizManager providesQuizManager() {
-        return new QuizManagerImpl();
-    }
+  @Singleton
+  @Provides
+  public QuizManager providesQuizManager() {
+    return new QuizManagerImpl();
+  }
 
-    @Singleton
-    @Provides
-    public ReminderManager providesReminderManager(ReminderItemDAO reminderItemDAO, LocalNotificationManager localNotificationManager) {
-        return new ReminderManagerImpl(reminderItemDAO, localNotificationManager);
-    }
+  @Singleton
+  @Provides
+  public ReminderManager providesReminderManager(
+      ReminderItemDAO reminderItemDAO, LocalNotificationManager localNotificationManager) {
+    return new ReminderManagerImpl(reminderItemDAO, localNotificationManager);
+  }
 
-    @Singleton
-    @Provides
-    public CycleManager providesCycleManager(AppSettingsManager appSettingsManager, CalendarManager calendarManager) {
-        return new CycleManagerImpl(appSettingsManager, calendarManager);
-    }
+  @Singleton
+  @Provides
+  public CycleManager providesCycleManager(
+      AppSettingsManager appSettingsManager, CalendarManager calendarManager) {
+    return new CycleManagerImpl(appSettingsManager, calendarManager);
+  }
 }
