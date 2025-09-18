@@ -8,13 +8,16 @@ in
 pinnedPkgs.mkShell {
   buildInputs = with pinnedPkgs; [
     # App Tools
-    jdk17
     gradle
     android-studio
     android-tools
 
     ktlint
     kotlin-language-server
+
+    jdk17
+    jdt-language-server
+    google-java-format
 
     # Additional Packages
     nil

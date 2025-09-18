@@ -23,7 +23,6 @@ import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.databinding.FragmentContentItemBinding;
 import com.kollectivemobile.euki.listeners.HeightListener;
-import com.kollectivemobile.euki.manager.BookmarkManager;
 import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.adapter.ContentGridSelectableAdapter;
@@ -49,9 +48,6 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
         RecyclerViewExpandableItemManager.OnGroupExpandListener,
         HeightListener {
     private static final String SAVED_STATE_EXPANDABLE_ITEM_MANAGER = "RecyclerViewExpandableItemManager";
-
-    @Inject
-    BookmarkManager mBookmarkManager;
 
     private FragmentContentItemBinding binding;
     private RecyclerViewExpandableItemManager mRecyclerViewExpandableItemManager;
@@ -91,22 +87,10 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        int resId = mBookmarkManager.isBookmark(mContentItem.getId()) ? R.menu.menu_favorite_on : R.menu.menu_favorite_off;
-        inflater.inflate(resId, menu);
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.item_bookmark) {
-            if (mBookmarkManager.isBookmark(mContentItem.getId())) {
-                mBookmarkManager.removeBookmark(mContentItem.getId());
-            } else {
-                mBookmarkManager.addBookmark(mContentItem.getId());
-            }
-            getActivity().invalidateOptionsMenu();
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -146,7 +130,7 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
         }
 
         if (mContentItem.getExpandableItems() != null && mContentItem.getExpandableItems().size() > 0) {
-            RecyclerView.Adapter expandableAdapter = new ContentRowExpandableAdapter(getContext(), mContentItem.getExpandableItems(), this, this, mBookmarkManager);
+            RecyclerView.Adapter expandableAdapter = new ContentRowExpandableAdapter(getContext(), mContentItem.getExpandableItems(), this, this);
 
             final Parcelable eimSavedState = (savedInstanceState != null) ? savedInstanceState.getParcelable(SAVED_STATE_EXPANDABLE_ITEM_MANAGER) : null;
             mRecyclerViewExpandableItemManager = new RecyclerViewExpandableItemManager(eimSavedState);

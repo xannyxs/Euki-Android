@@ -55,17 +55,6 @@ public class AppSettingsManagerImpl implements AppSettingsManager {
     }
 
     @Override
-    public void saveBookmarks(List<String> bookmarkIds) {
-        mAppSettings.setBookmarkIds(bookmarkIds);
-        mAppSettingsDAO.update(mAppSettings);
-    }
-
-    @Override
-    public List<String> getBookmarkIds() {
-        return mAppSettings.getBookmarkIds();
-    }
-
-    @Override
     public void saveUsedItems(List<String> items) {
         mAppSettings.setHomeItemsUsed(items);
     }
@@ -259,7 +248,6 @@ public class AppSettingsManagerImpl implements AppSettingsManager {
 
     @Override
     public void removeAll() {
-        mAppSettings.getBookmarkIds().clear();
         mAppSettings.getHomeItemsUsed().clear();
         mAppSettings.getHomeItemsNotUsed().clear();
         mAppSettings.setLastDateAutodelete(null);

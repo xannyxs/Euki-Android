@@ -29,7 +29,6 @@ import com.kollectivemobile.euki.model.TileItem;
 import com.kollectivemobile.euki.model.database.entity.ReminderItem;
 import com.kollectivemobile.euki.networking.EukiCallback;
 import com.kollectivemobile.euki.networking.ServerError;
-import com.kollectivemobile.euki.ui.bookmarks.BookmarksActivity;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.Dialogs;
 import com.kollectivemobile.euki.ui.common.adapter.TilesAdapter;
@@ -134,7 +133,7 @@ public class HomeFragment extends BaseFragment implements TileHolder.TileListene
     private void setUIElements() {
         mRecyclerViewDragDropManager = new RecyclerViewDragDropManager();
 
-        mTilesAdapter = new TilesAdapter(getActivity(), this);
+        mTilesAdapter = new TilesAdapter(this);
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(mTilesAdapter);
 
         mRecyclerViewDragDropManager.setDraggingItemShadowDrawable((NinePatchDrawable) ContextCompat.getDrawable(requireContext(), R.drawable.material_shadow_z3));
@@ -299,11 +298,6 @@ public class HomeFragment extends BaseFragment implements TileHolder.TileListene
         mHeaderFooterAdapter.update(mIsEditing);
         updateItems();
         updateLayout();
-    }
-
-    @Override
-    public void bookmarksPressed() {
-        startActivity(BookmarksActivity.makeIntent(getActivity()));
     }
 
     @Override

@@ -232,7 +232,6 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     <string name="stis">STIs</string>
     <string name="home">Home</string>
     <string name="calendar">Calendar</string>
-    <string name="bookmarks">Bookmarks</string>
     <string name="privacy">Privacy</string>
     <string name="source_format">Source: %s</string>
     <string name="knowledge_base">Information</string>
@@ -2159,7 +2158,7 @@ If cost is a concern for you, ask your clinician about payment plans, discounts,
     <string name="set_new_pin_button">SET NEW PIN</string>
     <string name="new_pin_confirmation">Great! Don’t forget your new PIN!</string>
     <string name="new_pin_skip">You haven\'t set the PIN, but you can always do it later</string>
-    <string name="weekly_recurring_info">Euki will permanently delete all of your settings, reminders, appointments, bookmarks, and daily log activity. Choose how often you want data deletion to happen.</string>
+    <string name="weekly_recurring_info">Euki will permanently delete all of your settings, reminders, appointments, and daily log activity. Choose how often you want data deletion to happen.</string>
     <string name="privacy_faqs_title_1">Who can see my data?</string>
     <string name="privacy_faqs_content_1">Just you! Euki does not collect or store any of your data on a cloud. It lives on your phone and in the app and is not shared anywhere else.</string>
     <string name="privacy_faqs_title_2">How is data stored?</string>
@@ -2226,8 +2225,6 @@ If cost is a concern for you, ask your clinician about payment plans, discounts,
     <string name="track_bleeding_tutorial_content">Get accurate period predictions and statistics in your cycle summary.</string>
     <string name="track_counter_tutorial_title">Tap to count</string>
     <string name="track_counter_tutorial_content">Hold down the icon to reset the count.</string>
-    <string name="bookmarks_empty_title">Start bookmarking</string>
-    <string name="bookmarks_empty_content">Bookmark information you want to read later. You can easily access it here.</string>
     <string name="pin_code_update_alert_title">Fake PIN Update</string>
     <string name="pin_code_update_alert_message">If someone asks you to open Euki and you don\'t want them to see your data, enter PIN %s when you open the app and we\'ll display a false screen.</string>
     <string name="nav_cycle">Cycle</string>
