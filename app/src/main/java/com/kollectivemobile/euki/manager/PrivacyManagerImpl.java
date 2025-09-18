@@ -17,16 +17,14 @@ public class PrivacyManagerImpl implements PrivacyManager {
     private LocalNotificationManager mLocalNotificationManager;
     private ReminderManager mReminderManager;
     private AppSettingsManager mAppSettingsManager;
-    private BookmarkManager mBookmarkManager;
 
     public PrivacyManagerImpl(CalendarManager calendarManager, LocalNotificationManager localNotificationManager,
-                              ReminderManager reminderManager, AppSettingsManager appSettingsManager,
-                              BookmarkManager bookmarkManager) {
+                              ReminderManager reminderManager, AppSettingsManager appSettingsManager
+                              ) {
         this.mCalendarManager = calendarManager;
         this.mLocalNotificationManager = localNotificationManager;
         this.mReminderManager = reminderManager;
         this.mAppSettingsManager = appSettingsManager;
-        this.mBookmarkManager = bookmarkManager;
     }
 
     @Override
@@ -72,7 +70,6 @@ public class PrivacyManagerImpl implements PrivacyManager {
         mReminderManager.removeAll();
         mAppSettingsManager.removeAll();
         mCalendarManager.removeAll();
-        mBookmarkManager.removeAllBookmarks();
     }
 
     @Override

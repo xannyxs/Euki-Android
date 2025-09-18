@@ -23,8 +23,6 @@ public class AppSettings {
     private Boolean mShowOnboardingScreens;
     @ColumnInfo(name = "pin_code")
     private String mPinCode;
-    @ColumnInfo(name = "bookmark_ids")
-    private List<String> mBookmarkIds;
     @ColumnInfo(name = "home_items_used")
     private List<String> mHomeItemsUsed;
     @ColumnInfo(name = "home_items_not_used")
@@ -76,7 +74,6 @@ public class AppSettings {
         this.mTrackPeriodEnabled = true;
         this.mPeriodPredictionEnabled = true;
 
-        this.mBookmarkIds = new ArrayList<>();
         this.mHomeItemsUsed = new ArrayList<>();
         this.mHomeItemsNotUsed = new ArrayList<>();
         this.mMainTitles = new HashMap<>();
@@ -104,14 +101,6 @@ public class AppSettings {
 
     public void setPinCode(String pinCode) {
         mPinCode = pinCode;
-    }
-
-    public List<String> getBookmarkIds() {
-        return mBookmarkIds;
-    }
-
-    public void setBookmarkIds(List<String> bookmarkIds) {
-        mBookmarkIds = bookmarkIds;
     }
 
     public List<String> getHomeItemsUsed() {

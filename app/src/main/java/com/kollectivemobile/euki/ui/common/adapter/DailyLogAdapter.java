@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.model.Appointment;
-import com.kollectivemobile.euki.model.Bookmark;
 import com.kollectivemobile.euki.model.FilterItem;
 import com.kollectivemobile.euki.model.database.entity.CalendarItem;
 import com.kollectivemobile.euki.ui.common.Dialogs;

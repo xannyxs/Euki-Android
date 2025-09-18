@@ -4,8 +4,6 @@ import com.kollectivemobile.euki.manager.AbortionContentManager;
 import com.kollectivemobile.euki.manager.AbortionContentManagerImpl;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
 import com.kollectivemobile.euki.manager.AppSettingsManagerImpl;
-import com.kollectivemobile.euki.manager.BookmarkManager;
-import com.kollectivemobile.euki.manager.BookmarkManagerImpl;
 import com.kollectivemobile.euki.manager.CalendarManager;
 import com.kollectivemobile.euki.manager.CalendarManagerImpl;
 import com.kollectivemobile.euki.manager.ContentManager;
@@ -56,12 +54,6 @@ public class ManagersModule {
 
     @Singleton
     @Provides
-    public BookmarkManager providesBookmarkManager(AppSettingsManager appSettingsManager, ContentManager contentManager) {
-        return new BookmarkManagerImpl(appSettingsManager, contentManager);
-    }
-
-    @Singleton
-    @Provides
     public CalendarManager providesCalendarManager(CalendarItemDAO calendarItemDAO, LocalNotificationManager localNotificationManager, AppSettingsManager appSettingsManager) {
         return new CalendarManagerImpl(calendarItemDAO, localNotificationManager, appSettingsManager);
     }
@@ -105,9 +97,9 @@ public class ManagersModule {
     @Singleton
     @Provides
     public PrivacyManager providesPrivacyManager(CalendarManager calendarManager, LocalNotificationManager localNotificationManager,
-                                                 ReminderManager reminderManager, AppSettingsManager appSettingsManager,
-                                                 BookmarkManager bookmarkManager) {
-        return new PrivacyManagerImpl(calendarManager, localNotificationManager, reminderManager, appSettingsManager, bookmarkManager);
+                                                 ReminderManager reminderManager, AppSettingsManager appSettingsManager
+                                                 ) {
+        return new PrivacyManagerImpl(calendarManager, localNotificationManager, reminderManager, appSettingsManager);
     }
 
     @Singleton

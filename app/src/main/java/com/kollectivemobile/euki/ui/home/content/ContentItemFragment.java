@@ -23,7 +23,6 @@ import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.databinding.FragmentContentItemBinding;
 import com.kollectivemobile.euki.listeners.HeightListener;
-import com.kollectivemobile.euki.manager.BookmarkManager;
 import com.kollectivemobile.euki.model.ContentItem;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.common.adapter.ContentGridSelectableAdapter;
@@ -49,9 +48,6 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
         RecyclerViewExpandableItemManager.OnGroupExpandListener,
         HeightListener {
     private static final String SAVED_STATE_EXPANDABLE_ITEM_MANAGER = "RecyclerViewExpandableItemManager";
-
-    @Inject
-    BookmarkManager mBookmarkManager;
 
     private FragmentContentItemBinding binding;
     private RecyclerViewExpandableItemManager mRecyclerViewExpandableItemManager;
@@ -91,9 +87,6 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // int resId = mBookmarkManager.isBookmark(mContentItem.getId()) ? R.menu.menu_favorite_on : R.menu.menu_favorite_off;
-        // inflater.inflate(resId, menu);
-        // super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
