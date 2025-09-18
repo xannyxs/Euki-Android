@@ -26,7 +26,6 @@ import com.kollectivemobile.euki.ui.privacy.PrivacyFragment;
 import com.kollectivemobile.euki.ui.privacy.PrivacyPinSetupFragment;
 import com.kollectivemobile.euki.ui.quiz.QuizFragment;
 import com.kollectivemobile.euki.ui.SplashActivity;
-import com.kollectivemobile.euki.ui.bookmarks.BookmarksFragment;
 import com.kollectivemobile.euki.ui.common.BaseFragment;
 import com.kollectivemobile.euki.ui.home.HomeFragment;
 import com.kollectivemobile.euki.ui.home.abortion.MainAbortionFragment;
@@ -60,7 +59,6 @@ public interface AppComponent {
     void inject(MainAbortionFragment fragment);
     void inject(MedicalAbortionFragment fragment);
     void inject(ContentItemFragment fragment);
-    void inject(BookmarksFragment fragment);
     void inject(ContentItemActivity activity);
     void inject(SearchFragment fragment);
     void inject(QuizFragment fragment);
