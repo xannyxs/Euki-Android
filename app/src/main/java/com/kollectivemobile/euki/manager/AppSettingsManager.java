@@ -31,12 +31,16 @@ public interface AppSettingsManager {
     Boolean shouldShowCalendarTutorial();
     void addDaityCounter();
     Boolean isPrivacyAlreadyShown();
+
     Boolean shouldShowPinUpdate();
     void saveShouldShowPinUpdate(Boolean show);
+
     Date latestBleedingTracking();
     void saveLatestBleedingTracking(Date date);
+
     List<FilterItem> filterItems();
     void saveFilterItems(List<FilterItem> filterItems);
+
     void saveHiddenCyclePeriods(List<Range<Date>> periods);
     List<Range<Date>> hiddenCyclePeriods();
     Boolean trackPeriodEnabled();
