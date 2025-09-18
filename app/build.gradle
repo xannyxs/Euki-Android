@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.kollectivemobile.euki"
-        minSdkVersion 26
+        minSdkVersion 30
         targetSdk 34
         versionCode 38
         versionName "2.0.0"
