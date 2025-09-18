@@ -91,22 +91,13 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        int resId = mBookmarkManager.isBookmark(mContentItem.getId()) ? R.menu.menu_favorite_on : R.menu.menu_favorite_off;
-        inflater.inflate(resId, menu);
-        super.onCreateOptionsMenu(menu, inflater);
+        // int resId = mBookmarkManager.isBookmark(mContentItem.getId()) ? R.menu.menu_favorite_on : R.menu.menu_favorite_off;
+        // inflater.inflate(resId, menu);
+        // super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.item_bookmark) {
-            if (mBookmarkManager.isBookmark(mContentItem.getId())) {
-                mBookmarkManager.removeBookmark(mContentItem.getId());
-            } else {
-                mBookmarkManager.addBookmark(mContentItem.getId());
-            }
-            getActivity().invalidateOptionsMenu();
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
