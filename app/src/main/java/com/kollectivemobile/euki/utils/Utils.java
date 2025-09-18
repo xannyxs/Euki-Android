@@ -25,8 +25,7 @@ public class Utils {
                 stringBuilder.append(line).append("\n");
                 line = reader.readLine();
             }
-            JSONObject jsonObject = new JSONObject(stringBuilder.toString());
-            return jsonObject;
+            return new JSONObject(stringBuilder.toString());
         } catch (Exception e) {
             return null;
         }
@@ -54,8 +53,7 @@ public class Utils {
 
     public static int getResourceId(String key, String resourceType) {
         try {
-            int resourceId = App.getContext().getResources().getIdentifier(key, resourceType, App.getContext().getPackageName());
-            return resourceId;
+            return App.getContext().getResources().getIdentifier(key, resourceType, App.getContext().getPackageName());
         } catch (Exception e) {
             return -1;
         }

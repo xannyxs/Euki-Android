@@ -200,7 +200,7 @@ Eres responsable de cualquier cargo móvil que puedas incurrir al usar nuestros 
 <b>9. Modificaciones; Terminación</b>
 Nos reservamos el derecho de modificar la App o los Servicios en cualquier momento, sin previo aviso. También podemos enmendar estas Condiciones de forma prospectiva de vez en cuando. Si lo hacemos, publicaremos las Condiciones enmendados en nuestro sitio web o aplicaciones móviles. Aceptas que tu uso continuo de la App constituye tu acuerdo con las Condiciones enmendadas. Si no estás de acuerdo con cualquier Condición enmendada que publiquemos, debes cancelar tu cuenta y dejar de usar la App y los Servicios. Excepto como se establece anteriormente, estas Condiciones solo pueden ser enmendadas o modificadas mediante un escrito expreso firmado por Euki, Inc. Puedes terminar tu acuerdo con estas Condiciones en cualquier momento y por cualquier razón eliminando tu cuenta. Euki, Inc. también puede terminar nuestro acuerdo bajo estas Condiciones en cualquier momento, por cualquier razón y sin previo aviso. Eso significa que podemos dejar de proporcionarte cualquier Servicio, o imponer nuevos límites o adicionales a tu capacidad para usar nuestros Servicios. Las secciones 2-5, 7, y 9-14 de las Condiciones, cualquier obligación acumulada y los recursos bajo estos, y cualquier otra disposición que por su naturaleza razonablemente deba sobrevivir, sobrevivirán la terminación o expiración de estas Condiciones.
 <b>10. Indemnización</b>
-Aceptas, en la medida permitida por la ley, indemnizar, defender y mantener indemne a Euki, Inc., sus licenciatarios, y a nuestros respectivos afiliados, directores, funcionarios, accionistas, miembros, empleados, licenciatarios, licenciatarios y agentes, de y contra cualquier y todas las quejas, cargos, reclamaciones, daños, pérdidas, costos, responsabilidades y gastos (incluidos los honorarios de abogados) debidos a, que surjan de, o se relacionen de cualquier manera con: (a) tu acceso o uso de la App o los Servicios; (b) tu violación de cualquier ley, regla o regulación; o (c) tu incumplimiento de estas Condiciones.
+Aceptas, en la medida permitida por la ley, indemnizar, defender y mantener indemne a Euki, Inc., sus licenciatarios, y a nuestros respectivos afiliados, directores, funcionarios, accionistas, miembros, empleados, licenciatarios, licenciatarios y agentes, de y contra cualquier y todas las quejas, cargos, reclamaciones, daños, pérdidas, costos, responsabilidades y gastos (incluidos los honorarios de abogados) debidos a, que surjan de, o se relacionen de cualquier manera con: (a) tu acceso o uso de la App o los Servicios; (b) tu violación de cualquier ley, regla o regulación; o © tu incumplimiento de estas Condiciones.
 <b>11. Limitación de Responsabilidad</b>
 EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY APLICABLE, EN NINGÚN CASO EUKI, INC., SUS LICENCIANTES, O NUESTROS RESPECTIVOS AFILIADOS, DIRECTORES, FUNCIONARIOS, ACCIONISTAS, MIEMBROS, EMPLEADOS, LICENCIANTES, LICENCIATARIOS O AGENTES SERÁN RESPONSABLES POR DAÑOS DIRECTOS, ESPECIALES, INDIRECTOS O CONSECUENTES, (INCLUYENDO DAÑOS POR PÉRDIDA DE NEGOCIOS, PÉRDIDA DE INGRESOS, PÉRDIDA DE DATOS O PÉRDIDA DE USO), YA SEA QUE SE BASEN EN CONTRATO, AGRAVIO (INCLUYENDO NEGLIGENCIA), O DE OTRO MODO, QUE SURJAN DE O ESTÉN RELACIONADOS CON ESTAS CONDICIONES, LA APP, LOS MATERIALES DE LA APP O LOS SERVICIOS, INCLUSO SI HEMOS SIDO INFORMADOS O DEBERÍAMOS HABER SABIDO DE LA POSIBILIDAD DE TALES DAÑOS. EN LA MEDIDA PERMITIDA POR LA LEY APLICABLE, NUESTRA RESPONSABILIDAD MÁXIMA Y LA DE CADA UNO DE NUESTROS LICENCIANTES HACIA TI POR CUALQUIER DAÑO QUE SURJA O ESTÉ RELACIONADO CON ESTAS CONDICIONES, LA APP, LOS MATERIALES DE LA APP O LOS SERVICIOS, YA SEA QUE SE BASEN EN CONTRATO, AGRAVIO (INCLUYENDO NEGLIGENCIA) U OTRO, SE LIMITARÁ A LAS CANTIDADES PAGADAS POR TI A NOSOTROS POR LOS SERVICIOS EN EL AÑO ANTERIOR (O, SI ERES UN USUARIO NO PAGANTE, A LA CANTIDAD DE $100). ALGUNAS JURISDICCIONES NO PERMITEN LA LIMITACIÓN O EXCLUSIÓN DE GARANTÍAS O DE RESPONSABILIDAD POR CIERTOS TIPOS DE DAÑOS, POR LO QUE ALGUNAS DE LAS LIMITACIONES O EXCLUSIONES ANTERIORES PUEDEN NO APLICARSE A TI. Cualquier reclamación que surja en relación con tu uso de la App debe presentarse dentro de un (1) año a partir de la fecha del evento que dio lugar a dicha reclamación. Los recursos bajo estas Condiciones son exclusivos y se limitan a los expresamente provistos en estas Condiciones, incluso si el recurso aplicable bajo estas Condiciones no cumple con su propósito esencial.
 <b>12. Arbitraje</b>
@@ -869,7 +869,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="iud_content_2">Para obtener un DIU, necesitas acudir a un/a médico que lo insertará en tu útero con un procedimiento que dura 2-3 minutos. Puedes pedirle a un/a médico que te retire el DIU en cualquier momento.</string>
     <string name="iud_content_3">
     <![CDATA[
-    El DIU es un 99% eficaz en la prevención del embarazo.<br/><br/>
+    El DIU es un 99%% eficaz en la prevención del embarazo.<br/><br/>
     El DIU hormonal funciona espesando el moco cervical para dificultar que el esperma fertilice un óvulo.
     ]]>
     </string>
@@ -907,7 +907,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="copper_uid_content_2">Para obtener un DIU, necesitas ir a un/a médico que lo insertará en tu útero con un procedimiento que dura 2-3 minutos. Puedes pedirle a un/a médico que retire tu DIU en cualquier momento.</string>
     <string name="copper_uid_content_3">
     <![CDATA[
-    El DIU es un 99% eficaz en la prevención del embarazo.<br/><br/>
+    El DIU es un 99%% eficaz en la prevención del embarazo.<br/><br/>
     El DIU sin hormonas funciona impidiendo que el esperma fertilice algún óvulo. El cobre del DIU modifica el patrón de natación de los espermatozoides y crea un entorno menos propicio para su supervivencia.
     ]]></string>
     <string name="copper_uid_content_4">
@@ -943,7 +943,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="implant_content_2">Se necesita un/a médico para colocar un implante. Anestesiarán tu brazo y entonces harán una pequeña incisión para poner la varilla bajo tu piel. Recuerda, cualquier persona tiene derecho de pedirle a un/a médico que le retire un implante en cualquier momento, sea cual sea la razón.</string>
     <string name="implant_content_3">
     <![CDATA[
-    El implante es aproximadamente un 99% eficaz en la prevención del embarazo.<br/><br/>
+    El implante es aproximadamente un 99%% eficaz en la prevención del embarazo.<br/><br/>
     Actúa liberando una hormona que impide que los ovarios liberen óvulos y que espesa el moco cervical, lo que dificulta que los espermatozoides lleguen al óvulo.
     ]]>
     </string>
@@ -981,7 +981,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="shot_content_2">Un/a médico aplica una inyección cada tres meses. Puedes interrumpir el tratamiento cuando quieras.</string>
     <string name="shot_content_3">
     <![CDATA[
-    La inyección es aproximadamente un 94% eficaz en la prevención del embarazo, basándose en su uso típico.<br/><br/>
+    La inyección es aproximadamente un 94%% eficaz en la prevención del embarazo, basándose en su uso típico.<br/><br/>
     Actúa inyectando hormonas que impiden que los ovarios liberen óvulos y que espesan el moco cervical, lo que dificulta que los espermatozoides lleguen al óvulo.
     ]]>
     </string>
@@ -1019,7 +1019,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="patch_content_2">Un/a médico puede proporcionarte un parche, que se coloca sobre la piel. Cada semana, durante tres semanas, el parche antiguo debe retirarse y un nuevo parche debe colocarse en un lugar diferente. En la cuarta semana, si alguien desea tener el periodo, debe retirar el parche.</string>
     <string name="patch_content_3">
     <![CDATA[
-    El parche es aproximadamente un 91% eficaz en la prevención del embarazo, si recuerdas colocarlo cada semana durante tres semanas. La prevención del embarazo disminuye si pesas más de 198 libras/ 90 kg.<br/><br/>
+    El parche es aproximadamente un 91%% eficaz en la prevención del embarazo, si recuerdas colocarlo cada semana durante tres semanas. La prevención del embarazo disminuye si pesas más de 198 libras/ 90 kg.<br/><br/>
     Actúa inyectando hormonas que impiden que los ovarios liberen óvulos y que también espesan el moco cervical, lo que dificulta que los espermatozoides lleguen al óvulo.
     ]]>
     </string>
@@ -1069,7 +1069,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     Puedes parar de tomar la píldora en cualquier momento si decides que quieres cambiar de método o que deseas un embarazo.
     ]]>
     </string>
-    <string name="pill_content_3">La píldora es aproximadamente un 91% eficaz, si recuerdas tomarla cada día a la misma hora.</string>
+    <string name="pill_content_3">La píldora es aproximadamente un 91%% eficaz, si recuerdas tomarla cada día a la misma hora.</string>
     <string name="pill_content_4">
     <![CDATA[
     &bull; Es realmente fácil de usar - sólo tienes que tragarla.<br/><br/>
@@ -1114,7 +1114,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     </string>
     <string name="ring_content_3">
     <![CDATA[
-    El anillo es aproximadamente un 91% eficaz en la prevención del embarazo, basándose en su uso típico.<br/><br/>
+    El anillo es aproximadamente un 91%% eficaz en la prevención del embarazo, basándose en su uso típico.<br/><br/>
     Actúa liberando hormonas que impiden que los ovarios liberen óvulos y que espesan el moco cervical, lo que dificulta que los espermatozoides lleguen al óvulo.
     ]]>
     </string>
@@ -1157,7 +1157,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     Querrás lavar el diafragma y el capuchón cervical después de cada uso y desechar la esponja en la basura después de cada uso. Puedes dejar de utilizar estos métodos en cualquier momento.
     ]]>
     </string>
-    <string name="other_barriers_content_3">
+    <string name="other_barriers_content_3" formatted="false">
     <![CDATA[
     El diafragma tiene aproximadamente un 88% de eficacia para prevenir el embarazo, el capuchón cervical aproximadamente un 71% de eficacia, y la esponja aproximadamente un 76% de eficacia, si se usan correctamente y de manera constante.<br/><br/>
     Si evitar un embarazo es tu principal prioridad, estos métodos pueden no ser la mejor opción para ti.
@@ -1209,7 +1209,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     </string>
     <string name="condom_content_3">
     <![CDATA[
-    Normalmente el condón "masculino" es aproximadamente un 82% eficaz en la prevención del embarazo.<br/><br/>
+    Normalmente el condón "masculino" es aproximadamente un 82%% eficaz en la prevención del embarazo.<br/><br/>
     El condón "femenino" tiene aproximadamente un 79% de eficacia. Puede que quieras tener anticonceptivos de emergencia a mano por si el condón se rompe.
     ]]>
     </string>
@@ -2162,7 +2162,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     Esta Política de Privacidad (“La Política”) describe el tipo de información que [Euki, Inc.] (“Euki”, “nosotras” o “nosotros”) (la “Compañía” o “nosotras”) almacena de la(o)s usuaria(o)s de la Aplicación Euki (que llamamos “la Aplicación”). Si tienes alguna pregunta sobre esta Política, te invitamos a contactarnos en <a href="mailto:eukiapp@protonmail.com">[eukiapp@protonmail.com]</a>. Respetamos enormemente tu privacidad e información personal. Esta Política establece nuestro compromiso con tu privacidad. Es importante que leas esta Política porque al usar la Aplicación, expresas tu consentimiento con las prácticas de privacidad descritas en esta Política.<br/><br/>
 
     <b>2. Información que Recopilamos y Cómo es Usada</b><br/>
-    No recopilamos ninguna información personal ni ningún otro tipo de información de la(o)s usuaria(o)s (incluyendo información sobre el uso de la Aplicación), excepto la Información Voluntaria, tal y como se define y describe en detalle más adelante. Cuando contactas voluntariamente con nuestro servicio de atención al cliente o te comunicas con nosotras por escrito (independientemente de la Aplicación), tendremos acceso a la información que tú decidas compartir con nosotras (“Información Voluntaria”). Ten la garantía de que, si nos contactas para buscar asistencia o con preguntas via email, guardaremos tu dirección de correo electrónico únicamente con el fin de responder a tu solicitud y cumpliendo con todas las leyes vigentes. En ningún otro caso recopilamos, ni guardamos, ni compartimos ninguna información de tipo personal que específicamente identifique a una persona en particular (como su nombre, dirección, fecha de nacimiento, número de teléfono, datos de seguridad social, o cualquier otra información que permita identificarla), ni información sobre su localización, ni ninguna otra información sobre la(el) usuaria(o). La Aplicación no recoge, ni tiene la capacidad de recopilar, ninguna información sobre la(o)s usuaria(o)s. No es necesario registrarse para utilizar la Aplicación. Si lo deseas puedes configurar una Número de Identificación Personal (PIN), que no queda registrado en modo alguno por la Aplicación. Si olvidas tu PIN, no habrá modo de recuperar ese PIN y deberás comenzar de cero el uso de la aplicación con un nuevo PIN. Respetamos tu privacidad. Por lo tanto, repetimos - la Aplicación no recoge ninguna información que pueda identificar a la persona, ni ninguna información anónima de manera automática, como por ejemplo el tipo de dispositivo móvil que estés utilizando, el identificador único de tus dispositivos móviles, la dirección de IP de tu dispositivo móvil, el sistema operativo de tu móvil, el tipo de navegador de Internet que utilices, ni ninguna información sobre el uso que hagas de la Aplicación. Únicamente en la medida en que nos proporciones alguna Información Voluntaria podremos compartirla, y sólo de las maneras siguientes:<br/>
+    No recopilamos ninguna información personal ni ningún otro tipo de información de la(o)s usuaria(o)s (incluyendo información sobre el uso de la Aplicación), excepto la Información Voluntaria, tal y como se define y describe en detalle más adelante. Cuando contactas voluntariamente con nuestro servicio de atención al cliente o te comunicas con nosotras por escrito (independientemente de la Aplicación), tendremos acceso a la información que tú decidas compartir con nosotras (“Información Voluntaria”). Ten la garantía de que, si nos contactas para buscar asistencia o con preguntas vía email, guardaremos tu dirección de correo electrónico únicamente con el fin de responder a tu solicitud y cumpliendo con todas las leyes vigentes. En ningún otro caso recopilamos, ni guardamos, ni compartimos ninguna información de tipo personal que específicamente identifique a una persona en particular (como su nombre, dirección, fecha de nacimiento, número de teléfono, datos de seguridad social, o cualquier otra información que permita identificarla), ni información sobre su localización, ni ninguna otra información sobre la(el) usuaria(o). La Aplicación no recoge, ni tiene la capacidad de recopilar, ninguna información sobre la(o)s usuaria(o)s. No es necesario registrarse para utilizar la Aplicación. Si lo deseas puedes configurar una Número de Identificación Personal (PIN), que no queda registrado en modo alguno por la Aplicación. Si olvidas tu PIN, no habrá modo de recuperar ese PIN y deberás comenzar de cero el uso de la aplicación con un nuevo PIN. Respetamos tu privacidad. Por lo tanto, repetimos - la Aplicación no recoge ninguna información que pueda identificar a la persona, ni ninguna información anónima de manera automática, como por ejemplo el tipo de dispositivo móvil que estés utilizando, el identificador único de tus dispositivos móviles, la dirección de IP de tu dispositivo móvil, el sistema operativo de tu móvil, el tipo de navegador de Internet que utilices, ni ninguna información sobre el uso que hagas de la Aplicación. Únicamente en la medida en que nos proporciones alguna Información Voluntaria podremos compartirla, y sólo de las maneras siguientes:<br/>
     • por requerimiento legal, como por ejemplo para cumplir con una citación u otro proceso legal parecido; o<br/>
     • cuando creamos de buena fe que la revelación de dichos datos sea necesaria para proteger nuestros derechos, proteger tu seguridad o la seguridad de terceros, investigar un fraude, o responder a un requerimiento gubernamental.<br/><br/>
 
@@ -2220,7 +2220,7 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="day_summary_data_title">Hiciste seguimiento a:</string>
     <string name="day_summary_empty_past_title">¿Necesitas retroceder?</string>
     <string name="day_summary_empty_today_title">¿Qué hay de nuevo en tu cuerpo?</string>
-    <string name="cycle_summary_days_format">%s día</string>
+    <string name="cycle_summary_days_format">%1$s %2$s</string>
     <string name="avg_cycle_length">Duración promedio del ciclo</string>
     <string name="cycle_variation">Variación de ciclo</string>
     <string name="avg_period_length">Longitud promedio del ciclo</string>

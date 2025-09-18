@@ -7,7 +7,7 @@
     <string name="got_it">Got it!</string>
     <string name="delete">Delete</string>
     <string name="error">Error</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="skip">Skip</string>
     <string name="go">Enter</string>
     <string name="none">None</string>
@@ -200,7 +200,7 @@ You are responsible for any mobile charges that you may incur in connection with
 <b>9. Modifications; Termination</b>
 We reserve the right to modify the App or the Services at any time, without notice to you. We may also from time to time amend these Terms prospectively. If we do so, we will post the amended Terms on our website or mobile applications. You agree that your continued use of the App constitutes your agreement to the amended Terms. If you do not agree to any amended Terms that we publish, you must terminate your account and cease using the App and the Services. Except as set forth above, these Terms may be amended or modified only by an express writing signed by Euki, Inc.. You can terminate your agreement with these Terms at any time and for any reason by deleting your account. Euki, Inc. may also terminate our agreement under these Terms at any time, for any reason, and without advance notice. That means that we may stop providing you with any Services, or impose new or additional limits on your ability to use our Services. Sections 2-5, 7, and 9-14 of the Terms, any accrued obligations and remedies hereunder, and any other provisions that by their nature should reasonably survive, shall survive the termination or expiration of these Terms.
 <b>10. Indemnity</b>
-You agree, to the extent permitted by law, to indemnify, defend, and hold harmless Euki, Inc., its licensors, and our respective affiliates, directors, officers, stockholders, members, employees, licensors, licensees, and agents, from and against any and all complaints, charges, claims, damages, losses, costs, liabilities, and expenses (including attorneys’ fees) due to, arising out of, or relating in any way to: (a) your access to or use of the App or the Services; (b) your violation of any law, rule or regulation; or (c) your breach of these Terms.
+You agree, to the extent permitted by law, to indemnify, defend, and hold harmless Euki, Inc., its licensors, and our respective affiliates, directors, officers, stockholders, members, employees, licensors, licensees, and agents, from and against any and all complaints, charges, claims, damages, losses, costs, liabilities, and expenses (including attorneys’ fees) due to, arising out of, or relating in any way to: (a) your access to or use of the App or the Services; (b) your violation of any law, rule or regulation; or © your breach of these Terms.
 <b>11. Limitation of Liability</b>
 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL EUKI, INC., ITS LICENSORS, OR OUR RESPECTIVE AFFILIATES, DIRECTORS, OFFICERS, STOCKHOLDERS, MEMBERS, EMPLOYEES, LICENSORS, LICENSEES OR AGENTS BE LIABLE FOR ANY DIRECT, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, (INCLUDING DAMAGES FOR LOSS OF BUSINESS, LOSS OF REVENUE, LOSS OF DATA, OR LOSS OF USE), WHETHER BASED ON CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE ARISING FROM OR RELATING TO THESE TERMS, THE APP, THE APP MATERIALS OR THE SERVICES, EVEN IF WE HAVE BEEN INFORMED OR SHOULD HAVE KNOWN OF THE POSSIBILITY OF SUCH DAMAGES TO THE EXTENT PERMITTED BY APPLICABLE LAW, OUR AND EACH OF OUR LICENSOR’S MAXIMUM AGGREGATE LIABILITY TO YOU FOR ANY DAMAGES ARISING FROM OR RELATING TO THESE TERMS, THE APP, THE APP MATERIALS OR THE SERVICES, WHETHER BASED ON CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, SHALL BE LIMITED TO THE AMOUNTS PAID BY YOU TO US FOR THE SERVICES IN THE PRIOR YEAR (OR, IF YOU ARE A NON-FEE PAYING USER, TO THE AMOUNT OF $100). SOME JURISDICTIONS DO NOT ALLOW THE LIMITATION OR EXCLUSION OF WARRANTIES OR OF LIABILITY FOR CERTAIN TYPES OF DAMAGES, SO SOME OF THE ABOVE LIMITATIONS OR EXCLUSIONS MAY NOT APPLY TO YOU. Any claims arising in connection with your use of the App must be brought within one (1) year of the date of the event giving rise to such claim. Remedies under these Terms are exclusive and are limited to those expressly provided for in these Terms, even if the applicable remedy under these Terms fails of its essential purpose.
 <b>12. Arbitration</b>
@@ -782,8 +782,8 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     <string name="misoprostol_12_subheading_4">Medical aftercare</string>
     <string name="misoprostol_12_subheading_5">Emotional aftercare</string>
     <string name="abortion_subheading_1_content">Most people who use medications to have an abortion experience bleeding and cramping. It is normal to pass blood clots that range in size from small to large (the size of golf balls or lemons). Once the pregnancy has passed, bleeding may resemble a flow similar to a period. Cramping can also vary greatly from person to person. For many people, the cramping can be painful, though it tends to subside after passing the pregnancy. Pain medication, a heating pad, rest, and a massage may help. It is also normal to experience nausea, vomiting, diarrhea, and weakness. If these symptoms last for more than 24 hours after taking misoprostol, it is recommended to call the clinic where you got the medications or to seek medical care. Source: National Abortion Federation</string>
-    <string name="abortion_subheading_2_content">Most people know when a medication abortion was successful because pregnancy symptoms begin to disappear within a few days, and they have seen pregnancy tissue come out during the abortion. It is important to make sure the abortion was successful. Some people decide to take a pregnancy test 3 weeks after having an abortion, and some people decide to get an ultrasound or go back to a clinic for a check up after a medication abortion. For any concerns about an abortion that might not be complete, it\'s recommended to call a trusted clinic or seek medical care. The Miscarriage and Abortion Hotline (1-833-246-2632), is also available by phone or text 8am-11pm anywhere in the US. If it is a medical emergency, call 9-1-1. No matter how or where an abortion happened, everyone always has the right to share or not to share any information with a medical provider—including information about whether they have had an abortion. Some people might feel more comfortable saying that they had a miscarriage. You can contact the Repro Legal Hotline (844-868-2812) for any legal questions about abortion. Source: Women Help Women</string>
-    <string name="abortion_subheading_3_content">Medication abortion is safe and complications are very rare. Still, it’s important to know when to seek medical care. Here are some potential signs to watch out for: - Prolonged bleeding (bleeding that continues for more than 3 weeks) - Excruciating pain that cannot be managed with home remedies like over-the-counter pain medication, a heating pad, and massages - Blood clots that are larger than a lemon - A high fever (higher than 100.4) that lasts for more than a day - Smelly discharge - Flu-like symptoms more than 24 hours after taking misoprostol For any concerns about any side effects, it\'s recommended to call a trusted clinic or seek medical care. The Miscarriage and Abortion Hotline (1-833-246-2632), is also available by phone or text 8am-11pm anywhere in the US. If it is a medical emergency, call 9-1-1. No matter how or where an abortion happened, everyone always has the right to share or not to share any information with a medical provider—including information about whether they have had an abortion. Some people might feel more comfortable saying that they had a miscarriage. You can contact the Repro Legal Hotline (844-868-2812) for any legal questions about abortion. Source: Women on Web</string>
+    <string name="abortion_subheading_2_content">Most people know when a medication abortion was successful because pregnancy symptoms begin to disappear within a few days, and they have seen pregnancy tissue come out during the abortion. It is important to make sure the abortion was successful. Some people decide to take a pregnancy test 3 weeks after having an abortion, and some people decide to get an ultrasound or go back to a clinic for a check up after a medication abortion. For any concerns about an abortion that might not be complete, it\'s recommended to call a trusted clinic or seek medical care. The Miscarriage and Abortion Hotline (1–833-246-2632), is also available by phone or text 8am-11pm anywhere in the US. If it is a medical emergency, call 9-1-1. No matter how or where an abortion happened, everyone always has the right to share or not to share any information with a medical provider—including information about whether they have had an abortion. Some people might feel more comfortable saying that they had a miscarriage. You can contact the Repro Legal Hotline (844-868-2812) for any legal questions about abortion. Source: Women Help Women</string>
+    <string name="abortion_subheading_3_content">Medication abortion is safe and complications are very rare. Still, it’s important to know when to seek medical care. Here are some potential signs to watch out for: – Prolonged bleeding (bleeding that continues for more than 3 weeks) – Excruciating pain that cannot be managed with home remedies like over-the-counter pain medication, a heating pad, and massages - Blood clots that are larger than a lemon - A high fever (higher than 100.4) that lasts for more than a day - Smelly discharge - Flu-like symptoms more than 24 hours after taking misoprostol For any concerns about any side effects, it\'s recommended to call a trusted clinic or seek medical care. The Miscarriage and Abortion Hotline (1-833-246-2632), is also available by phone or text 8am-11pm anywhere in the US. If it is a medical emergency, call 9-1-1. No matter how or where an abortion happened, everyone always has the right to share or not to share any information with a medical provider—including information about whether they have had an abortion. Some people might feel more comfortable saying that they had a miscarriage. You can contact the Repro Legal Hotline (844-868-2812) for any legal questions about abortion. Source: Women on Web</string>
     <string name="abortion_subheading_4_content">It can be helpful to have a friend or family member nearby you during the medication abortion process to provide care just like they would for someone who had a minor illness. After taking the medications, it is not uncommon to have an upset stomach. To minimize nausea, vomiting, or diarrhea, light eating is generally recommended, including avoiding greasy or spicy foods, and drinking plenty of fluids. A slight fever, chills, and hot flashes can also be common. For people who went to a clinic for care, it\'s a good idea to call the clinic if you have a fever that persists for more than 24 hours. Source: National Abortion Federation</string>
     <string name="abortion_subheading_5_content">A decision to end a pregnancy can be complex, and some people find they need or want help coping after an abortion. There is no right or wrong way to feel after an abortion. Feelings of happiness, sadness, empowerment, anxiety, grief, relief, and guilt are all common. People often talk about feeling judged for their decision to have an abortion. Sometimes this comes from family, friends, or providers. Reading stories of other people’s abortion experiences or talking to family and friends can help people to remember that they are not alone. More than one million abortions happen every year in the US, and people who have abortions come from every race, religion, gender, class, state, and demographic category you can think of. Some people need extra help coping after their abortion. Reaching out for support from people who can provide unconditional love can help people feel seen and heard. Engaging in creative activities like drawing, painting, writing, and dancing can help people to explore their emotions. Physical activities like hiking, biking, running, swimming, and other forms of exercise can help people feel connected to their body. Contacting a mental health professional is always okay. Abortion doulas provide support during and after an abortion. Google \"abortion doula\" to see if there\'s a local doula collective near you, or ask the abortion clinic if they know of one. The All-Options Talkline is a free phone hotline that provides support to people before, during, and after their abortions. They also provide support related to other reproductive experiences, like parenting and adoption. You can call them at 1-888-493-0092 if you want to talk to someone. Source: All-Options</string>
     <string name="mife_miso_12_weeks">Mifepristone and misoprostol up to 12 weeks</string>
@@ -880,7 +880,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     <string name="iud_content_2">To get an IUD, you need to go to a medical provider, who will insert it in your uterus in a 2-3 minute procedure. You can have your IUD removed by a medical provider at any time.</string>
     <string name="iud_content_3">
     <![CDATA[
-    The IUD is about 99% effective at preventing pregnancy.<br/><br/>
+    The IUD is about 99%% effective at preventing pregnancy.<br/><br/>
     The hormonal IUD works by thickening the mucus around the cervix to make it difficult for sperm to fertilize an egg.
     ]]>
     </string>
@@ -918,7 +918,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     <string name="copper_uid_content_2">To get an IUD, you need to go to a clinician, who will insert it in your uterus in a 2-3 minute procedure. You can have a clinician remove your IUD at any time.</string>
     <string name="copper_uid_content_3">
     <![CDATA[
-    The IUD is about 99% effective in preventing pregnancy.<br/><br/>
+    The IUD is about 99%% effective in preventing pregnancy.<br/><br/>
     The non-hormonal IUD works by preventing sperm from fertilizing an egg. Copper in the IUD changes the sperm\'s swimming pattern and creates a less hospitable environment for sperm to survive.
     ]]>
     </string>
@@ -955,7 +955,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     <string name="implant_content_2">A clinician has to insert the implant. They’ll numb the upper arm and then make a small incision to put the rod under the skin. Remember, anyone has the right to ask a clinician to remove an implant at any time, no matter what the reason.</string>
     <string name="implant_content_3">
     <![CDATA[
-    The implant is about 99% effective at preventing pregnancy.<br/><br/>
+    The implant is about 99%% effective at preventing pregnancy.<br/><br/>
     It works by releasing a hormone that prevents your ovaries from releasing an egg and also thickens your cervical mucus, making it difficult for sperm to reach an egg.
     ]]>
     </string>
@@ -993,7 +993,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     <string name="shot_content_2">A clinician gives you an injection every three months. You can stop the shot whenever you want.</string>
     <string name="shot_content_3">
     <![CDATA[
-    The shot is about 94% effective at preventing pregnancy based on typical use.<br/><br/>
+    The shot is about 94%% effective at preventing pregnancy based on typical use.<br/><br/>
     It works by injecting hormones that prevent your ovaries from releasing an egg and also thickens your cervical mucus, making it difficult for sperm to reach an egg.
     ]]>
     </string>
@@ -1031,7 +1031,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     <string name="patch_content_2">People can get the patch from a clinician, and stick it on their skin. Every week for three weeks, the old patch has to come off and a new patch has to get put on in a different place. In the fourth week, if someone wants to get a period, they can take the patch off.</string>
     <string name="patch_content_3">
     <![CDATA[
-    The patch is about 91% effective at preventing pregnancy, if you remember to put it on every week for three weeks. Pregnancy prevention decreases if you weigh more than 198 lbs.<br/><br/>
+    The patch is about 91%% effective at preventing pregnancy, if you remember to put it on every week for three weeks. Pregnancy prevention decreases if you weigh more than 198 lbs.<br/><br/>
     It works by injecting hormones that prevent your ovaries from releasing an egg and also thickens your cervical mucus, which makes it difficult for the sperm to reach an egg.
     ]]>
     </string>
@@ -1081,7 +1081,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     You can stop taking the pill at any time if you decide you want to change methods or want to become pregnant.
     ]]>
     </string>
-    <string name="pill_content_3">The pill is about 91% effective if you’re able to take it at the same time every day.</string>
+    <string name="pill_content_3">The pill is about 91%% effective if you’re able to take it at the same time every day.</string>
     <string name="pill_content_4">
     <![CDATA[
     &bull; It’s really easy to use – you just need to swallow it.<br/><br/>
@@ -1126,7 +1126,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     </string>
     <string name="ring_content_3">
     <![CDATA[
-    The ring is about 91% effective at preventing pregnancy with typical use.<br/><br/>
+    The ring is about 91%% effective at preventing pregnancy with typical use.<br/><br/>
     It works by releasing hormones that prevent your ovaries from releasing an egg and also thickens your cervical mucus, which makes it difficult for the sperm to reach an egg.
     ]]>
     </string>
@@ -1169,9 +1169,9 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     You’ll want to wash your diaphragm and cervical cap after each use and throw the sponge in the trash after each use. You can stop using these methods at any time.
     ]]>
     </string>
-    <string name="other_barriers_content_3">
+    <string name="other_barriers_content_3" formatted="false">
     <![CDATA[
-    The diaphragm is about 88% effective at preventing pregnancy, the cervical cap is about 71% effective, and the sponge is about 76% effective, if you use them correctly and consistently.<br/><br/>
+    The diaphragm is about 88%% effective at preventing pregnancy, the cervical cap is about 71%% effective, and the sponge is about 76%% effective, if you use them correctly and consistently.<br/><br/>
     If not getting pregnant is your top priority, these may not be the best options for you.
     ]]>
     </string>
@@ -1221,8 +1221,8 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     </string>
     <string name="condom_content_3">
     <![CDATA[
-    "Male" condoms are typically about 82% effective at preventing pregnancy.<br/><br/>
-    The "female condom" is about 79% effective at preventing pregnancy. You may want to have emergency contraception on hand just in case the condom breaks.
+    "Male" condoms are typically about 82%% effective at preventing pregnancy.<br/><br/>
+    The "female condom" is about 79%% effective at preventing pregnancy. You may want to have emergency contraception on hand just in case the condom breaks.
     ]]>
     </string>
     <string name="condom_content_4">
@@ -1255,7 +1255,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     </string>
     <string name="pull_out_content_1">The pull out method is when the partner with a penis pulls out of the vagina, anus, or mouth before ejaculating.</string>
     <string name="pull_out_content_2">This method is dependent on the partner with a penis knowing exactly when they will ejaculate, and pulling out before that happens. That partner has to make sure to keep semen away from your anus, vulva, or mouth.</string>
-    <string name="pull_out_content_3">Pull out is typically about 78% effective, and your partner has to do it exactly right every time for it to be effective in preventing pregnancy. It may not be the best option for you if your top priority is preventing pregnancy.</string>
+    <string name="pull_out_content_3">Pull out is typically about 78%% effective, and your partner has to do it exactly right every time for it to be effective in preventing pregnancy. It may not be the best option for you if your top priority is preventing pregnancy.</string>
     <string name="pull_out_content_4">
     <![CDATA[
     &bull; It doesn’t cost anything.<br/><br/>
@@ -1280,7 +1280,7 @@ Euki, Inc. welcomes comments, questions, concerns, or suggestions. Please send a
     Both of these methods are considered permanent. Even though it may be possible to reverse a tubal ligation or vasectomy, this might not be the case. Talk to your clinician if you think you may want to reverse it in the future.
     ]]>
     </string>
-    <string name="tubes_tied_content_3">These methods are 99% effective at preventing pregnancy.</string>
+    <string name="tubes_tied_content_3">These methods are 99%% effective at preventing pregnancy.</string>
     <string name="tubes_tied_content_4">
     <![CDATA[
     &bull; Once you have a tubal ligation or vasectomy, you don’t need to worry about contraception for pregnancy prevention.<br/><br/>
@@ -1458,7 +1458,7 @@ If cost is a concern for you, ask your clinician about payment plans, discounts,
     <![CDATA[
     There\'s no perfect contraceptive method, and sometimes, you have to try several different ones until you find the right fit. This process can be overwhelming and frustrating, especially if you can\'t find a method that works for you.<br/><br/>
     It\'s up to you to determine what side effects you can handle, and which ones are deal breakers. What is easy to tolerate for a friend might be totally different for you. Don\'t let anyone, not even a health professional, tell you that your experience on birth control doesn\'t matter.<br/><br/>
-    It\'s normal to be frustrated that there isn\'t a 100% effective, side effect-free contraceptive method. Maybe what works best for you isn\'t what\'s most effective to prevent pregnancy, but it fits your life and relationships. That\'s okay!<br/><br/>
+    It\'s normal to be frustrated that there isn\'t a 100%% effective, side effect-free contraceptive method. Maybe what works best for you isn\'t what\'s most effective to prevent pregnancy, but it fits your life and relationships. That\'s okay!<br/><br/>
     If you feel comfortable, talk to your provider about your concerns, and see if they can make a recommendation for you. Remember, you can always get emergency contraception at a local pharmacy or clinic if you need it.
     ]]>
     </string>
@@ -2075,7 +2075,8 @@ If cost is a concern for you, ask your clinician about payment plans, discounts,
     </string>
     <string name="pregnancy_options_content">
     <![CDATA[
-    If your period is late and you think you might be pregnant, the first step is to take a pregnancy test. You can find these at most grocery stores and pharmacies. They cost about $3 and are 99% accurate when used correctly.<br/><br/>
+    If your period is late and you think you might be pregnant, the first step is to take a pregnancy test. You can find these at most grocery stores and pharmacies. They cost about $3 and are 99%
+    ccurate when used correctly.<br/><br/>
     If you\'re pregnant and not sure what you want to do, Euki is here to provide you with helpful information on all of your options.<br/><br/>
     People make different decisions when faced with a pregnancy, and everyone deserves to have access and support for whatever option they choose. Any decision you make about a pregnancy should be your decision.<br/><br/>
     If someone in your life is trying to influence or force you into carrying the pregnancy to term, making an adoption plan, or having an abortion, that\'s called coercion—and it\’s not okay. If you are afraid for your safety, or your partner is harming you in any way, call the Rape Abuse & Incest National Network (RAINN) Hotline at 1-800-656-4673.<br/><br/>
@@ -2241,7 +2242,7 @@ If cost is a concern for you, ask your clinician about payment plans, discounts,
     <string name="day_summary_data_title">You tracked:</string>
     <string name="day_summary_empty_past_title">Need to backtrack?</string>
     <string name="day_summary_empty_today_title">What’s new with your body?</string>
-    <string name="cycle_summary_days_format">%s day</string>
+    <string name="cycle_summary_days_format">%1$s %2$s</string>
     <string name="avg_cycle_length">Avg. cycle length</string>
     <string name="cycle_variation">Cycle variation</string>
     <string name="avg_period_length">Avg. period length</string>
@@ -2614,7 +2615,7 @@ If cost is a concern for you, ask your clinician about payment plans, discounts,
     <string name="how_does_birth_control_affect_my_cycle">How does birth control affect my cycle?</string>
     <string name="how_does_birth_control_affect_my_cycle_content">Different forms of birth control can have different effects on your cycle. For example, the hormonal IUD works by thickening the mucus in the cervix, thinning the uterine lining, and partially suppressing ovulation, a combination which can stop monthly bleeding in many people. A copper IUD does not affect the cycle but instead makes the uterus uninhabitable for eggs and sperm. This means that some people\'s period remains the same or gets heavier. You can find more specific information on how each type of contraception affects menstruation here.</string>
     <string name="what_is_a_regular_period">What is a regular period?</string>
-    <string name="what_is_a_regular_period_content">A ”regular” period usually lasts between 21 and 45 days. This means that periods will start 21-35 days apart and last between 2-7 days. A period can be altered by things like taking contraception, pregnancy, using testosterone, and changes in diet and exercise. One might consider consulting a health care provider if they\'re experiencing more frequent bleeding or have gone over two months without a period.</string>
+    <string name="what_is_a_regular_period_content">A ”regular” period usually lasts between 21 and 45 days. This means that periods will start 21–35 days apart and last between 2-7 days. A period can be altered by things like taking contraception, pregnancy, using testosterone, and changes in diet and exercise. One might consider consulting a health care provider if they\'re experiencing more frequent bleeding or have gone over two months without a period.</string>
     <string name="what_happens_during_a_period">What happens during a period?</string>
     <string name="what_happens_during_a_period_content">The first day of a period often begins with light spotting that is usually thick and brownish. Then the period blood changes to a darker red.</string>
     <string name="mental_and_emotional_health">Mental and emotional health</string>

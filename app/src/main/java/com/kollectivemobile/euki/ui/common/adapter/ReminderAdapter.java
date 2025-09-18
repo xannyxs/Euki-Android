@@ -2,6 +2,7 @@ package com.kollectivemobile.euki.ui.common.adapter;
 
 import static com.kollectivemobile.euki.App.getContext;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -65,6 +66,7 @@ public class ReminderAdapter extends RecyclerView.Adapter implements RemindersLi
     return null;
   }
 
+  @SuppressLint("RecyclerView")
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
     if (holder instanceof ExistentHolder && mCurrentReminderItem != null) {
