@@ -22,7 +22,6 @@ public class App extends Application {
         sContext = this;
 
         mAppComponent = DaggerAppComponent.builder()
-
                 .appModule(new AppModule(this))
                 .build();
 
