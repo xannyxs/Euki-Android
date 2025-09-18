@@ -232,7 +232,6 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="stis">Infecciones de Transmisión Sexual</string>
     <string name="home">Inicio</string>
     <string name="calendar">Calendario</string>
-    <string name="bookmarks">Favoritos</string>
     <string name="privacy">Privacidad</string>
     <string name="source_format">Fuente: %s</string>
     <string name="knowledge_base">Información</string>
@@ -2205,8 +2204,6 @@ Euki, Inc. acoge con beneplácito comentarios, preguntas, preocupaciones o suger
     <string name="track_bleeding_tutorial_content">Obtén predicciones y estadísticas precisas sobre la menstruación en el resumen de tu ciclo.</string>
     <string name="track_counter_tutorial_title">Pulsa para la cuenta</string>
     <string name="track_counter_tutorial_content">Mantén pulsado el icono para poner el contador a cero.</string>
-    <string name="bookmarks_empty_title">Los marcadores aparecen aquí</string>
-    <string name="bookmarks_empty_content">Puede marcar la información desde la pestaña Inicio para acceder fácilmente.</string>
     <string name="pin_code_update_alert_title">Actualización de PIN falso</string>
     <string name="pin_code_update_alert_message">Si alguien te pide que abras Euki y no quieres que vea tus datos, introduce el PIN %s cuando abras la aplicación y mostraremos una pantalla falsa.</string>
     <string name="nav_cycle">Ciclo</string>
