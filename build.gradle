@@ -1,7 +1,7 @@
 buildscript {
     ext {
         kotlin_version = '1.9.24'
-        gradle_version = '8.5.1'
+        gradle_version = '8.13.0'
     }
     repositories {
         google()
