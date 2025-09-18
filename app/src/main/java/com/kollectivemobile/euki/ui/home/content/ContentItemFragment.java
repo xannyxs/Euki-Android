@@ -146,7 +146,7 @@ public class ContentItemFragment extends BaseFragment implements ContentGridSele
         }
 
         if (mContentItem.getExpandableItems() != null && mContentItem.getExpandableItems().size() > 0) {
-            RecyclerView.Adapter expandableAdapter = new ContentRowExpandableAdapter(getContext(), mContentItem.getExpandableItems(), this, this, mBookmarkManager);
+            RecyclerView.Adapter expandableAdapter = new ContentRowExpandableAdapter(getContext(), mContentItem.getExpandableItems(), this, this);
 
             final Parcelable eimSavedState = (savedInstanceState != null) ? savedInstanceState.getParcelable(SAVED_STATE_EXPANDABLE_ITEM_MANAGER) : null;
             mRecyclerViewExpandableItemManager = new RecyclerViewExpandableItemManager(eimSavedState);
