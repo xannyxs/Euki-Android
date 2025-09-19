@@ -20,12 +20,12 @@ import com.kollectivemobile.euki.model.database.entity.CalendarItem;
 import com.kollectivemobile.euki.networking.EukiCallback;
 import com.kollectivemobile.euki.networking.ServerError;
 import com.kollectivemobile.euki.ui.calendar.CalendarFragment;
-import com.kollectivemobile.euki.ui.auth.DeviceAuthFragment;
 import com.kollectivemobile.euki.ui.common.BaseActivity;
 import com.kollectivemobile.euki.ui.common.Dialogs;
 import com.kollectivemobile.euki.ui.common.views.NavBar;
 import com.kollectivemobile.euki.ui.common.views.NavBarListener;
 import com.kollectivemobile.euki.ui.cycle.CycleFragment;
+import com.kollectivemobile.euki.ui.home.HomeFragment;
 import com.kollectivemobile.euki.ui.privacy.PrivacyFragment;
 import com.kollectivemobile.euki.ui.track.TrackActivity;
 import com.kollectivemobile.euki.utils.Utils;
@@ -181,7 +181,7 @@ public class MainActivity extends BaseActivity {
       case 2:
         break;
       case 3:
-        fragment = new DeviceAuthFragment();
+        fragment = HomeFragment.newInstance();
         break;
       case 4:
         fragment = PrivacyFragment.newInstance();

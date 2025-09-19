@@ -19,12 +19,10 @@ import com.kollectivemobile.euki.databinding.FragmentEmptyBinding;
 
 public class EmptyFragment extends Fragment {
 
-    private FragmentEmptyBinding binding;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout using View Binding
-        binding = FragmentEmptyBinding.inflate(inflater, container, false);
+        FragmentEmptyBinding binding = FragmentEmptyBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
