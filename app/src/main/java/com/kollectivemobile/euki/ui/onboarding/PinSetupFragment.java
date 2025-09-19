@@ -103,8 +103,6 @@ public class PinSetupFragment extends BaseFragment {
   protected void setUIElements() {
     showDots();
 
-    btnSetPin.setOnClickListener(v -> setPin());
-
     View.OnClickListener numberClickListener = this::buttonPressed;
 
     tvButton0.setOnClickListener(numberClickListener);

@@ -2136,7 +2136,7 @@ If cost is a concern for you, ask your clinician about payment plans, discounts,
     &bull; All-Options Talkline: 1-888-493-0092<br/>
     ]]>
     </string>
-    <string name="logged_data_title">Tracked data</string>
+    <string name="logged_data_title">Settings</string>
     <string name="recurring_data_title">Set frequent data deletion</string>
     <string name="recurring_data_text">Select how often you want Euki to automatically delete all of your tracked data</string>
     <string name="delete_all_data">Delete all data now</string>

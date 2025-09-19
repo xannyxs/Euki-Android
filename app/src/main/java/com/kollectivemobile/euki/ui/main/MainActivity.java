@@ -184,7 +184,7 @@ public class MainActivity extends BaseActivity {
         fragment = HomeFragment.newInstance();
         break;
       case 4:
-        fragment = PrivacyFragment.newInstance();
+        fragment = new PrivacyFragment();
         break;
     }
 

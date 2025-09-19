@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.R;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
-import com.kollectivemobile.euki.ui.main.MainActivity;
 import com.kollectivemobile.euki.ui.onboarding.PinSetupFragment;
 import com.kollectivemobile.euki.utils.Utils;
 
@@ -63,26 +62,6 @@ public class CheckPinFragment extends PinSetupFragment {
     protected void initInjection() {
         if (getActivity() != null) {
             ((App)getActivity().getApplication()).getAppComponent().inject(this);
-        }
-    }
-
-    @Override
-    public void setPin() {
-        String currentPin = mAppSettingsManager.getPinCode();
-        String fakePin = currentPin.equals("1111") ? "2222" : "1111";
-
-        if (currentPin.equals(code)) {
-            if (shouldShowMainViewController) {
-                startActivity(MainActivity.makeIntent(getActivity()));
-            } else {
-                getActivity().finish();
-            }
-        } else if (code.equals(fakePin)) {
-            fakeScreenLayout.setVisibility(View.VISIBLE);
-        } else {
-            tvError.setVisibility(View.VISIBLE);
-            code = "";
-            showDots();
         }
     }
 
