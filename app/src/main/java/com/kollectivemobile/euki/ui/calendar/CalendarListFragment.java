@@ -50,7 +50,7 @@ public class CalendarListFragment extends BaseFragment implements CalendarListAd
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getActivity() != null) {
             ((App) getActivity().getApplication()).getAppComponent().inject(this);

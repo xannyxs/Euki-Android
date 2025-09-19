@@ -52,7 +52,7 @@ public class CalendarDayFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((App)getActivity().getApplication()).getAppComponent().inject(this);
         setUIElements();

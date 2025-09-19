@@ -70,7 +70,7 @@ public class QuizFragment extends BaseFragment implements MethodAdapter.MethodLi
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (getArguments() != null) {
             quizType = (QuizType) getArguments().getSerializable(QUIZ_TYPE);
