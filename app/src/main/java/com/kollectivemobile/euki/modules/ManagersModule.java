@@ -1,5 +1,6 @@
 package com.kollectivemobile.euki.modules;
 
+import com.kollectivemobile.euki.App;
 import com.kollectivemobile.euki.manager.AbortionContentManager;
 import com.kollectivemobile.euki.manager.AbortionContentManagerImpl;
 import com.kollectivemobile.euki.manager.AppSettingsManager;
@@ -12,6 +13,8 @@ import com.kollectivemobile.euki.manager.ContraceptionContentManager;
 import com.kollectivemobile.euki.manager.ContraceptionContentManagerImpl;
 import com.kollectivemobile.euki.manager.CycleManager;
 import com.kollectivemobile.euki.manager.CycleManagerImpl;
+import com.kollectivemobile.euki.manager.DeviceAuthManager;
+import com.kollectivemobile.euki.manager.DeviceAuthManagerImpl;
 import com.kollectivemobile.euki.manager.HomeManager;
 import com.kollectivemobile.euki.manager.HomeManagerImpl;
 import com.kollectivemobile.euki.manager.LocalNotificationManager;
@@ -35,7 +38,14 @@ import javax.inject.Singleton;
 
 @Module
 public class ManagersModule {
-  public ManagersModule() {}
+  public ManagersModule() {
+  }
+
+  @Singleton
+  @Provides
+  public DeviceAuthManager providesDeviceAuthManager() {
+    return new DeviceAuthManagerImpl(App.getContext());
+  }
 
   @Singleton
   @Provides
